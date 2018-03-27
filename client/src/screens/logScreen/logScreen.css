@@ -1,0 +1,37 @@
+.log-screen {
+  background-color: #E6E6E6;
+}
+
+.log-screen-title-wrapper {
+  display: flex;
+  margin-bottom: 15px;
+  justify-content: space-between;
+}
+
+.log-screen-title {
+  font-weight: bold;
+  color: white;
+}
+
+/* Custom, iPhone Retina */ 
+@media only screen and (min-width: 320px) {
+	.log-screen {
+    height: 100%;
+    position: absolute;
+    overflow-y: auto;
+    padding-bottom: 75px;
+  }
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width: 480px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width: 768px) {
+  .log-screen {
+    position: initial;
+    margin-top: 75px;
+  }
+}

@@ -1,0 +1,126 @@
+.log-item-parts .log-item-no-parts {
+  padding: 16px;
+}
+
+.log-item-total-parts-editing {
+  font-size: 14px;
+  padding: 15px 10px;
+  border-radius: 0 6px 0 0;
+  background-color: #3E3E3E;
+  border-top: 1px solid #6E99B5;
+  border-right: 1px solid #6E99B5;
+  border-left: 1px solid #6E99B5;
+  color: #B1B1B1;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.log-item-part {
+  display: block;
+  padding: 0 10px;
+}
+
+.log-item-part-info {
+  margin: 15px 0;
+  align-items: baseline;
+  display: flex;
+  justify-content: space-between;
+}
+
+.log-item-part-divider {
+  width: 100%;
+  border-top: 1px solid #95989A;
+}
+
+.log-item-parts {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+  padding: 0;
+  background-color: #CBCBCB;
+  border-radius: 0 0 6px 6px;
+  border-bottom: 1px solid #6E99B5;
+  border-right: 1px solid #6E99B5;
+}
+
+.log-item-part-input-wrapper {
+  background-color: #CBCBCB;
+  padding: 15px 10px;
+  border: 1px solid #6E99B5;
+  border-radius: 0 6px 6px 6px;
+}
+
+.log-item-part-input-error {
+  color: red;
+  margin-top: 5px;
+}
+
+.log-item-part-inputs {
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.log-item-part-input {
+  font-size: 14px;
+  color: #3E3E3E;
+  border-top: 0;
+  border-right: 0;
+  padding: 0 0 5px 10px;
+  line-height: 1.1;
+  border-radius: 0;
+  border-left: 0;
+  font-size: inherit;
+  border-bottom: 2px dotted rgba(62, 62, 62, .7);
+  box-shadow: initial;
+  background: none;
+  height: auto;
+}
+
+.log-item-part-name-input {
+  flex: 3;
+  margin-right: 15px;
+}
+
+.log-item-part-price-input {
+  flex: 1;
+}
+
+.log-item-part-input:focus {
+  border-bottom: 1px solid rgba(62, 62, 62, .7);
+  box-shadow: initial;
+}
+
+.log-item-part .log-item-part-checkbox {
+  margin-right: 5px;
+}
+
+.log-item-part-input-button-wrapper {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.log-item-part-input-button {
+  text-shadow: initial;
+  border: 0;
+  background-image: none;
+  font-size: 14px;
+  font-family: 'Lato', sans-serif;
+  padding: 8px 0;
+  border-radius: 6px;
+  width: 43%;
+  background-color: #145581;
+  color: white;
+}
+
+.log-item-part-input-button:active,
+.log-item-part-input-button:focus,
+.log-item-part-input-button:hover {
+  background-color: #145581;
+  color: white;
+  border: 0;
+  outline: none;
+}

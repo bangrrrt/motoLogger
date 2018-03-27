@@ -1,0 +1,53 @@
+.footer-bar-content {
+  background-color: #093553;
+  height: 65px;
+  z-index: 99999999;
+  width: 100%;
+  color: white;
+  position: fixed;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.footer-bar-cb-logo {
+  flex: 1;
+}
+
+.footer-bar-links-wrapper {
+  align-items: center;
+  padding: 20px 40px;
+  justify-content: space-around;
+  display: flex;
+  border-top: 1px solid white;
+}
+
+.footer-bar-links {
+  display: flex;
+  margin: 0;
+  text-align: left;
+  list-style: none;
+  padding: 0;
+  flex: 2;
+}
+
+.footer-bar-link {
+  padding: 0 5px;
+}
+
+.footer-bar-links a {
+  color: white;
+}  
+
+.footer-bar-logo {
+  align-items: center;
+  height: 70%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-bar-remove-icon {
+  margin: 0 20px;
+  font-size: 32px;
+  display: flex;
+}

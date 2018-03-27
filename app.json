@@ -1,0 +1,21 @@
+{
+  "name": "motoLogger",
+  "description": "Keep track of motorcycle maintenance by creating logs.",
+  "scripts": {
+  },
+  "env": {
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}

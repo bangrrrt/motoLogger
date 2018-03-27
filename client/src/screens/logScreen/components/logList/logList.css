@@ -1,0 +1,32 @@
+.log-list-column {
+  margin-top: 25px;
+}
+
+/* Custom, iPhone Retina */ 
+@media only screen and (min-width: 320px) {
+  .log-list-row:first-child .log-list-column:first-child {
+    margin-top: 0;
+  }
+
+  .log-list-column {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width: 480px) {
+
+}
+
+/* Custom, iPhone Retina */ 
+@media only screen and (min-width: 768px) {
+  .log-list-row:first-child .log-list-column:first-child {
+    margin-top: 25px;
+  }
+
+  .log-list-column {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}

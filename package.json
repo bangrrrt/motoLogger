@@ -1,0 +1,26 @@
+{
+  "name": "moto-maintenance",
+  "version": "0.0.0",
+  "private": true,
+  "homepage": "./client/build/index.html",
+  "scripts": {
+    "start": "node index.js",
+    "heroku-postbuild": "cd client && yarn install --only=dev && yarn install && yarn run build",
+    "start:local": "concurrently \"yarn run server\" \"yarn run client\" \"yarn run mongoDB\"",
+    "server": "node ./bin/www",
+    "client": "cd client && yarn run react-scripts start",
+    "mongoDB": "\"C:/Program Files/MongoDB/Server/3.4/bin/mongod.exe\" & \"C:/Program Files/MongoDB/Server/3.4/bin/mongo.exe\""
+  },
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "concurrently": "^3.5.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.15.5",
+    "jade": "~1.11.0",
+    "mongodb": "^3.0.2",
+    "mongoose": "^4.12.3",
+    "morgan": "~1.9.0",
+    "serve-favicon": "~2.4.5"
+  }
+}

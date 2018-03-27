@@ -1,0 +1,95 @@
+.log-item-miles-input-wrapper {
+  margin-top: 10px;
+  background-color: #CBCBCB;
+  padding: 15px 10px;
+  border: 1px solid #6E99B5;
+  border-radius: 0 6px 6px 6px;
+}
+
+.log-item-miles-inputs {
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.log-item-miles-inputs input[type=number]::-webkit-inner-spin-button,
+.log-item-miles-inputs input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none; 
+  margin: 0;
+}
+
+.log-item-miles-input {
+  font-size: 16px;
+  color: #3E3E3E;
+  border-top: 0;
+  border-right: 0;
+  padding: 0 0 5px 10px;
+  line-height: 1.1;
+  border-radius: 0;
+  border-left: 0;
+  font-size: inherit;
+  border-bottom: 2px dotted rgba(62, 62, 62, .7);
+  box-shadow: initial;
+  background: none;
+  height: auto;
+  margin-right: 15px;
+}
+
+.log-item-miles-input:focus,
+.log-item-miles-date-picker input:focus {
+  border-bottom: 1px solid rgba(62, 62, 62, .7);
+  box-shadow: initial;
+  outline: 0;
+}
+
+.log-item-miles-input-wrapper i {
+  margin-right: 2px;
+}
+.log-item-miles-input-container {
+  display: flex;
+  flex: 2;
+}
+
+.log-item-miles-date-picker {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.log-item-miles-date-picker i {
+  color: #3E3E3E;
+  font-size: large;
+  margin-right: 2px
+}
+
+.log-item-miles-date-picker .react-datepicker {
+  transform: scale(1.6);
+}
+
+.log-item-miles-date-picker input {
+  cursor: pointer;
+  font-size: 14px;
+  color: #3E3E3E;
+  border-top: 0;
+  border-right: 0;
+  padding: 0 0 5px 10px;
+  line-height: 1.1;
+  border-radius: 0;
+  border-left: 0;
+  font-size: inherit;
+  border-bottom: 2px dotted rgba(62, 62, 62, .7);
+  box-shadow: initial;
+  background: none;
+  height: auto;
+  width: 100%;
+}
+
+.log-item-mileage-miles {
+  display: flex;
+}
+
+.log-item-mileage-miles-fun {
+  opacity: 0.3;
+  margin-left: 3px;
+}

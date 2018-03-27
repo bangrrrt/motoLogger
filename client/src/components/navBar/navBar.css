@@ -1,0 +1,36 @@
+.nav-bar {
+  border-top: 1px solid #95989A;
+  border-bottom: 2px solid #95989A;
+  position: fixed;
+  z-index: 99;
+  width: 100%;
+  height: 65px;
+  padding: 10px 15px;
+  background-color: #093553;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  font-size: 32px;
+}
+
+.nav-bar-title {
+  font-family: 'Lato', sans-serif;
+  margin: 0;
+  font-weight: bold;
+}
+
+.nav-bar-menu {
+  
+}
+
+.nav-bar-menu-icon {
+  display: flex;
+}
+
+.nav-bar-add-log-icon {
+  display: flex;
+  color: #145581;
+  background-color: white;
+  border-radius: 20px;
+}

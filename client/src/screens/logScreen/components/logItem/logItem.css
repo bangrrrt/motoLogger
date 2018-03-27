@@ -1,0 +1,244 @@
+.log-container {
+  position: relative;
+}
+
+.log-item-wrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 10px;
+  background-color: #4F7F9F;
+  border-radius: 3px;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.6);
+}
+
+.log-item--editing {
+  transition: all ease-in 0.2s;
+}
+
+.log-item-edit-menu-wrapper {
+  background-color: rgba(255,255,255,0.8);
+  height: 100%;
+  width: 100%;
+}
+
+.log-item-edit-menu {
+  width: auto;
+  position: absolute;
+  overflow: hidden;
+  top: 36px;
+  right: 10px;
+  border-radius: 6px 0 6px 6px;
+  background-color: white;
+}
+
+.log-item-editing-bg {
+  background-color: #fffdc2;
+}
+
+.log-item-mileage {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+.log-item-section {
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 0 6px 6px 6px;
+  background-color: #3E3E3E;
+  border: 1px solid #6E99B5;
+  color: #B1B1B1;
+  margin-top: 10px;
+}
+
+.log-item-title-input {
+  color: white;
+  border-top: 0;
+  border-right: 0;
+  padding: 0 10px;
+  line-height: 1.1;
+  border-radius: 0;
+  border-left: 0;
+  font-size: inherit;
+  border-bottom: 2px dotted rgba(255,255,255,0.7);
+  box-shadow: initial;
+  background: none;
+  height: inherit;
+}
+
+.log-item-title-input::placeholder {
+  color: rgba(255,255,255,0.7);
+}
+
+.log-item-title-input:focus {
+  border-bottom: 1px solid rgba(255,255,255,0.7);
+  box-shadow: initial;
+}
+
+.log-item-title {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.log-item-title-name {
+  font-family: 'Leckerli One', cursive;
+  color: white;
+  flex: 6;
+}
+
+.log-item-title-name,
+.log-item-title-name > .form-group {
+  margin: 0 5px 0 0;
+}
+
+.log-item-icons {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.log-item-icons--editing {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.log-item-icon-cog {
+  justify-content: flex-end;
+}
+
+.log-item-icon-cog--active {
+  opacity: 1 !important;
+  color: white;
+}
+
+.log-item-icon-trash {
+  margin-right: 10px;
+}
+
+.log-item-title .log-save {
+  opacity: 1;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background-color: rgba(255,255,255,0.2);
+  color: white;
+  cursor: pointer;
+  border: 1px solid white;
+}
+
+.log-item-icon {
+  cursor: pointer;
+  font-size: 18px;
+  opacity: 0.5;
+}
+
+.log-item-icon:hover {
+  opacity: 1;
+}
+
+.log-item-notes-wrapper--editing,
+.log-item-notes-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 50px;
+}
+
+.log-item-notes-wrapper--editing {
+  background: white;
+  color: #3e3e3e;
+}
+
+.log-item-notes-body:focus {
+  box-shadow: none;
+}
+
+.log-item-notes-body {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  background: none;
+  resize: vertical;
+}
+
+.log-item-expand-button {
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  color: black;
+  transition: all ease-in 0.2s;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(1.125, 1.125, 1.125);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.log-item-expand-button:hover,
+.log-item-expand-button:active {
+  animation-duration: .5s;
+  animation-name: pulse;
+  text-decoration: none;
+  color: black;
+}
+
+@media only screen and (min-width: 320px) {
+  .log-item-wrapper {
+    border-radius: initial;
+  }
+}
+
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+}
+
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+}
+
+.log-cog-icon-rotating {
+  -webkit-animation: rotating 0.5s linear 0s 1;
+  -moz-animation: rotating 0.5s linear 0s 1;
+  -ms-animation: rotating 0.5s linear 0s 1;
+  -o-animation: rotating 0.5s linear 0s 1;
+  animation: rotating 0.5s linear 0s 1;
+}

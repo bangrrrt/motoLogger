@@ -1,0 +1,46 @@
+.log-item-total-parts {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 0 6px 6px 6px;
+  background-color: #3E3E3E;
+  border: 1px solid #6E99B5;
+  color: #B1B1B1;
+}
+
+.log-item-total-parts-expanded {
+  border-radius: 0 6px 0 0;
+}
+
+.log-item-part-detail-divider {
+  width: 100%;
+  border-top: 1px solid #95989A;
+}
+
+.log-item-part-details {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 10px;
+}
+
+.log-item-parts-details {
+  margin-bottom: 5px;
+  padding: 0;
+  background-color: #CBCBCB;
+  border-radius: 0 0 6px 6px;
+  border-bottom: 1px solid #6E99B5;
+  border-right: 1px solid #6E99B5;
+  padding-left: 0;
+}
+
+.log-item-part-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.log-item-part-detail {
+  display: flex;
+}

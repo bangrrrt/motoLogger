@@ -1,0 +1,26 @@
+.log-item-edit-menu-list {
+  color: #3E3E3E;
+  list-style: none;
+  margin: 0;
+  text-align: center;
+  padding: 0 10px 10px;
+}
+
+.log-item-edit-menu-list:focus {
+  outline: 0;
+}
+
+.log-item-edit-menu-list-item {
+  margin: 5px 0 0;
+  cursor: pointer;
+}
+
+.log-item-edit-menu-button,
+.log-item-edit-menu-button--editing {
+  background: none;
+  border: none;
+}
+
+.log-item-edit-menu-button--editing {
+  color: lightgray;
+}
