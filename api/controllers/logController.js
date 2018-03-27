@@ -3,8 +3,8 @@ var objectId = require('mongodb').ObjectID;
 var assert = require('assert');
 // var url = 'mongodb://localhost:27017/motoMaintenance';
 
-var db = 'heroku_r020v8q8';
-var collection = 'logs';
+var DATABASE = 'heroku_r020v8q8';
+var COLLECTION = 'logs';
 
 // Adds a new log
 exports.CREATE_LOG = function(req, res) {
@@ -24,7 +24,7 @@ exports.CREATE_LOG = function(req, res) {
       res.send(err);
     }
 
-    client.db(db).collection(collection)
+    client.db(DATABASE).collection(COLLECTION)
       .insertOne(newLog, function(err, results) {
         assert.equal(null, err);
 
@@ -41,16 +41,14 @@ exports.GET_LOGS = function(req, res) {
       res.send(err);
     }
 
-    var db = client.db(db);
-    var collection = db.collection(collection);
-
-    collection.find({}).toArray(function (err, result) {
-      if (err) {
-        res.send(err);
-      };
-      res.json({ logs: result });
-      client.close();
-    });
+    client.db(DATABASE).collection(COLLECTION)
+      .find({}).toArray(function (err, result) {
+        if (err) {
+          res.send(err);
+        };
+        res.json({ logs: result });
+        client.close();
+      });
     client.close();
   });
 };
@@ -74,7 +72,7 @@ exports.UPDATE_LOG = function(req, res) {
       res.send(err);
     }
 
-    client.db(db).collection(collection)
+    client.db(DATABASE).collection(COLLECTION)
       .updateOne({ _id: req.body.logId }, { $set: updatedLog }, function(err, result) {
         if (err) {
           res.send(err)
@@ -91,7 +89,7 @@ exports.DELETE_LOG = function(req, res) {
   mongo.connect(process.env.MONGODB_URI, function(err, client) {
     assert.equal(null, err);
 
-    client.db(db).collection(collection)
+    client.db(DATABASE).collection(COLLECTION)
       .deleteOne({ _id: req.params.logId }, function(err, result) {
         assert.equal(err, null);
         assert.equal(1, result.result.n);
