@@ -41,9 +41,10 @@ class FooterMenu extends Component {
               className="footer-menu-wrapper"
               style={{ right, display: right === width ? 'none' : 'initial' }}
             >
-              <div className="footer-menu-logo">
+              <div className="footer-menu-logo-wrapper">
                 <img
-                  src=""
+                  className="footer-menu-logo"
+                  src="../../../images/motoLogger-logo.png"
                   alt="motoLogger logo"
                 />
               </div>
@@ -57,13 +58,10 @@ class FooterMenu extends Component {
                       <a href="https://github.com/bangrrrt">Github</a>
                     </li>
                     <li className="footer-menu-link">
-                      <a href="https://twitter.com/bangrrrt">Twitter</a>
-                    </li>
-                    <li className="footer-menu-link">
                       <a href="mailto:ChristianDBangert@gmail.com">ChristianDBangert@gmail.com</a>
                     </li>
                   </ul>
-                  <img className="footer-menu-cb-logo" src="" alt="cb logo"/>
+                  <img className="footer-menu-cb-logo" src="../../../images/cb-logo.png" alt="cb logo" />
                 </div>
               </div>
               <span

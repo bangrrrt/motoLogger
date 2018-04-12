@@ -42,7 +42,11 @@ class NavBar extends Component {
             />}
         </div>
         <div className="nav-bar-title-wrapper">
-          <h1 className="nav-bar-title">motoLogger</h1>
+          <img
+            src="../../images/motoLogger-logo.png"
+            className="nav-bar-logo"
+            alt="motoLogger logo"
+          />
         </div>
         <div className="nav-bar-add-log">
           <span

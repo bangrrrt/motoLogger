@@ -13,13 +13,10 @@ const FooterBar = () => (
           <a href="https://github.com/bangrrrt">Github</a>
         </li>
         <li className="footer-bar-link">
-          <a href="https://twitter.com/bangrrrt">Twitter</a>
-        </li>
-        <li className="footer-bar-link">
           <a href="mailto:ChristianDBangert@gmail.com">ChristianDBangert@gmail.com</a>
         </li>
       </ul>
-      <img className="footer-bar-cb-logo" src="" alt="cb logo"/>
+      <img className="footer-bar-cb-logo" src="../../../images/cb-logo.png" alt="cb logo" />
     </div>
   </div>
 );

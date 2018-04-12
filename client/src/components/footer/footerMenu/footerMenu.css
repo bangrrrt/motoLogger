@@ -13,7 +13,7 @@
 }
 
 .footer-menu-cb-logo {
-  flex: 1;
+  width: 60px;
 }
 
 .footer-menu-links-wrapper {
@@ -41,12 +41,16 @@
   color: white;
 }  
 
-.footer-menu-logo {
+.footer-menu-logo-wrapper {
   align-items: center;
   height: 70%;
   margin-top: 20px;
   display: flex;
   justify-content: center;
+}
+
+.footer-menu-logo {
+  width: 90%;
 }
 
 .footer-menu-remove-icon {
