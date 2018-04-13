@@ -1,5 +1,4 @@
 .nav-bar {
-  border-bottom: 2px solid #95989A;
   position: fixed;
   z-index: 99;
   width: 100%;
@@ -44,5 +43,13 @@
   .nav-bar {
     border-bottom: 0;
     border-top: 1px solid #95989A;
+  }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width: 768px) {
+  .nav-bar {
+    border-top: 0;
+    border-bottom: 1px solid #95989A;
   }
 }

@@ -44,7 +44,7 @@ class FooterMenu extends Component {
               <div className="footer-menu-logo-wrapper">
                 <img
                   className="footer-menu-logo"
-                  src="../../../images/motoLogger-logo.png"
+                  src="https://raw.githubusercontent.com/bangrrrt/motoLogger/master/client/src/images/motoLogger-logo.png"
                   alt="motoLogger logo"
                 />
               </div>
@@ -61,7 +61,7 @@ class FooterMenu extends Component {
                       <a href="mailto:ChristianDBangert@gmail.com">ChristianDBangert@gmail.com</a>
                     </li>
                   </ul>
-                  <img className="footer-menu-cb-logo" src="../../../images/cb-logo.png" alt="cb logo" />
+                  <img className="footer-menu-cb-logo" src="https://raw.githubusercontent.com/bangrrrt/motoLogger/master/client/src/images/cb-logo.png" alt="cb logo" />
                 </div>
               </div>
               <span

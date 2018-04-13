@@ -16,7 +16,7 @@ const FooterBar = () => (
           <a href="mailto:ChristianDBangert@gmail.com">ChristianDBangert@gmail.com</a>
         </li>
       </ul>
-      <img className="footer-bar-cb-logo" src="../../../images/cb-logo.png" alt="cb logo" />
+      <img className="footer-bar-cb-logo" src="https://raw.githubusercontent.com/bangrrrt/motoLogger/master/client/src/images/cb-logo.png" alt="cb logo" />
     </div>
   </div>
 );

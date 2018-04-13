@@ -43,7 +43,7 @@ class NavBar extends Component {
         </div>
         <div className="nav-bar-title-wrapper">
           <img
-            src="../../images/motoLogger-logo.png"
+            src="https://raw.githubusercontent.com/bangrrrt/motoLogger/master/client/src/images/motoLogger-logo.png"
             className="nav-bar-logo"
             alt="motoLogger logo"
           />
