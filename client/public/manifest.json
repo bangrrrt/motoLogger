@@ -1,6 +1,8 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "motoLogger",
+  "name": "motoLogger",
+  "description": "Easily track motorcycle maintenance by creating logs.",
+  "author": "Christian D Bangert",
   "icons": [
     {
       "src": "favicon.ico",
@@ -11,5 +13,9 @@
   "start_url": "./index.html",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "developer": {
+    "name": "Christian D Bangert",
+    "url": "https://www.linkedin.com/in/bangrrrt"
+  }
 }
