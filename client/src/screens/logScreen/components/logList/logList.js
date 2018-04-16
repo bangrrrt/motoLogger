@@ -43,45 +43,84 @@ class LogList extends React.Component {
     }
   }
 
-  renderLogList = (logs) => {
-    return map(logs, (log) => {
-      return (
-        <Col
-          className="log-list-column"
-          key={log.logId}
-          lg={4}
-          sm={6}
-        >
-          <LogItemContainer log={log} />
-        </Col>
-      );
-    });
+  renderLogList = logs => (
+    map(logs, log => (
+      <Col
+        className="log-list-column"
+        key={log.logId}
+        lg={4}
+        sm={6}
+      >
+        <LogItemContainer log={log} />
+      </Col>
+    ))
+  )
+
+  renderChunkedLogs = () => {
+    const chunkedLogs = chunk(this.props.logs, this.state.chunkSize);
+
+    return map(chunkedLogs, (logs, index) => (
+      <Row
+        key={logs[0].logId}
+        className="log-list-row"
+      >
+        {this.renderLogList(logs, index)}
+      </Row>
+    ));
   }
 
-  render() {
-    const chunkedLogs = chunk(this.props.logs, this.state.chunkSize);
+  renderPlaceholder = () => {
+    if (this.props.isLoading) {
+      return (
+        <div>
+          <i className="log-list-loading glyphicon glyphicon-wrench" />
+          <h4>Loading...</h4>
+        </div>
+      );
+    }
+
+    const addLogTextLink = (
+      <span
+        className="log-list-text-link"
+        onClick={() => {
+          this.props.onAsyncCreateLog();
+        }}
+      >
+        click here.
+      </span>
+    );
 
     return (
       <div>
-        {map(chunkedLogs, (logs, index) => {
-          return (
-            <Row
-              key={logs[0].logId}
-              className="log-list-row"
-            >
-              {this.renderLogList(logs, index)}
-            </Row>
-          );
-        })}
+        <h3>Looks like you have no logs</h3>
+        <p>To get started click on the plus icon or {addLogTextLink}</p>
+      </div>
+    );
+  }
+
+  render() {
+    return (
+      <div>
+        {!this.props.logs.length ? this.renderPlaceholder() : this.renderChunkedLogs()}
       </div>
     );
   }
 }
 
-const { array } = PropTypes;
+const { array, func, bool } = PropTypes;
 
 LogList.propTypes = {
-  // An array of logs
+  /**
+   * True when the app is loading data
+   */
+  isLoading: bool.isRequired,
+  /**
+   * Async action to create a log
+   */
+  onAsyncCreateLog: func.isRequired,
+  /**
+   * An array of logs
+   */
   logs: array.isRequired
 };
 

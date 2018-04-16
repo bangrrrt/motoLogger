@@ -134,7 +134,8 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         logItems: state.logItems.filter(element => element.logId !== action.logId),
-        isEditing: false
+        isEditing: false,
+        isLoading: false
       };
     case types.EDIT_LOG:
       return {
