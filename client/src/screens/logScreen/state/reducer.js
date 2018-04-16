@@ -5,7 +5,7 @@ import includes from 'lodash/includes';
 import indexOf from 'lodash/indexOf';
 
 import * as types from './types';
-import { updateLogEditingStatus } from './helper';
+import { updateLogEditingStatus, fetchLogHelper } from './helper';
 
 const initialState = {
   // True if a log is being edited
@@ -66,7 +66,7 @@ const reducer = (state = initialState, action) => {
         isLoading: false,
         logItems: [
           ...state.logItems,
-          ...action.fetchedLogs
+          ...fetchLogHelper(action.fetchedLogs)
         ]
       };
     case types.ASYNC_UPDATE_LOGS_REQUEST:
