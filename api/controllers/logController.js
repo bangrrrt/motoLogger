@@ -1,14 +1,15 @@
 var mongo = require('mongodb').MongoClient;
 var objectId = require('mongodb').ObjectID;
 var assert = require('assert');
-// var url = 'mongodb://localhost:27017/motoMaintenance';
+var URL = process.env.MONGODB_URI || 'mongodb://localhost:27017/motoMaintenance';
 
 var DATABASE = 'heroku_r020v8q8';
 var COLLECTION = 'logs';
 
+
 // Adds a new log
 exports.CREATE_LOG = function(req, res) {
-  mongo.connect(process.env.MONGODB_URI, function(err, client) {
+  mongo.connect(URL, function(err, client) {
     var newLog = {
       _id: req.body.logId,
       logId: req.body.logId,
@@ -36,7 +37,7 @@ exports.CREATE_LOG = function(req, res) {
 
 // Gets all the saved logs
 exports.GET_LOGS = function(req, res) {
-  mongo.connect(process.env.MONGODB_URI, function(err, client) {
+  mongo.connect(URL, function(err, client) {
     if (err) {
       res.send(err);
     }
@@ -56,7 +57,7 @@ exports.GET_LOGS = function(req, res) {
 // Updates a log
 exports.UPDATE_LOG = function(req, res) {
   var resultArray = [];
-  mongo.connect(process.env.MONGODB_URI, function(err, client) {
+  mongo.connect(URL, function(err, client) {
     var updatedLog = {
       _id: req.body.logId,
       logId: req.body.logId,
@@ -86,7 +87,7 @@ exports.UPDATE_LOG = function(req, res) {
 
 // Deletes a log
 exports.DELETE_LOG = function(req, res) {
-  mongo.connect(process.env.MONGODB_URI, function(err, client) {
+  mongo.connect(URL, function(err, client) {
     assert.equal(null, err);
 
     client.db(DATABASE).collection(COLLECTION)
