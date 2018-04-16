@@ -8,6 +8,8 @@ import * as types from './types';
 import { updateLogEditingStatus } from './helper';
 
 const initialState = {
+  // True if a log is being edited
+  isEditing: false,
   // True if the app is making a request to the server
   isLoading: false,
   // Id of the log menu that is open
@@ -82,6 +84,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+        isEditing: false,
         activeMenuLogId: [],
         logItems: map(state.logItems, (log) => {
           if (log.logId !== action.editingLogId.logId) {
@@ -107,6 +110,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+        isEditing: true,
         activeMenuLogId: [],
         logItems: [
           action.newItem,
@@ -129,7 +133,8 @@ const reducer = (state = initialState, action) => {
     case types.ASYNC_DELETE_LOG_SUCCESS:
       return {
         ...state,
-        logItems: state.logItems.filter(element => element.logId !== action.logId)
+        logItems: state.logItems.filter(element => element.logId !== action.logId),
+        isEditing: false
       };
     case types.EDIT_LOG:
       return {

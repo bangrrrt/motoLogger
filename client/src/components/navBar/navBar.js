@@ -30,7 +30,8 @@ class NavBar extends Component {
     const {
       activeMenuLogId,
       onAsyncCreateLog,
-      isMobile
+      isMobile,
+      isEditing
     } = this.props;
 
     return (
@@ -53,7 +54,9 @@ class NavBar extends Component {
             className="nav-bar-add-log-icon glyphicon glyphicon-plus-sign"
             disabled={activeMenuLogId}
             onClick={() => {
-              onAsyncCreateLog();
+              if(!isEditing) {
+                onAsyncCreateLog();
+              }
             }}
           />
         </div>
@@ -65,6 +68,10 @@ class NavBar extends Component {
 const { array, func, bool } = PropTypes;
 
 NavBar.propTypes = {
+  /**
+   * True if a log is being edited
+   */
+  isEditing: bool.isRequired,
   /**
    * Action to update the state of the app if viewed on mobile
    */
