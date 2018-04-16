@@ -6,7 +6,7 @@ import { asyncCreateLog } from '../../screens/logScreen/state/actions';
 const mapStateToProps = state => ({
   activeMenuLogId: state.logScreen.activeMenuLogId,
   isMobile: state.app.isMobile,
-  isEditing: state.app.isEditing
+  isEditing: state.logScreen.isEditing
 });
 
 const mapStateToDispatch = dispatch => ({
