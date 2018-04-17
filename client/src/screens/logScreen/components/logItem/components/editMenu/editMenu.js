@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
+
 import './editMenu.css';
 
 class EditMenu extends Component {
@@ -43,7 +45,12 @@ class EditMenu extends Component {
         </li>
         <li
           className="log-item-edit-menu-list-item"
-          onClick={() => onAsyncDeleteItem(logId)}
+          onClick={() => {
+            const confirmed = window.confirm('Are you sure you want to delete this log?');
+            if (confirmed) {
+              onAsyncDeleteItem(logId);
+            }
+          }}
         >
           Delete
         </li>
@@ -58,7 +65,25 @@ class EditMenu extends Component {
   }
 }
 
+const { func, object } = PropTypes;
+
 EditMenu.propTypes = {
+  /**
+   * The log that has the edit menu open
+  */
+  log: object.isRequired,
+  /**
+   * Action that edits a log
+   */
+  onEditLog: func.isRequired,
+  /**
+   * Async action that deletes a log
+   */
+  onAsyncDeleteItem: func.isRequired,
+  /**
+   *  Action that opens the edit menu
+   */
+  onToggleMenu: func.isRequired
 
 };
 

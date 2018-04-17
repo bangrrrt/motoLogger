@@ -37,7 +37,7 @@ class Parts extends Component {
     return (
       <div>
         <div className={`log-item-total-parts ${isExpanded ? 'log-item-total-parts-expanded' : ''}`}>
-          <span>{parts.length} Part{parts.length > 1 ? 's' : ''}</span>
+          <span>{parts.length} Part{parts.length !== 1 ? 's' : ''}</span>
           <span>{getTotalPartsAmount(parts)}</span>
         </div>
         {isExpanded && this.renderExpandedContent()}

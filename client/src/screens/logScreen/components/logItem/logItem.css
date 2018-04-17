@@ -69,6 +69,7 @@
 
 .log-item-title-input::placeholder {
   color: rgba(255,255,255,0.7);
+  font-size: 20px;
 }
 
 .log-item-title-input:focus {
@@ -85,7 +86,7 @@
 }
 
 .log-item-title-name {
-  font-family: 'Leckerli One', cursive;
+  font-family: 'Oleo Script', cursive;
   color: white;
   flex: 6;
 }

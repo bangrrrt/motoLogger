@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import includes from 'lodash/includes';
@@ -7,15 +7,15 @@ import { Motion, spring } from 'react-motion';
 
 import Miles from './components/defaultView/miles/miles';
 import Parts from './components/defaultView/parts/parts';
-import PartsEditing from './components/editView/partsEditing/partsEditing'
-import MilesEditing from './components/editView/milesEditing/milesEditing'
+import PartsEditing from './components/editView/partsEditing/partsEditing';
+import MilesEditing from './components/editView/milesEditing/milesEditing';
 
 import EditMenu from './components/editMenu/editMenu';
 
 import './logItem.css';
 
-// Renders a log 
-class LogItem extends React.Component {
+// Renders a log
+class LogItem extends Component {
   constructor(props) {
     super(props);
 
@@ -41,7 +41,7 @@ class LogItem extends React.Component {
       <FormGroup controlId={this.props.log.logId}>
         <FormControl
           className="log-item-title-input"
-          placeholder="Log name"
+          placeholder="Maintenance name"
           value={this.state.nameInput}
           onChange={(e) => {
             this.setState({
@@ -95,16 +95,21 @@ class LogItem extends React.Component {
   renderCogIcon = () => {
     const {
       onToggleMenu,
+      activeMenuLogId,
       log: {
         logId
       }
     } = this.props;
 
-    const hasActiveMenu = includes(this.props.activeMenuLogId, this.props.log.logId);
+    const hasActiveMenu = includes(activeMenuLogId, logId);
 
     return (
       <span
-        onClick={() => onToggleMenu(logId)}
+        onClick={() => {
+          if (!activeMenuLogId.length) {
+            onToggleMenu(logId);
+          }
+        }}
         className={`
           glyphicon
           glyphicon-cog
@@ -125,7 +130,7 @@ class LogItem extends React.Component {
           style={{
             overflowY: this.state.isExpanded ? 'auto' : 'hidden',
             height
-          }}  
+          }}
         >
           {this.props.log.notes}
         </p>
@@ -214,7 +219,7 @@ class LogItem extends React.Component {
   }
 
   renderLogContent = () => {
-    if(this.props.log.isEditable) {
+    if (this.props.log.isEditable) {
       return this.renderEditView();
     }
 
@@ -226,7 +231,7 @@ class LogItem extends React.Component {
       activeMenuLogId,
       log: {
         isEditable,
-        logId,
+        logId
       }
     } = this.props;
 
@@ -243,8 +248,7 @@ class LogItem extends React.Component {
             logMenuHeight: spring(hasActiveMenu ? 86 : 0)
           }}
         >
-        {
-          ({ height, logMenuHeight }) => {
+          {({ height, logMenuHeight }) => {
             const logMenu = (
               <div
                 className="log-item-edit-menu"
@@ -259,24 +263,23 @@ class LogItem extends React.Component {
                 className={`log-item-wrapper fadeIn animated log-item${isEditable ? '--editing' : ''}`}
                 ref={(log) => { this.logNode = log; }}
               >
-              <div className="log-item-title">
-                <h3 className="log-item-title-name">
-                  {this.renderLogNameInput()}
-                </h3>
-                {hasActiveMenu && createPortal(logMenu, this.logContainer)}
-                {isEditable && this.renderSaveIcon()}
-                <div className={`log-item-icons${isEditable ? '--editing' : ''}`}>
-                  {this.renderCogIcon()}
+                <div className="log-item-title">
+                  <h3 className="log-item-title-name">
+                    {this.renderLogNameInput()}
+                  </h3>
+                  {hasActiveMenu && createPortal(logMenu, this.logContainer)}
+                  {isEditable && this.renderSaveIcon()}
+                  <div className={`log-item-icons${isEditable ? '--editing' : ''}`}>
+                    {this.renderCogIcon()}
+                  </div>
+                </div>
+                {this.renderLogContent()}
+                <div className={`log-item-notes-wrapper${isEditable ? '--editing' : ''} log-item-section`}>
+                  {this.renderNotes(height)}
                 </div>
               </div>
-              {this.renderLogContent()}
-              <div className={`log-item-notes-wrapper${isEditable ? '--editing' : ''} log-item-section`}>
-                {this.renderNotes(height)}
-              </div>
-            </div>
             );
-          }
-        }
+          }}
         </Motion>
       </div>
     );

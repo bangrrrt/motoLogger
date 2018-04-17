@@ -11,7 +11,7 @@ class Miles extends Component {
 		return (
 			<div className="log-item-mileage log-item-section">
 				<div className="log-item-mileage-miles">
-					<span>{miles} miles</span>
+					<span>{miles} Miles</span>
 					{this.props.isExpanded && <span className="log-item-mileage-miles-fun">of smiles</span>}
 				</div>
 				<div>

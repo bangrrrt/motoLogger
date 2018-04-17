@@ -160,7 +160,7 @@ class PartsEditing extends Component {
     if (!this.props.parts.length) {
       return (
         <li className="log-item-part log-item-no-parts text-center">
-          <span>No parts added</span>
+          <span>Add parts used for maintenance</span>
         </li>
       );
     }
@@ -197,7 +197,7 @@ class PartsEditing extends Component {
     return (
       <div className="log-item-parts-wrapper">
         <div className="log-item-total-parts-editing">
-          <span>{parts.length} Part{parts.length > 1 ? 's' : ''}</span>
+          <span>{parts.length} Part{parts.length !== 1 ? 's' : ''}</span>
           <span>{getTotalPartsAmount(parts)}</span>
         </div>
         <ul className="log-item-parts">
