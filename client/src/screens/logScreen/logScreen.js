@@ -6,6 +6,8 @@ import {
   Col
 } from 'react-bootstrap';
 
+import LoginScreen from '../loginScreen/loginScreen';
+
 import LogListContainer from './components/logList/logListContainer';
 
 import './logScreen.css';
@@ -27,6 +29,7 @@ class LogScreen extends Component {
         className="log-screen"
         style={{ width: isMobile ? '100%' : '' }}
       >
+        <LoginScreen />
         <Row>
           <Col xs={12}>
             <LogListContainer logs={logItems} id="logId" />

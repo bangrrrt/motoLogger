@@ -3,7 +3,14 @@ module.exports = {
     "rules": {
         "comma-dangle": ["error", "never"],
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-        "react/forbid-prop-types": []
+        "react/forbid-prop-types": [],
+        "jsx-a11y/label-has-for": [ 2, {
+            "components": [ "Label" ],
+            "required": {
+                "some": [ "nesting", "id" ]
+            },
+            "allowChildren": false
+        }]
     },
     "parser": "babel-eslint",
     "env": {
