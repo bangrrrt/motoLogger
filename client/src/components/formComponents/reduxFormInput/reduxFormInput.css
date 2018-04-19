@@ -1,0 +1,25 @@
+.redux-form-input {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.redux-form-input-input-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.redux-form-input-label {
+  padding-left: 10px
+}
+
+.redux-form-input-error {
+  font-size: 12px;
+  color: red;
+}
+
+.redux-form-input-input {
+  padding: 10px;
+  border: 1px solid #6E99B5;
+  border-radius: 0 6px 6px 6px;
+  outline: 0;
+}

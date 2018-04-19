@@ -1,21 +1,27 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import store from './state/store';
 import NavBarContainer from './components/navBar/navBarContainer';
 import FooterContainer from './components/footer/footerContainer';
 import LogScreenContainer from './screens/logScreen/logScreenContainer';
+import LoginScreen from './screens/loginScreen/loginScreen';
 
 import './App.css';
 
 const App = () => (
-  <Provider store={store}>
-    <div className="App">
-      <NavBarContainer />
-      <LogScreenContainer />
-      <FooterContainer />
-    </div>
-  </Provider>
+  <Router>
+    <Provider store={store}>
+      <div className="App">
+        <NavBarContainer />
+        <Route exact path="/" component={LogScreenContainer} />
+        <Route path="/logs" component={LogScreenContainer} />
+        <Route path="/login" component={LoginScreen} />
+        <FooterContainer />
+      </div>
+    </Provider>
+  </Router>
 );
 
 export default App;

@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 import './reduxFormInput.css';
 
-const ReduxFormInput = ({ input, label, type, meta: { touched, error } }) => (
-  <div>
-    <label htmlFor="label">{label}</label>
-    <div>
-      <input {...input} placeholder={label} type={type} />
-      {touched && error && <span>{error}</span>}
+const ReduxFormInput = ({ input, label, placeholder, type, meta: { touched, error } }) => (
+  <div className="redux-form-input">
+    <label className="redux-form-input-label" htmlFor="label">{label}</label>
+    <div className="redux-form-input-input-wrapper">
+      <input className="redux-form-input-input" {...input} placeholder={placeholder} type={type} />
+      {touched && error && <span className="redux-form-input-error">{error}</span>}
     </div>
   </div>
 )
@@ -20,9 +20,19 @@ ReduxFormInput.propTypes = {
    * redux-form prop injection
    */
   input: object.isRequired,
+  meta: object.isRequired,
+  /**
+   * The placeholder text for the input
+  */
+  placeholder: string.isRequired,
+  /**
+   * Input label name
+  */
   label: string.isRequired,
-  type: string.isRequired,
-  meta: object.isRequired
+  /**
+   * Input type
+   */
+  type: string.isRequired
   /** */
 };
 

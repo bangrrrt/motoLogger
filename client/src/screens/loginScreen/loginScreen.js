@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import ReduxFormInput from '../../components/formComponents/reduxFormInput/reduxFormInput';
 
+import './loginScreen.css';
+
 import submit from './submit';
 
 const LoginScreen = ({
@@ -12,31 +14,47 @@ const LoginScreen = ({
   reset,
   submitting
 }) => (
-  <div>
-    <h1>Login</h1>
-    <form onSubmit={handleSubmit(submit)}>
-      <Field
-        name="username"
-        type="text"
-        component={ReduxFormInput}
-        label="Username"
-      />
-      <Field
-        name="password"
-        type="password"
-        component={ReduxFormInput}
-        label="Password"
-      />
-      {error && <strong>{error}</strong>}
-      <div>
-        <button type="submit" disabled={submitting}>
-          Log In
-        </button>
-        <button type="button" disabled={pristine || submitting} onClick={reset}>
-          Clear Values
-        </button>
-      </div>
-    </form>
+  <div className="login-screen-wrapper">
+    <div className="login-screen">
+      <h1 className="login-screen-title">Login</h1>
+      <form onSubmit={handleSubmit(submit)}>
+        <Field
+          name="username"
+          type="text"
+          component={ReduxFormInput}
+          label="Username"
+          placeholder="Email Address"
+        />
+        <Field
+          name="password"
+          type="password"
+          component={ReduxFormInput}
+          label="Password"
+          placeholder="Your Secret"
+        />
+        {error && <strong>{error}</strong>}
+        <div className="login-screen-button-wrapper">
+          <button
+            type="submit"
+            disabled={submitting}
+            className="login-screen-button"
+          >
+            Log In
+          </button>
+        </div>
+      </form>
+    </div>
+    <div className="login-screen-register">
+      <h5>Don't have an account?</h5>
+      <h3 className="login-screen-register-title">
+        <a
+          href="#"
+          className="login-screen-register-title-link"
+        >
+          Register Now
+        </a>
+      </h3>
+    </div>
   </div>
 );
 
