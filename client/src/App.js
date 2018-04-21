@@ -6,6 +6,7 @@ import store from './state/store';
 import NavBarContainer from './components/navBar/navBarContainer';
 import FooterContainer from './components/footer/footerContainer';
 import LogScreenContainer from './screens/logScreen/logScreenContainer';
+import RegisterScreen from './screens/registerScreen/registerScreen';
 import LoginScreen from './screens/loginScreen/loginScreen';
 
 import './App.css';
@@ -18,6 +19,7 @@ const App = () => (
         <Route exact path="/" component={LogScreenContainer} />
         <Route path="/logs" component={LogScreenContainer} />
         <Route path="/login" component={LoginScreen} />
+        <Route path="/register" component={RegisterScreen} />
         <FooterContainer />
       </div>
     </Provider>

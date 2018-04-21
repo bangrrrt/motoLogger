@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
 import ReduxFormInput from '../../components/formComponents/reduxFormInput/reduxFormInput';
 
 import './loginScreen.css';
@@ -10,8 +11,6 @@ import submit from './submit';
 const LoginScreen = ({
   error,
   handleSubmit,
-  pristine,
-  reset,
   submitting
 }) => (
   <div className="login-screen-wrapper">
@@ -27,6 +26,7 @@ const LoginScreen = ({
         />
         <Field
           name="password"
+          hasForgotPassword
           type="password"
           component={ReduxFormInput}
           label="Password"
@@ -47,12 +47,12 @@ const LoginScreen = ({
     <div className="login-screen-register">
       <h5>Don't have an account?</h5>
       <h3 className="login-screen-register-title">
-        <a
-          href="#"
+        <Link
+          to="/register"
           className="login-screen-register-title-link"
         >
           Register Now
-        </a>
+        </Link>
       </h3>
     </div>
   </div>
@@ -66,8 +66,6 @@ LoginScreen.propTypes = {
    */
   handleSubmit: func.isRequired,
   error: string,
-  pristine: bool.isRequired,
-  reset: func.isRequired,
   submitting: bool.isRequired
 };
 
