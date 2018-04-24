@@ -53,7 +53,7 @@ ReduxFormInput.propTypes = {
   /**
    * True if the password
    */
-  hasForgotPassword: bool.isRequired,
+  hasForgotPassword: bool,
   /**
    * The placeholder text for the input
   */
@@ -69,7 +69,12 @@ ReduxFormInput.propTypes = {
   /**
    * True if the field value is optional
    */
-  isOptional: bool.isRequired
+  isOptional: bool
+};
+
+ReduxFormInput.defaultProps = {
+  isOptional: false,
+  hasForgotPassword: false
 };
 
 export default ReduxFormInput;

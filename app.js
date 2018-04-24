@@ -8,6 +8,15 @@ var bodyParser = require('body-parser');
 // Load log routes
 var logRoutes = require('./api/routes/logRoutes');
 
+// Login route
+var loginRoutes = require('./api/routes/loginRoutes');
+
+// Logout route
+var logoutRoutes = require('./api/routes/logoutRoutes');
+
+// Register route
+var registerRoutes = require('./api/routes/registerRoutes');
+
 var app = express();
 
 // view engine setup
@@ -24,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Log api
 app.use('/api/logs', logRoutes);
+app.use('/api/login', loginRoutes);
 app.set('view engine', 'jade');
 
 // The "catchall" handler: for any request that doesn't

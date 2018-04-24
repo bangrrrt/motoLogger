@@ -1,15 +1,20 @@
-import { connect } from 'redux';
-import { submit } from 'redux-form';
-
+import { connect } from 'react-redux';
+import { asyncLoginUser } from './state/actions';
 
 import loginScreen from './loginScreen';
 
+const handleSubmit = (values, dispatch) => {
+  console.log('values', values);
+
+  dispatch(asyncLoginUser());
+};
+
 const mapStatToProps = state => ({
-  state: state.login
+  state: state.login,
+  onSubmit: handleSubmit
 });
 
-const mapDispatchToProps = dispatch => ({
-  handleSubmit: () => dispatch(submit('form'))
-});
+// const mapDispatchToProps = dispatch => ({
+// });
 
-export default connect(mapStatToProps, mapDispatchToProps)(loginScreen);
+export default connect(mapStatToProps, null)(loginScreen);

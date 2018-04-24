@@ -6,17 +6,16 @@ import ReduxFormInput from '../../components/formComponents/reduxFormInput/redux
 
 import './loginScreen.css';
 
-import submit from './submit';
-
 const LoginScreen = ({
   error,
+  onSubmit,
   handleSubmit,
   submitting
 }) => (
   <div className="login-screen-wrapper">
     <div className="login-screen">
       <h1 className="login-screen-title">Login</h1>
-      <form onSubmit={handleSubmit(submit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Field
           name="username"
           type="text"
@@ -66,7 +65,11 @@ LoginScreen.propTypes = {
    */
   handleSubmit: func.isRequired,
   error: string,
-  submitting: bool.isRequired
+  submitting: bool.isRequired,
+  /**
+   * Handles form submission
+   */
+  onSubmit: func.isRequired
 };
 
 LoginScreen.defaultProps = {
@@ -74,6 +77,5 @@ LoginScreen.defaultProps = {
 };
 
 export default reduxForm({
-  form: 'login',
-  onSubmit: submit
+  form: 'login'
 })(LoginScreen);

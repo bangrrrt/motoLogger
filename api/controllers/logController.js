@@ -1,15 +1,13 @@
 var mongo = require('mongodb').MongoClient;
 var objectId = require('mongodb').ObjectID;
 var assert = require('assert');
-var URL = process.env.MONGODB_URI || 'mongodb://localhost:27017/motoMaintenance';
+var dbResources = require('./resources/resources');
 
-var DATABASE = 'heroku_r020v8q8';
-var COLLECTION = 'logs';
-
+var { dbURL, logCollection, dataBase } = dbResources;
 
 // Adds a new log
 exports.CREATE_LOG = function(req, res) {
-  mongo.connect(URL, function(err, client) {
+  mongo.connect(dbURL, function(err, client) {
     var newLog = {
       _id: req.body.logId,
       logId: req.body.logId,
@@ -25,7 +23,7 @@ exports.CREATE_LOG = function(req, res) {
       res.send(err);
     }
 
-    client.db(DATABASE).collection(COLLECTION)
+    client.db(dataBase).collection(logCollection)
       .insertOne(newLog, function(err, results) {
         assert.equal(null, err);
 
@@ -37,12 +35,12 @@ exports.CREATE_LOG = function(req, res) {
 
 // Gets all the saved logs
 exports.GET_LOGS = function(req, res) {
-  mongo.connect(URL, function(err, client) {
+  mongo.connect(dbURL, function(err, client) {
     if (err) {
       res.send(err);
     }
 
-    client.db(DATABASE).collection(COLLECTION)
+    client.db(dataBase).collection(logCollection)
       .find({}).toArray(function (err, result) {
         if (err) {
           res.send(err);
@@ -57,7 +55,7 @@ exports.GET_LOGS = function(req, res) {
 // Updates a log
 exports.UPDATE_LOG = function(req, res) {
   var resultArray = [];
-  mongo.connect(URL, function(err, client) {
+  mongo.connect(dbURL, function(err, client) {
     var updatedLog = {
       _id: req.body.logId,
       logId: req.body.logId,
@@ -73,7 +71,7 @@ exports.UPDATE_LOG = function(req, res) {
       res.send(err);
     }
 
-    client.db(DATABASE).collection(COLLECTION)
+    client.db(dataBase).collection(logCollection)
       .updateOne({ _id: req.body.logId }, { $set: updatedLog }, function(err, result) {
         if (err) {
           res.send(err)
@@ -87,10 +85,10 @@ exports.UPDATE_LOG = function(req, res) {
 
 // Deletes a log
 exports.DELETE_LOG = function(req, res) {
-  mongo.connect(URL, function(err, client) {
+  mongo.connect(dbURL, function(err, client) {
     assert.equal(null, err);
 
-    client.db(DATABASE).collection(COLLECTION)
+    client.db(dataBase).collection(logCollection)
       .deleteOne({ _id: req.params.logId }, function(err, result) {
         assert.equal(err, null);
         assert.equal(1, result.result.n);
