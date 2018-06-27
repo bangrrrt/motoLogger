@@ -29,7 +29,7 @@ class NavBar extends Component {
   render() {
     const {
       activeMenuLogId,
-      onAsyncCreateLog,
+      onCreateLog,
       isMobile,
       isEditing
     } = this.props;
@@ -55,7 +55,7 @@ class NavBar extends Component {
             disabled={activeMenuLogId}
             onClick={() => {
               if(!isEditing) {
-                onAsyncCreateLog();
+                onCreateLog();
               }
             }}
           />
@@ -87,7 +87,7 @@ NavBar.propTypes = {
   /**
    * Action that creates a new log
    */
-  onAsyncCreateLog: func.isRequired,
+  onCreateLog: func.isRequired,
   /**
    * An action that toggles the footer menu visible
    */

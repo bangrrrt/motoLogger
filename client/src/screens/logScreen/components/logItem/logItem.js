@@ -20,12 +20,18 @@ class LogItem extends Component {
     super(props);
 
     this.state = {
-      nameInput: this.props.log.itemName,
+      nameInput: this.props.log.logName,
       notesInput: this.props.log.notes,
       isExpanded: false,
       miles: this.props.log.miles
     };
   }
+
+  getLog = () => ({
+    ...this.props.log,
+    logName: this.state.nameInput,
+    notes: this.state.notesInput
+  })
 
   handleExpand = () => {
     this.setState({ isExpanded: !this.state.isExpanded });
@@ -56,33 +62,21 @@ class LogItem extends Component {
     );
   }
 
-  getLog = () => {
-    const {
-      logId,
-      isEditable,
-      dateAdded,
-      parts,
-      miles
-    } = this.props.log;
-
-    return {
-      itemName: this.state.nameInput,
-      notes: this.state.notesInput,
-      logId,
-      isEditable,
-      dateAdded,
-      parts,
-      miles
-    };
-  }
-
   renderSaveIcon = () => {
-    const { onAsyncUpdateLog } = this.props;
+    const {
+      onAsyncCreateLog,
+      onAsyncUpdateLog,
+      isNewItemCreated
+    } = this.props;
 
     return (
       <span
         onClick={() => {
-          onAsyncUpdateLog(this.getLog());
+          if (isNewItemCreated) {
+            onAsyncCreateLog(this.getLog());
+          } else {
+            onAsyncUpdateLog(this.getLog());
+          }
         }}
         className="log-save"
         aria-hidden="true"
@@ -286,9 +280,17 @@ class LogItem extends Component {
   }
 }
 
-const { func, array } = PropTypes;
+const { func, array, bool } = PropTypes;
 
 LogItem.propTypes = {
+  /**
+   * True when user just created a new log
+  */
+  isNewItemCreated: bool.isRequired,
+  /**
+   * Async func that creates a new log in the data base
+  */
+  onAsyncCreateLog: func.isRequired,
   /**
    * Action that adds miles to the log item
    */

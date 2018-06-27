@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import LogList from './logList';
 import {
-  asyncCreateLog
+  createLog
 } from '../../state/actions';
 
 const mapStateToProps = state => ({
@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 });
 
 const mapStateToDispatch = dispatch => ({
-  onAsyncCreateLog: () => dispatch(asyncCreateLog())
+  onCreateLog: () => dispatch(createLog())
 });
 
 export default connect(mapStateToProps, mapStateToDispatch)(LogList);
