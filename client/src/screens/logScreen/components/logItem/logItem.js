@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
+import size from 'lodash/size';
 import includes from 'lodash/includes';
-import { FormGroup, FormControl, HelpBlock } from 'react-bootstrap';
+import { FormGroup, FormControl } from 'react-bootstrap';
 import { Motion, spring } from 'react-motion';
 
 import Miles from './components/defaultView/miles/miles';
@@ -23,7 +24,9 @@ class LogItem extends Component {
       nameInput: this.props.log.logName,
       notesInput: this.props.log.notes,
       isExpanded: false,
-      miles: this.props.log.miles
+      miles: this.props.log.miles,
+      errors: {},
+      isFormSubmitted: false
     };
   }
 
@@ -38,9 +41,9 @@ class LogItem extends Component {
   }
 
   renderLogNameInput = () => {
-    const help = false;
+    const { errors, nameInput } = this.state;
     if (!this.props.log.isEditable) {
-      return this.state.nameInput;
+      return nameInput;
     }
 
     return (
@@ -48,7 +51,7 @@ class LogItem extends Component {
         <FormControl
           className="log-item-title-input"
           placeholder="Maintenance name"
-          value={this.state.nameInput}
+          value={nameInput}
           onChange={(e) => {
             this.setState({
               ...this.state,
@@ -57,11 +60,14 @@ class LogItem extends Component {
           }}
           readOnly={!this.props.log.isEditable}
         />
-        {help && <HelpBlock>{help}</HelpBlock>}
+        {errors.name && nameInput === '' && <span className="log-item-title-error">{errors.name}</span>}
       </FormGroup>
     );
   }
 
+  /**
+   * Renders save icon and handles log submission
+   */
   renderSaveIcon = () => {
     const {
       onAsyncCreateLog,
@@ -72,11 +78,22 @@ class LogItem extends Component {
     return (
       <span
         onClick={() => {
-          if (isNewItemCreated) {
+          const errors = {};
+
+          this.setState({ isFormSubmitted: true });
+
+          if (!this.state.nameInput) {
+            const message = 'Please name this log';
+            errors.name = message;
+          }
+
+          if (isNewItemCreated && size(errors) === 0) {
             onAsyncCreateLog(this.getLog());
-          } else {
+          } else if (size(errors) === 0) {
             onAsyncUpdateLog(this.getLog());
           }
+
+          this.setState({ errors });
         }}
         className="log-save"
         aria-hidden="true"
@@ -86,6 +103,9 @@ class LogItem extends Component {
     );
   }
 
+  /**
+   * Renders the Menu Icon
+  */
   renderCogIcon = () => {
     const {
       onToggleMenu,
@@ -115,8 +135,10 @@ class LogItem extends Component {
     );
   }
 
+  /**
+   * Renders the notes section
+   */
   renderNotes = (height) => {
-    const help = false;
     if (!this.props.log.isEditable) {
       return (
         <p
@@ -146,7 +168,6 @@ class LogItem extends Component {
           }}
           readOnly={!this.props.log.isEditable}
         />
-        {help && <HelpBlock>{help}</HelpBlock>}
       </FormGroup>
     );
   }
@@ -280,9 +301,42 @@ class LogItem extends Component {
   }
 }
 
-const { func, array, bool } = PropTypes;
+const { func, array, bool, shape, string, number } = PropTypes;
 
 LogItem.propTypes = {
+  /**
+   * Action that updates a log's date
+   */
+  onUpdateDate: func.isRequired,
+  /**
+   * Log values and settings
+   */
+  log: shape({
+    /**
+     * The name of the log
+     */
+    logName: string,
+    /**
+     * Array of parts associated with the log
+     */
+    parts: array,
+    /**
+     * True if the log is in edit mode
+     */
+    isEditable: bool,
+    /**
+     * The date the maintenance was done
+     */
+    dateAdded: string,
+    /**
+     * The unique identifier for the log
+     */
+    logId: string,
+    /**
+     * How many miles the user is currently at
+     */
+    miles: number
+  }),
   /**
    * True when user just created a new log
   */
