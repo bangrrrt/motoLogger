@@ -8,6 +8,34 @@ import * as types from './types';
 import { updateLogEditingStatus, fetchLogHelper } from './helper';
 
 const initialState = {
+  /**
+   * Name of the editing log
+   */
+  logName: '',
+  /**
+   * Notes for the log
+   */
+  logNotes: '',
+  /**
+   * Date the maintenance was done
+   */
+  dateAdded: '',
+  /**
+   * The identifier for the log
+   */
+  logId: '',
+  /**
+   * True if the log is expanded
+   */
+  isExpanded: false,
+  /**
+   * Object of errors for different fields
+   */
+  errors: {},
+  /**
+   * True if the form was submitted
+   */
+  isFormSubmitted: false,
   // True if a log is being edited
   isEditing: false,
   // True when user just created a log
