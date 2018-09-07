@@ -4,9 +4,11 @@ import thunk from 'redux-thunk';
 
 import appReducer from './reducer';
 import logScreenReducer from '../screens/logScreen/state/reducer';
+import homeScreenReducer from '../screens/homeScreen/state/reducer';
 
 const reducer = combineReducers({
   app: appReducer,
+  homeScreen: homeScreenReducer,
   logScreen: logScreenReducer,
   form: formReducer
 });

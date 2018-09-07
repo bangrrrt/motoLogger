@@ -4,8 +4,6 @@ import { asyncLoginUser } from './state/actions';
 import loginScreen from './loginScreen';
 
 const handleSubmit = (values, dispatch) => {
-  console.log('values', values);
-
   dispatch(asyncLoginUser());
 };
 

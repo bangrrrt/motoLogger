@@ -48,8 +48,8 @@ const RegisterScreen = ({
             type="submit"
             disabled={submitting}
             className="g-recaptcha register-screen-button"
-            data-sitekey="6LdRa1QUAAAAABj9YA3lDkA3aQ-4hhJjBtwd5FzE"
-            data-callback={submit}
+            // data-sitekey="6LdRa1QUAAAAABj9YA3lDkA3aQ-4hhJjBtwd5FzE"
+            // data-callback={submit}
           >
             Create Account
           </button>

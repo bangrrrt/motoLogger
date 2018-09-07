@@ -6,7 +6,9 @@ import {
   Col
 } from 'react-bootstrap';
 
+import NavBarContainer from '../../components/navBar/navBarContainer';
 import LogListContainer from './components/logList/logListContainer';
+import FooterContainer from '../../components/footer/footerContainer';
 
 import './logScreen.css';
 
@@ -23,16 +25,20 @@ class LogScreen extends Component {
     } = this.props;
 
     return (
-      <Grid
-        className="log-screen"
-        style={{ width: isMobile ? '100%' : '' }}
-      >
-        <Row>
-          <Col xs={12}>
-            <LogListContainer logs={logItems} id="logId" />
-          </Col>
-        </Row>
-      </Grid>
+      <div>
+        <NavBarContainer />
+        <Grid
+          className="log-screen"
+          style={{ width: isMobile ? '100%' : '' }}
+        >
+          <Row>
+            <Col xs={12}>
+              <LogListContainer logs={logItems} id="logId" />
+            </Col>
+          </Row>
+        </Grid>
+        <FooterContainer />
+      </div>
     );
   }
 }

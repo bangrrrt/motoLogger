@@ -3,7 +3,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 90vh;
   animation: fadeIn 1.5s;
 }
 
@@ -49,9 +48,7 @@
 
 /* Custom, iPhone Retina */ 
 @media only screen and (min-width: 320px) {
-	.register-screen {
-    width: 90%;
-  }
+
 }
 
 /* Extra Small Devices, Phones */ 
@@ -61,8 +58,5 @@
 
 /* Small Devices, Tablets */
 @media only screen and (min-width: 768px) {
-  .register-screen {
-    width: 25%;
-    margin-top: 80px;
-  }
+
 }

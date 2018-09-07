@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import { Link } from 'react-router-dom';
 import ReduxFormInput from '../../components/formComponents/reduxFormInput/reduxFormInput';
 
 import './loginScreen.css';
@@ -14,9 +13,10 @@ const LoginScreen = ({
 }) => (
   <div className="login-screen-wrapper">
     <div className="login-screen">
-      <h1 className="login-screen-title">Login</h1>
+      <h3 className="login-screen-title">Login</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Field
+          autoComplete="username"
           name="username"
           type="text"
           component={ReduxFormInput}
@@ -24,6 +24,7 @@ const LoginScreen = ({
           placeholder="Email Address"
         />
         <Field
+          autoComplete="current-password"
           name="password"
           hasForgotPassword
           type="password"
@@ -42,17 +43,6 @@ const LoginScreen = ({
           </button>
         </div>
       </form>
-    </div>
-    <div className="login-screen-register">
-      <h5>Don't have an account?</h5>
-      <h3 className="login-screen-register-title">
-        <Link
-          to="/register"
-          className="login-screen-register-title-link"
-        >
-          Register Now
-        </Link>
-      </h3>
     </div>
   </div>
 );
