@@ -2,14 +2,11 @@
   text-align: left;
 }
 
-.hs-body-register-form .grecaptcha-badge {
-  position: initial !important;
-}
-
 .hs-body-hero-image-wrapper {
   height: 100vh;
   justify-content: center;
-  z-index: 2;
+  z-index: 5;
+  position: relative;
   display: flex;
   color: white;
   flex-direction: column;
@@ -17,6 +14,28 @@
   background-position: center;
   background-repeat: no-repeat;
   background-image: url('../../../../images/homeScreenImages/repair.png');
+}
+
+.hs-body-title-sub-text {
+  margin-bottom: 30px;
+}
+
+.hs-body-features {
+  list-style: none;
+  margin-top: 5px;
+  font-size: 18px;
+  text-align: left;
+  padding-left: 0;
+}
+
+.hs-body-features li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.hs-body-features-item-icon {
+  margin-right: 16px;
 }
 
 .hs-body-hero-image-content {
@@ -70,9 +89,7 @@
 }
 
 .hs-body-hero-image {
-  display: none;
   margin: auto;
-  animation-delay: 0.3s;
 }
 
 .hs-body-oil-content {
@@ -82,6 +99,8 @@
   background-color: #ffffff;
   display: flex;
   height: 100vh;
+  z-index: 4;
+  position: relative;
 }
 
 .hs-body-oil-image {
@@ -101,7 +120,6 @@
 }
 
 .hs-body-gears-image {
-  height: 85vw;
   display: none;
 }
 
@@ -113,6 +131,8 @@
   align-items: center;
   height: 100vh;
   padding: 10px;
+  z-index: 3;
+  position: relative;
 }
 
 .hs-body-sell-content {
@@ -122,6 +142,8 @@
   background-position: top center;
   display: flex;
   align-items: center;
+  z-index: 2;
+  position: relative;
 }
 
 .hs-body-register-form {
@@ -143,6 +165,8 @@
   background-image: url("../../../../images/homeScreenImages/parts.png");
   background-size: cover;
   background-position: center;
+  z-index: 1;
+  position: relative;
 }
 
 .hs-body-sell-image-wrapper {
@@ -264,11 +288,11 @@
   overflow: hidden;
 }
 
-/*************************/
-/*************************/
-/* Custom, iPhone Retina */ 
-/*************************/
-/*************************/
+/*******************************************************/
+/*******************************************************/
+/********** Custom, iPhone Retina Landscape ************/ 
+/*******************************************************/
+/*******************************************************/
 @media only screen and (min-width: 320px) and (orientation: landscape) {
   .hs-body-hero-image-wrapper {
     display: flex;
@@ -362,16 +386,36 @@
 
 }
 
+/*******************************************************/
+/*******************************************************/
+/********** Custom, iPhone Retina Portrait *************/ 
+/*******************************************************/
+/*******************************************************/
 @media only screen and (min-width: 320px) and (orientation: portrait)  {
   .hs-body p {
     font-size: 16px;
+  }
+
+  .hs-body-gears-image {
+    height: 75vw;
+  }
+
+  .hs-body-register-form .grecaptcha-badge {
+    bottom: 70px !important;
+    animation-name: fadeInRight;
+    animation-delay: 5s;
   }
 
   .hs-body-hero-image-wrapper {
     padding: 10px 0;
   }
 
+  .hs-body-hero-image-slogan {
+    font-size: 20px;
+  }
+
   .hs-body-register-form {
+    margin-top: 20px;
     order: 2;
   }
 
@@ -401,12 +445,16 @@
   }
 
   .hs-body-register-content {
-    padding: 20px 20px;
+    padding: 20px 20px 60px;
     flex-direction: column;
     justify-content: space-evenly;
     min-height: 100vh;
     margin-bottom: 60px;
     height: auto;
+  }
+
+  .hs-body-register-content .register-screen-button-wrapper {
+    justify-content: flex-start;
   }
 
   .hs-body-hero-image-logo {
@@ -438,6 +486,7 @@
   }
 
   .hs-body-oil-content {
+    height: auto;
     flex-direction: column;
     justify-content: space-evenly;
   }
@@ -461,6 +510,12 @@
     animation-name: fadeInDownBig;
   }
 
+  .hs-body-features {
+    margin-top: 5px;
+    font-size: 18px;
+    text-align: left;
+  }
+
   .hs-body-features-saved-logs-image {
   }
 
@@ -479,6 +534,8 @@
   .hs-body-gear-image-wrapper {
     order: 2;
     height: 50vh;
+    display: flex;
+    align-items: center;
   }
 
   .hs-body-sell-image-wrapper {
@@ -507,10 +564,26 @@
 
 }
 
-/* Small Devices, Tablets */
+/*******************************************************/
+/*******************************************************/
+/*************** Small Devices, Tablets *****************/ 
+/*******************************************************/
+/*******************************************************/
 @media only screen and (min-width: 768px) and (orientation: landscape) {
   .hs-body p {
     font-size: 18px;
+  }
+
+  .hs-body-gears-image {
+    height: 85vw;
+  }
+
+  .hs-body-register-form .grecaptcha-badge {
+    bottom: 1px !important;
+  }
+
+  .hs-body-hero-image-slogan {
+    font-size: 32px;
   }
 
   .hs-body-hero-image-learn-more {
@@ -529,7 +602,8 @@
   .hs-body-register-content {
     margin-bottom: 0;
     flex-direction: initial;
-    height: 100vh;    
+    height: 100vh;
+    padding-top: 70px;
   }
 
   .hs-body-gears-text-wrapper {
@@ -610,7 +684,6 @@
 
   .hs-body-title-text {
     font-size: 36px;
-    margin-bottom: 35px;
   }
 
   .hs-body-oil-image-wrapper {

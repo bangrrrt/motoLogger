@@ -112,9 +112,9 @@ class Body extends Component {
                 src="https://raw.githubusercontent.com/bangrrrt/motoLogger/master/client/src/images/motoLogger-logo.png"
                 alt="motoLogger"
               />
-              <h2 className="hs-body-hero-image-slogan">Fix it, Log it</h2>
+              <h1 className="hs-body-hero-image-slogan">Fix it, Log it, Ride</h1>
             </div>
-            <div className="hs-body-hero-image fadeInDownBig">
+            <div className="hs-body-hero-image">
               <LoginScreenContainer />
               <div className="hs-body-hero-image-register">
                 <h5>Don't have an account?</h5>
@@ -151,12 +151,23 @@ class Body extends Component {
             </div>
             <div className={oilTextClasses}>
               <h1 className="hs-body-title-text">Easily Track Motorcycle Maintenance</h1>
-              <p>Whether she&#39;s a new bike or old, you do your own maintenance or not,
-                keeping a log of what changed will come in handy down the road. Never forget
-                the model number of your favorite oil filter. Look back to see what you paid
-                when you took your bike to the mechanic to prevent getting ripped off by a new
-                mechanic.
+              <p className="hs-body-title-sub-text">Whether or not you do your own maintenance,
+                using motoLogger will help you keep your bike as good as new (<i>even if she&#39;s far from it</i>).
               </p>
+              <ul className="hs-body-features">
+                <li className="hs-body-features-item">
+                  <span className="hs-body-features-item-icon glyphicon glyphicon-cog" />
+                  <span>Know exactly when your last oil change was, and never forget the oil filter model number</span>
+                </li>
+                <li className="hs-body-features-item">
+                  <span className="hs-body-features-item-icon glyphicon glyphicon-cog" />
+                  <span>Track parts and labor expenses to easily compare mechanics and / or retail prices</span>
+                </li>
+                <li className="hs-body-features-item">
+                  <span className="hs-body-features-item-icon glyphicon glyphicon-cog" />
+                  <span>See true cost of ownership and maintenance activity for your vehicle</span>
+                </li>
+              </ul>
             </div>
           </div>
         </Waypoint>
@@ -167,9 +178,9 @@ class Body extends Component {
           <div className="hs-body-gears-content">
             <div className={gearsTextClasses}>
               <h1 className="hs-body-title-text">Create A Log For Everything</h1>
-              <p>Some maintenance might be straight forward, but maybe you learned some new tricks
+              <p>Maintenance might be straight forward for you, but maybe you learned some new tricks
                 along the way. Take advantage of the notes section to learn from your own mistakes
-                or happy accidents.
+                or remember that tip the mechanic mentioned.
               </p>
             </div>
             <div className="hs-body-gear-image-wrapper">
@@ -204,7 +215,11 @@ class Body extends Component {
             </div>
             <div className={sellTextClasses}>
               <h1 className="hs-body-title-text">Sell With Confidence</h1>
-              <p className="hs-body-paragraph-text">Documenting your maintenance will allow the buyer to see the real value of your motorcycle and that it&#39;s more than just a used bike. When it&#39;s time for them to throw down money they&#39;ll feel a sense of confidence knowing they aren&#39;t about to get ripped off. Sharing this info will also give them a good idea of what might need to be repaired and that you&#39;re looking out for them.</p>
+              <p className="hs-body-paragraph-text">
+                You know she&#39;s more than just a used bike. Documenting your maintenance with motoLogger
+                will show your buyer the real value of your motorcycle. When it&#39;s time to talk numbers
+                you&#39;ll have proof that she&#39;s worth it.
+              </p>
             </div>
           </div>
         </Waypoint>
@@ -215,7 +230,10 @@ class Body extends Component {
           <div id="register" className="hs-body-register-content">
             <div className={registerTextClasses}>
               <h1 className="hs-body-title-text">Relax</h1>
-              <p className="hs-body-paragraph-text">Forget about all your worries and enjoy the ride. After all you earned it by maintaining and logging your maintenance, <em>right?</em></p>
+              <p className="hs-body-paragraph-text">When you use motoLogger life becomes easier
+                through organization. If your bike is up and runnin&#39; get out there and enjoy the
+                ride. Just dont forget to log your journey. Otherwise, it&#39;s time to start logging.
+              </p>
             </div>
             <div className={registerFormClasses}>
               <RegisterScreen />
