@@ -11,7 +11,7 @@ exports.CREATE_LOG = function(req, res) {
     var newLog = {
       _id: req.body.logId,
       logId: req.body.logId,
-      itemName: req.body.itemName,
+      logName: req.body.logName,
       dateAdded: req.body.dateAdded,
       notes: req.body.notes,
       isEditable: req.body.isEditable,
@@ -27,7 +27,7 @@ exports.CREATE_LOG = function(req, res) {
       .insertOne(newLog, function(err, results) {
         assert.equal(null, err);
 
-        res.json(newLog);
+        res.send("Log added!");
         client.close();
       });
   });
@@ -41,7 +41,7 @@ exports.GET_LOGS = function(req, res) {
     }
 
     client.db(dataBase).collection(logCollection)
-      .find({}).toArray(function (err, result) {
+      .find({}).sort({ miles: -1 }).toArray(function (err, result) {
         if (err) {
           res.send(err);
         };
@@ -59,7 +59,7 @@ exports.UPDATE_LOG = function(req, res) {
     var updatedLog = {
       _id: req.body.logId,
       logId: req.body.logId,
-      itemName: req.body.itemName,
+      logName: req.body.logName,
       dateAdded: req.body.dateAdded,
       notes: req.body.notes,
       isEditable: false,
@@ -91,7 +91,7 @@ exports.DELETE_LOG = function(req, res) {
     client.db(dataBase).collection(logCollection)
       .deleteOne({ _id: req.params.logId }, function(err, result) {
         assert.equal(err, null);
-        assert.equal(1, result.result.n);
+        assert.equal(1, result.result.ok);
 
         res.send('Log deleted.')
         client.close();

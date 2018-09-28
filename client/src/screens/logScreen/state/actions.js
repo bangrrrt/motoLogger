@@ -13,6 +13,23 @@ const cryptoString = (len) => {
   return crypto.randomBytes(Math.ceil(len / 2)).toString('hex').slice(0, len);
 };
 
+export const createLog = () => {
+  const newLog = {
+    logId: cryptoString(24),
+    logName: '',
+    dateAdded: moment().format('MMM D, YYYY'),
+    notes: '',
+    isEditable: true,
+    parts: [],
+    miles: 0
+  };
+
+  return {
+    type: types.CREATE_LOG,
+    newLog
+  };
+};
+
 export const onSelectLogPart = logId => ({
   type: types.SELECT_LOG_PART,
   logId
@@ -87,26 +104,16 @@ const asyncCreateLogError = error => ({
   error
 });
 
-const asyncCreateLogSuccess = newItem => ({
+const asyncCreateLogSuccess = logId => ({
   type: types.ASYNC_CREATE_LOG_SUCCESS,
-  newItem
+  logId
 });
 
-export const asyncCreateLog = () => (dispatch) => {
+export const asyncCreateLog = newItem => (dispatch) => {
   dispatch(asyncCreateLogRequest());
 
-  const newItem = {
-    logId: cryptoString(24),
-    itemName: '',
-    dateAdded: moment().format('MMM D, YYYY'),
-    notes: '',
-    isEditable: true,
-    parts: [],
-    miles: 0
-  };
-
   return axios.put('/api/logs/createLog', newItem)
-    .then(res => dispatch(asyncCreateLogSuccess(res.data)))
+    .then(() => dispatch(asyncCreateLogSuccess(newItem.logId)))
     .catch(err => dispatch(asyncCreateLogError(err)));
 };
 
@@ -132,11 +139,9 @@ export const asyncDeleteLog = logId => (dispatch) => {
     .catch(err => dispatch(asyncDeleteLogError(err)));
 };
 
-const asyncUpdateLogsRequest = () => {
-  return {
-    type: types.ASYNC_UPDATE_LOGS_REQUEST
-  };
-};
+const asyncUpdateLogsRequest = () => ({
+  type: types.ASYNC_UPDATE_LOGS_REQUEST
+});
 
 const asyncUpdateLogsError = error => ({
   type: types.ASYNC_UPDATE_LOGS_ERROR,

@@ -8,8 +8,38 @@ import * as types from './types';
 import { updateLogEditingStatus, fetchLogHelper } from './helper';
 
 const initialState = {
+  /**
+   * Name of the editing log
+   */
+  logName: '',
+  /**
+   * Notes for the log
+   */
+  logNotes: '',
+  /**
+   * Date the maintenance was done
+   */
+  dateAdded: '',
+  /**
+   * The identifier for the log
+   */
+  logId: '',
+  /**
+   * True if the log is expanded
+   */
+  isExpanded: false,
+  /**
+   * Object of errors for different fields
+   */
+  errors: {},
+  /**
+   * True if the form was submitted
+   */
+  isFormSubmitted: false,
   // True if a log is being edited
   isEditing: false,
+  // True when user just created a log
+  isNewItemCreated: false,
   // True if the app is making a request to the server
   isLoading: false,
   // Id of the log menu that is open
@@ -21,6 +51,16 @@ const initialState = {
 // Create update log function that takes in an operation type, data, and an id
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.CREATE_LOG:
+      return {
+        ...state,
+        isNewItemCreated: true,
+        isEditing: true,
+        logItems: [
+          action.newLog,
+          ...state.logItems
+        ]
+      };
     case types.UPDATE_LOG_DATE:
       return {
         ...state,
@@ -110,12 +150,10 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        isEditing: true,
-        activeMenuLogId: [],
-        logItems: [
-          action.newItem,
-          ...state.logItems
-        ]
+        isNewItemCreated: false,
+        isEditing: false,
+        logItems: updateLogEditingStatus(action.logId, state.logItems),
+        activeMenuLogId: []
       };
     case types.ASYNC_DELETE_LOG_REQUEST:
       return {

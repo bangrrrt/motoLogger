@@ -83,7 +83,7 @@ class LogList extends React.Component {
       <span
         className="log-list-text-link"
         onClick={() => {
-          this.props.onAsyncCreateLog();
+          this.props.onCreateLog();
         }}
       >
         click here.
@@ -115,9 +115,9 @@ LogList.propTypes = {
    */
   isLoading: bool.isRequired,
   /**
-   * Async action to create a log
+   * Action to create a log
    */
-  onAsyncCreateLog: func.isRequired,
+  onCreateLog: func.isRequired,
   /**
    * An array of logs
    */

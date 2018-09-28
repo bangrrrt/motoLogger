@@ -3,6 +3,7 @@ import LogItem from './logItem';
 import {
   asyncDeleteLog,
   onEditLog,
+  asyncCreateLog,
   asyncUpdateLogs,
   onToggleMenu,
   onAddLogPart,
@@ -11,23 +12,21 @@ import {
   onUpdateDate
 } from '../../state/actions';
 
-const mapStateToProps = (state) => {
-  return {
-    activeMenuLogId: state.logScreen.activeMenuLogId
-  };
-};
+const mapStateToProps = state => ({
+  activeMenuLogId: state.logScreen.activeMenuLogId,
+  isNewItemCreated: state.logScreen.isNewItemCreated
+});
 
-const mapStateToDispatch = (dispatch) => {
-  return {
-    onToggleMenu: logId => dispatch(onToggleMenu(logId)),
-    onEditLog: logId => dispatch(onEditLog(logId)),
-    onAsyncDeleteItem: logId => dispatch(asyncDeleteLog(logId)),
-    onAsyncUpdateLog: editingLog => dispatch(asyncUpdateLogs(editingLog)),
-    onAddLogPart: (newPart, logId) => dispatch(onAddLogPart(newPart, logId)),
-    onDeleteLogParts: (partsIndex, logId) => dispatch(onDeleteLogParts(partsIndex, logId)),
-    onAddLogMiles: (miles, logId) => dispatch(onAddLogMiles(miles, logId)),
-    onUpdateDate: (date, logId) => dispatch(onUpdateDate(date, logId))
-  };
-};
+const mapStateToDispatch = dispatch => ({
+  onToggleMenu: logId => dispatch(onToggleMenu(logId)),
+  onEditLog: logId => dispatch(onEditLog(logId)),
+  onAsyncDeleteItem: logId => dispatch(asyncDeleteLog(logId)),
+  onAsyncCreateLog: newLog => dispatch(asyncCreateLog(newLog)),
+  onAsyncUpdateLog: editingLog => dispatch(asyncUpdateLogs(editingLog)),
+  onAddLogPart: (newPart, logId) => dispatch(onAddLogPart(newPart, logId)),
+  onDeleteLogParts: (partsIndex, logId) => dispatch(onDeleteLogParts(partsIndex, logId)),
+  onAddLogMiles: (miles, logId) => dispatch(onAddLogMiles(miles, logId)),
+  onUpdateDate: (date, logId) => dispatch(onUpdateDate(date, logId))
+});
 
 export default connect(mapStateToProps, mapStateToDispatch)(LogItem);
