@@ -41,7 +41,7 @@ exports.GET_LOGS = function(req, res) {
     }
 
     client.db(dataBase).collection(logCollection)
-      .find({}).toArray(function (err, result) {
+      .find({}).sort({ miles: -1 }).toArray(function (err, result) {
         if (err) {
           res.send(err);
         };

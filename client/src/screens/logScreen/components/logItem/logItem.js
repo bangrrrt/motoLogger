@@ -51,6 +51,7 @@ class LogItem extends Component {
         <FormControl
           className="log-item-title-input"
           placeholder="Maintenance name"
+          type="input"
           value={nameInput}
           onChange={(e) => {
             this.setState({
