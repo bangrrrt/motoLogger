@@ -16,9 +16,9 @@ const asyncLoginUserRequest = () => ({
   type: types.ASYNC_LOGIN_USER_REQUEST
 });
 
-export const asyncLoginUser = () => (dispatch) => {
+export const asyncLoginUser = credentials => (dispatch) => {
   dispatch(asyncLoginUserRequest());
-  return axios.get('/api/login/')
+  return axios.post('/api/signup/', credentials)
     .then(res => dispatch(asyncLoginUserSuccess(res)))
     .catch(err => dispatch(asyncLoginUserError(err)));
 };
@@ -42,26 +42,4 @@ export const asyncLogOutUser = () => (dispatch) => {
   return axios.get('/logout')
     .then(res => dispatch(asyncLogOutUserSuccess(res)))
     .catch(err => dispatch(asyncLogOutUserError(err)));
-};
-
-const asyncRegisterUserSuccess = response => ({
-  type: types.ASYNC_REGISTER_USER_SUCCESS,
-  response
-});
-
-const asyncRegisterUserError = error => ({
-  type: types.ASYNC_REGISTER_USER_ERROR,
-  error
-});
-
-const asyncRegisterUserRequest = () => ({
-  type: types.ASYNC_REGISTER_USER_REQUEST
-});
-
-export const asyncRegisterUser = () => (dispatch) => {
-  dispatch(asyncRegisterUserRequest());
-
-  return axios.post('/register')
-    .then(res => dispatch(asyncRegisterUserSuccess(res)))
-    .catch(err => dispatch(asyncRegisterUserError(err)));
 };

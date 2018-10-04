@@ -3,14 +3,11 @@ import { asyncLoginUser } from './state/actions';
 
 import loginScreen from './loginScreen';
 
-const handleSubmit = (values, dispatch) => {
-  console.log('values', values);
-
-  dispatch(asyncLoginUser());
+const handleSubmit = (credentials, dispatch) => {
+  dispatch(asyncLoginUser(credentials));
 };
 
 const mapStatToProps = state => ({
-  state: state.login,
   onSubmit: handleSubmit
 });
 
