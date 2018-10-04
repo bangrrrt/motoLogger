@@ -12,15 +12,20 @@
     "mongoDB": "\"C:/Program Files/MongoDB/Server/3.4/bin/mongod.exe\" & \"C:/Program Files/MongoDB/Server/3.4/bin/mongo.exe\""
   },
   "dependencies": {
+    "bcrypt-nodejs": "^0.0.3",
     "body-parser": "~1.18.2",
     "concurrently": "^3.5.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
     "jade": "~1.11.0",
+    "jsonwebtoken": "^8.3.0",
     "mongodb": "^3.0.2",
     "mongoose": "^4.12.3",
     "morgan": "~1.9.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
     "serve-favicon": "~2.4.5"
   }
 }
