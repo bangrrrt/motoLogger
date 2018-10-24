@@ -3,15 +3,15 @@ import asyncRegisterUser from './state/actions';
 
 import registerScreen from './registerScreen';
 
-const handleSubmit = (registerData, dispatch) => {
-  dispatch(asyncRegisterUser(registerData));
+const handleSubmit = (values, dispatch) => {
+  dispatch(asyncRegisterUser(values));
 };
 
-const mapStatToProps = state => ({
+const mapStateToProps = () => ({
   onSubmit: handleSubmit
 });
 
 // const mapDispatchToProps = dispatch => ({
 // });
 
-export default connect(mapStatToProps, null)(registerScreen);
+export default connect(mapStateToProps, null)(registerScreen);
