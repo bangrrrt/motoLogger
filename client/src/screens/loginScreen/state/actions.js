@@ -18,7 +18,7 @@ const asyncLoginUserRequest = () => ({
 
 export const asyncLoginUser = credentials => (dispatch) => {
   dispatch(asyncLoginUserRequest());
-  return axios.post('/api/signup/', credentials)
+  return axios.post('/api/login/', credentials)
     .then(res => dispatch(asyncLoginUserSuccess(res)))
     .catch(err => dispatch(asyncLoginUserError(err)));
 };
