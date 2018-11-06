@@ -16,7 +16,7 @@ const App = () => (
     <Provider store={store}>
       <div className="App">
         <NavBarContainer />
-        <Route exact path="/" component={LogScreenContainer} />
+        <Route exact path="/" component={LoginScreenContainer} />
         <Route path="/logs" component={LogScreenContainer} />
         <Route path="/login" component={LoginScreenContainer} />
         <Route path="/register" component={RegisterScreenContainer} />

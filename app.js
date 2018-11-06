@@ -6,7 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
-var config = require('./config/database');
+var session = require('express-session')
+var resources = require('./api/controllers/resources');
 
 
 // Load log routes
@@ -20,6 +21,7 @@ var logoutRoutes = require('./api/routes/logoutRoutes');
 
 // Register route
 var registerRoutes = require('./api/routes/registerRoutes');
+var motorcycleRoutes = require('./api/routes/motorcycleRoutes');
 
 var app = express();
 
@@ -32,12 +34,16 @@ var app = express();
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+// app.use(cookieParser());
+app.use(session({
+  maxAge: 60000,
+  secret: resources.secret
+}));
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 /* Auth passport  */
 // var api = require('./routes/api');
-mongoose.connect(config.database);
+mongoose.connect(resources.dbURL);
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -46,20 +52,16 @@ app.use(function(req, res, next) {
 });
 
 app.use(passport.initialize());
-
+app.use(passport.session());
 app.get('/', function(req, res) {
   res.send('Page under construction.');
 });
 
-// app.use('/api', api);
-/* Auth Passport  */
-
-
-
 // Log api
-// app.use('/api/logs', logRoutes);
+app.use('/api/logs', logRoutes);
 app.use('/api/register', registerRoutes);
 app.use('/api/login', loginRoutes);
+app.use('/api/motorcycles', motorcycleRoutes);
 app.set('view engine', 'jade');
 
 // The "catchall" handler: for any request that doesn't

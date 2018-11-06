@@ -81,16 +81,16 @@ const asyncFetchLogsError = error => ({
   error
 });
 
-const asyncFetchLogsSuccess = fetchedLogs => ({
+const asyncFetchLogsSuccess = data => ({
   type: types.ASYNC_FETCH_LOGS_SUCCESS,
-  fetchedLogs
+  data
 });
 
-export const asyncFetchLogs = () => (dispatch) => {
+export const asyncFetchLogs = motorcycleId => (dispatch) => {
   dispatch(asyncFetchLogsRequest());
 
-  return axios.get('/api/logs/list')
-    .then(res => dispatch(asyncFetchLogsSuccess(res.data.logs)))
+  return axios.get('/api/logs/list', { headers: { Authorization: window.localStorage.token }, data: { motorcycleId } })
+    .then(res => dispatch(asyncFetchLogsSuccess(res.data)))
     .catch(err => dispatch(asyncFetchLogsError(err)));
 };
 

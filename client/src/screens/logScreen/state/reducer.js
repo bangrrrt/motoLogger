@@ -9,6 +9,10 @@ import { updateLogEditingStatus, fetchLogHelper } from './helper';
 
 const initialState = {
   /**
+   * Id of motorcycle's log
+   */
+  motorcycleId: '',
+  /**
    * Name of the editing log
    */
   logName: '',
@@ -36,15 +40,25 @@ const initialState = {
    * True if the form was submitted
    */
   isFormSubmitted: false,
-  // True if a log is being edited
+  /*
+   * True if a log is being edited
+   */
   isEditing: false,
-  // True when user just created a log
+  /**
+   * True when user just created a log
+   */
   isNewItemCreated: false,
-  // True if the app is making a request to the server
+  /**
+   * True if the app is making a request to the server
+   */
   isLoading: false,
-  // Id of the log menu that is open
+  /**
+   * Id of the log menu that is open
+   */
   activeMenuLogId: [],
-  // Array of logs
+  /**
+   * Array of logs
+   */
   logItems: []
 };
 
@@ -89,6 +103,23 @@ const reducer = (state = initialState, action) => {
           return logItem;
         })
       };
+    // case types.ASYNC_FETCH_MOTORCYCLES_REQUEST:
+    //   return {
+    //     ...state,
+    //     isLoading: true
+    //   };
+    // case types.ASYNC_FETCH_MOTORCYCLES_ERROR:
+    //   return {
+    //     ...state,
+    //     isLoading: false,
+    //     error: action.error
+    //   };
+    // case types.ASYNC_FETCH_MOTORCYCLES_SUCCESS:
+    //   return {
+    //     ...state,
+    //     isLoading: false,
+    //     motorcycles: action.data.motorcycles
+    //   };
     case types.ASYNC_FETCH_LOGS_REQUEST:
       return {
         ...state,
@@ -101,12 +132,14 @@ const reducer = (state = initialState, action) => {
         error: action.error
       };
     case types.ASYNC_FETCH_LOGS_SUCCESS:
+      console.log('action',action)
       return {
         ...state,
         isLoading: false,
+        motorcycles: action.data.motorcycles,
         logItems: [
           ...state.logItems,
-          ...fetchLogHelper(action.fetchedLogs)
+          ...fetchLogHelper(action.data)
         ]
       };
     case types.ASYNC_UPDATE_LOGS_REQUEST:

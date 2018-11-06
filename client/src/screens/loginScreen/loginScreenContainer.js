@@ -7,11 +7,12 @@ const handleSubmit = (credentials, dispatch) => {
   dispatch(asyncLoginUser(credentials));
 };
 
-const mapStatToProps = state => ({
-  onSubmit: handleSubmit
+const mapStateToProps = state => ({
+  onSubmit: handleSubmit,
+  isAuthenticated: state.loginScreen.isAuthenticated
 });
 
 // const mapDispatchToProps = dispatch => ({
 // });
 
-export default connect(mapStatToProps, null)(loginScreen);
+export default connect(mapStateToProps, null)(loginScreen);

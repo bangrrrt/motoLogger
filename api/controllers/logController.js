@@ -1,9 +1,23 @@
 var mongo = require('mongodb').MongoClient;
 var objectId = require('mongodb').ObjectID;
 var assert = require('assert');
-var dbResources = require('./resources/resources');
-
+var dbResources = require('./resources');
+var LogModel = require('../models/logModel');
+var MotorcycleModel = require('../models/motorcycleModel');
 var { dbURL, logCollection, dataBase } = dbResources;
+
+getToken = function (headers) {
+  if (headers && headers.authorization) {
+    var parted = headers.authorization.split(' ');
+    if (parted.length === 2) {
+      return parted[1];
+    } else {
+      return null;
+    }
+  } else {
+    return null;
+  }
+};
 
 // Adds a new log
 exports.CREATE_LOG = function(req, res) {
@@ -34,22 +48,45 @@ exports.CREATE_LOG = function(req, res) {
 };
 
 // Gets all the saved logs
-exports.GET_LOGS = function(req, res) {
-  mongo.connect(dbURL, function(err, client) {
-    if (err) {
-      res.send(err);
-    }
+// exports.GET_LOGS = function(req, res) {
+//   mongo.connect(dbURL, function(err, client) {
+//     if (err) {
+//       res.send(err);
+//     }
 
-    client.db(dataBase).collection(logCollection)
-      .find({}).sort({ miles: -1 }).toArray(function (err, result) {
-        if (err) {
-          res.send(err);
-        };
-        res.json({ logs: result });
-        client.close();
-      });
-    client.close();
-  });
+//     client.db(dataBase).collection(logCollection)
+//       .find({}).sort({ miles: -1 }).toArray(function (err, result) {
+//         if (err) {
+//           res.send(err);
+//         };
+//         res.json({ logs: result });
+//         client.close();
+//       });
+//     client.close();
+//   });
+// };
+
+exports.GET_LOGS = function(req, res) {
+  console.log('body', req.body)
+  var token = getToken(req.headers);
+  console.log('token', token);
+  if (token) {
+    LogModel.find({ motorcycleId: req.body.motorcycleId }, function (err, logs) {
+      if (err) return next(err);
+
+      console.log('motorcycles', logs)
+
+      if (logs.length) {
+        res.json({
+          logs
+        });
+      } else {
+        res.json({ logs: null });
+      }
+    });
+  } else {
+    return res.status(403).send({success: false, msg: 'Unauthorized.'});
+  }
 };
 
 // Updates a log

@@ -5,11 +5,12 @@ import { asyncFetchLogs } from './state/actions';
 const mapStateToProps = state => ({
   logItems: state.logScreen.logItems,
   activeMenuLogId: state.logScreen.activeMenuLogId,
-  isMobile: state.app.isMobile
+  isMobile: state.app.isMobile,
+  motorcycles: state.garageScreen.motorcycles
 });
 
 const mapStateToDispatch = dispatch => ({
-  onAsyncFetchLogs: () => dispatch(asyncFetchLogs())
+  onAsyncFetchLogs: motorcycleId => dispatch(asyncFetchLogs(motorcycleId))
 });
 
 export default connect(mapStateToProps, mapStateToDispatch)(LogScreen);
