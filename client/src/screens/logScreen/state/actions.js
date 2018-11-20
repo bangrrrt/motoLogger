@@ -89,7 +89,7 @@ const asyncFetchLogsSuccess = data => ({
 export const asyncFetchLogs = motorcycleId => (dispatch) => {
   dispatch(asyncFetchLogsRequest());
 
-  return axios.get('/api/logs/list', { headers: { Authorization: window.localStorage.token }, data: { motorcycleId } })
+  return axios.get(`/api/logs/list/${motorcycleId}`, { headers: { Authorization: window.localStorage.token } })
     .then(res => dispatch(asyncFetchLogsSuccess(res.data)))
     .catch(err => dispatch(asyncFetchLogsError(err)));
 };

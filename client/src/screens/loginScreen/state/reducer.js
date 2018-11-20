@@ -31,13 +31,19 @@ const reducer = (state = initialState, action) => {
         isLoading: false
       };
     case types.ASYNC_LOGIN_USER_SUCCESS: {
-      const { user, token } = action.response.data;
+      const {
+        username,
+        firstName,
+        lastName,
+        token
+      } = action.response.data;
+
       window.localStorage.token = token;
       return {
         ...state,
-        username: user.username,
-        firstName: user.firstName,
-        lastName: user.lastName,
+        username,
+        firstName,
+        lastName,
         isAuthenticated: true,
         isLoading: false
       };
@@ -48,6 +54,7 @@ const reducer = (state = initialState, action) => {
         isLoading: true
       };
     case types.ASYNC_LOGOUT_USER_ERROR:
+    console.log('action', action)
       return {
         ...state,
         error: action.error,
@@ -59,6 +66,32 @@ const reducer = (state = initialState, action) => {
         isLoading: false
       };
     case types.ASYNC_LOGOUT_USER_REQUEST:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case types.ASYNC_FETCH_USER_DATA_ERROR:
+      return {
+        ...state,
+        error: action.error,
+        isLoading: false
+      };
+    case types.ASYNC_FETCH_USER_DATA_SUCCESS: {
+      const {
+        username,
+        firstName,
+        lastName
+      } = action.response.data;
+
+      return {
+        ...state,
+        username,
+        firstName,
+        lastName,
+        isLoading: false
+      };
+    }
+    case types.ASYNC_FETCH_USER_DATA_REQUEST:
       return {
         ...state,
         isLoading: true

@@ -132,14 +132,14 @@ const reducer = (state = initialState, action) => {
         error: action.error
       };
     case types.ASYNC_FETCH_LOGS_SUCCESS:
-      console.log('action',action)
+      console.log('action', action);
       return {
         ...state,
         isLoading: false,
-        motorcycles: action.data.motorcycles,
+        motorcycleId: action.data.motorcycleId,
         logItems: [
           ...state.logItems,
-          ...fetchLogHelper(action.data)
+          ...fetchLogHelper(action.data.logs)
         ]
       };
     case types.ASYNC_UPDATE_LOGS_REQUEST:

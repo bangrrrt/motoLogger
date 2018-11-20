@@ -23,7 +23,7 @@ const MotorcycleSchema = new Schema({
     required: false
   },
   year: {
-    type: Date,
+    type: Number,
     required: false
   },
   image: { // Check for file size limits

@@ -26,7 +26,6 @@ exports.ADD = function(req, res) {
     User.findOne({ username: req.user.username }, function (err, user) {
       if (err) return next(err);
 
-      console.log('user', user)
       user.motorcycle.push(req.body.motorcycle)
       res.json({ user });
     });

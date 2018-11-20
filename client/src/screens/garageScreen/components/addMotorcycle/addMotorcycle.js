@@ -1,78 +1,38 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal } from 'react-bootstrap';
 
-class AddMotorcycle extends Component {
-  constructor() {
-    super();
+const AddMotorcycle = ({
+  isEditing
+}) => {
+  const text = isEditing ? 'Edit Motorcycle' : 'Add your first motorcycle!';
+  return (
+    <div>
+      <h4>{text}</h4>
+      <div>
+        <input
+          type="text"
+        />
+        <button
+          onClick={() => console.log('Motorcycle added')}
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  );
+};
 
-    this.state = {
-      name: ''
-    };
-  }
-
-  componentDidMount() {
-  }
-
-  handleNameChange = (e) => {
-    this.setState({ name: e.target.value });
-  }
-
-  renderSavedMotorcycles = () => {
-    if (!this.props.motorcycles) {
-      return null;
-    }
-
-    if (this.props.motorcycles && !this.props.motorcycles.length) {
-      return (
-        <div>
-          <p>Add your first motorcycle!</p>
-          <div>
-            <input
-              type="text"
-              onChange={this.handleNameChange}
-              value={this.state.name}
-            />
-            <button
-              onClick={() => console.log('Motorcycle added')}
-            >
-              Add
-            </button>
-          </div>
-        </div>
-      );
-    }
-
-    return this.props.motorcycles.map(motorcycle => (
-      <span>{motorcycle.name}</span>
-    ));
-  }
-
-  render() {
-    return (
-      <Modal
-        show
-      >
-        <Modal.Body>
-          <h1>Garage</h1>
-          {this.renderSavedMotorcycles()}
-        </Modal.Body>
-      </Modal>
-    );
-  }
-}
-
-const { arrayOf, object } = PropTypes;
+const { bool } = PropTypes;
 
 AddMotorcycle.propTypes = {
   /**
-   * List of motorcycles the user has in their garage
+   * True when a user is editing a motorcycle
    */
-  motorcycles: arrayOf(object).isRequired
+  isEditing: bool
 };
 
 AddMotorcycle.defaultProps = {
-
+  isEditing: false
 };
 
 export default AddMotorcycle;

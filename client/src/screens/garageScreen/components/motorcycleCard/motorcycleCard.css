@@ -1,0 +1,16 @@
+.garage-screen-motorcycle-card {
+  width: 200px;
+  height: 120px;
+  background-color: #f7f7f7;
+  color: #1F1F1F;
+  padding: 10px;
+  border: 1px solid #bbbbbb;
+  border-radius: 20px;
+  text-align: center;
+  transition: all ease 0.3s;
+}
+
+.garage-screen-motorcycle-card:hover {
+  background-color: #fff;
+  border-color: #1F1F1F;
+}

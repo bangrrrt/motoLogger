@@ -5,7 +5,7 @@ require('./passport')(passport);
 var logs = require('../controllers/logController');
 var router = express.Router();
 
-router.get('/list', passport.authenticate('jwt', { session: true }), logs.GET_LOGS);
+router.get('/list/:motorcycleId', passport.authenticate('jwt', { session: true }), logs.GET_LOGS);
 
 router.put('/updateLog', passport.authenticate('jwt', { session: true }), logs.UPDATE_LOG);
 // One of these, or even both, should probably use the post method instead

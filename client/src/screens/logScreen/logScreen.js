@@ -14,7 +14,12 @@ import './logScreen.css';
 // Renders the log screen where all the logs are visible
 class LogScreen extends Component {
   componentDidMount() {
-    this.props.onAsyncFetchLogs(123);
+    const { hasLoggedIn, onAsyncFetchUserData } = this.props;
+    const { token } = window.localStorage;
+
+    if (token && !hasLoggedIn) {
+      onAsyncFetchUserData(token);
+    }
   }
 
   render() {
@@ -41,9 +46,13 @@ class LogScreen extends Component {
   }
 }
 
-const { array, func, bool, arrayOf, object } = PropTypes;
+const { array, func, bool } = PropTypes;
 
 LogScreen.propTypes = {
+  /**
+   * True if the user has just logged in
+   */
+  hasLoggedIn: bool.isRequired,
   /**
    * If true the app is being viewed from a mobile device
    */
@@ -59,7 +68,11 @@ LogScreen.propTypes = {
   /**
    * Async action that gets logs from the server
    */
-  onAsyncFetchLogs: func.isRequired
+  onAsyncFetchLogs: func.isRequired,
+  /**
+   * Async action which fetches the user's data
+   */
+  onAsyncFetchUserData: func.isRequired
 };
 
 export default LogScreen;

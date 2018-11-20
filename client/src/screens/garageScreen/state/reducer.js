@@ -1,5 +1,10 @@
 import * as types from './types';
-import { ASYNC_LOGIN_USER_SUCCESS, ASYNC_LOGIN_USER_REQUEST } from '../../loginScreen/state/types';
+import {
+  ASYNC_LOGIN_USER_SUCCESS,
+  ASYNC_LOGIN_USER_REQUEST,
+  ASYNC_FETCH_USER_DATA_REQUEST,
+  ASYNC_FETCH_USER_DATA_SUCCESS
+} from '../../loginScreen/state/types';
 
 const initialState = {
   /**
@@ -15,16 +20,17 @@ const initialState = {
 // Create update log function that takes in an operation type, data, and an id
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ASYNC_LOGIN_USER_SUCCESS: {
-      const { user } = action.response.data;
-      console.log('action', action);
+    case ASYNC_LOGIN_USER_SUCCESS:
+    case ASYNC_FETCH_USER_DATA_SUCCESS: {
+      const { motorcycles } = action.response.data;
       return {
         ...state,
-        motorcycles: user.motorcycles,
+        motorcycles,
         isLoading: false
       };
     }
     case ASYNC_LOGIN_USER_REQUEST:
+    case ASYNC_FETCH_USER_DATA_REQUEST:
       return {
         ...state,
         isLoading: true

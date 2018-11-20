@@ -11,7 +11,6 @@ class LoginScreen extends Component {
     const { isAuthenticated, history } = this.props;
 
     if (isAuthenticated !== prevProps.isAuthenticated) {
-      console.log('woo');
       history.push('/logs');
     }
   }

@@ -2,22 +2,10 @@ var mongo = require('mongodb').MongoClient;
 var objectId = require('mongodb').ObjectID;
 var assert = require('assert');
 var dbResources = require('./resources');
-var LogModel = require('../models/logModel');
+var Log = require('../models/logModel');
 var MotorcycleModel = require('../models/motorcycleModel');
 var { dbURL, logCollection, dataBase } = dbResources;
-
-getToken = function (headers) {
-  if (headers && headers.authorization) {
-    var parted = headers.authorization.split(' ');
-    if (parted.length === 2) {
-      return parted[1];
-    } else {
-      return null;
-    }
-  } else {
-    return null;
-  }
-};
+var getToken = require('../helper');
 
 // Adds a new log
 exports.CREATE_LOG = function(req, res) {
@@ -47,37 +35,17 @@ exports.CREATE_LOG = function(req, res) {
   });
 };
 
-// Gets all the saved logs
-// exports.GET_LOGS = function(req, res) {
-//   mongo.connect(dbURL, function(err, client) {
-//     if (err) {
-//       res.send(err);
-//     }
-
-//     client.db(dataBase).collection(logCollection)
-//       .find({}).sort({ miles: -1 }).toArray(function (err, result) {
-//         if (err) {
-//           res.send(err);
-//         };
-//         res.json({ logs: result });
-//         client.close();
-//       });
-//     client.close();
-//   });
-// };
-
 exports.GET_LOGS = function(req, res) {
-  console.log('body', req.body)
   var token = getToken(req.headers);
-  console.log('token', token);
-  if (token) {
-    LogModel.find({ motorcycleId: req.body.motorcycleId }, function (err, logs) {
-      if (err) return next(err);
+  var motorcycleId = req.params.motorcycleId;
 
-      console.log('motorcycles', logs)
+  if (token) {
+    Log.find({ motorcycleId: motorcycleId }, function (err, logs) {
+      if (err) return next(err);
 
       if (logs.length) {
         res.json({
+          motorcycleId,
           logs
         });
       } else {

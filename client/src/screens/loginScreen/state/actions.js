@@ -43,3 +43,29 @@ export const asyncLogOutUser = () => (dispatch) => {
     .then(res => dispatch(asyncLogOutUserSuccess(res)))
     .catch(err => dispatch(asyncLogOutUserError(err)));
 };
+
+const asyncFetchUserDataSuccess = response => ({
+  type: types.ASYNC_FETCH_USER_DATA_SUCCESS,
+  response
+});
+
+const asyncFetchUserDataError = (error) => {
+  console.log('error', error);
+
+  return {
+    type: types.ASYNC_FETCH_USER_DATA_ERROR,
+    error
+  };
+};
+
+const asyncFetchUserDataRequest = () => ({
+  type: types.ASYNC_FETCH_USER_DATA_REQUEST
+});
+
+export const asyncFetchUserData = () => (dispatch) => {
+  dispatch(asyncFetchUserDataRequest());
+
+  return axios.get('/api/login/user', { headers: { Authorization: window.localStorage.token } })
+    .then(user => dispatch(asyncFetchUserDataSuccess(user)))
+    .catch(error => dispatch(asyncFetchUserDataError(error)));
+};
