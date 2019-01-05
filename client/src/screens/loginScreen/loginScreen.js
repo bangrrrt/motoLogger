@@ -7,6 +7,14 @@ import ReduxFormInput from '../../components/formComponents/reduxFormInput/redux
 import './loginScreen.css';
 
 class LoginScreen extends Component {
+  componentDidMount() {
+    const { history } = this.props;
+
+    if (window.localStorage.token) {
+      history.push('/logs');
+    }
+  }
+
   componentDidUpdate(prevProps) {
     const { isAuthenticated, history } = this.props;
 

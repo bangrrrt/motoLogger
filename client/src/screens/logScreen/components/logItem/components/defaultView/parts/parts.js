@@ -8,27 +8,31 @@ import './parts.css';
 
 // Renders the default parts view
 class Parts extends Component {
-
   renderExpandedContent = () => (
     <ul className="log-item-parts-details">
       {map(this.props.parts, (part, index) => {
+        const {
+          partName,
+          price
+        } = part;
+
         return (
           <li
-            key={part.partName}
+            key={partName}
             className="log-item-part-detail"
           >
             {index >= 1 && <div className="log-item-part-detail-divider" />}
             <div className="log-item-part-details">
-              <span>{part.partName}</span>
-              <span>${floatToAmount(part.partPrice)}</span>
+              <span>{partName}</span>
+              <span>${price === 0 ? 0 : floatToAmount(price)}</span>
             </div>
           </li>
-        )
+        );
       })}
     </ul>
   );
 
-  render()  {
+  render() {
     const {
       parts,
       isExpanded
@@ -46,13 +50,18 @@ class Parts extends Component {
   }
 }
 
-const { string, array, bool } = PropTypes;
+const {
+  string,
+  arrayOf,
+  object,
+  bool
+} = PropTypes;
 
 Parts.propTypes = {
   /**
    * Array of parts
    */
-  parts: array,
+  parts: arrayOf(object),
   /**
    * The unique log id
    */

@@ -3,19 +3,9 @@ import axios from 'axios';
 
 import * as types from './types';
 
-const crypto = require('crypto');
-
-const cryptoString = (len) => {
-  if (!Number.isFinite(len)) {
-    throw new TypeError('Expected a finite number');
-  }
-
-  return crypto.randomBytes(Math.ceil(len / 2)).toString('hex').slice(0, len);
-};
-
 export const createLog = () => {
   const newLog = {
-    logId: cryptoString(24),
+    logId: 'newLog',
     logName: '',
     dateAdded: moment().format('MMM D, YYYY'),
     notes: '',
@@ -112,7 +102,12 @@ const asyncCreateLogSuccess = logId => ({
 export const asyncCreateLog = newItem => (dispatch) => {
   dispatch(asyncCreateLogRequest());
 
-  return axios.put('/api/logs/createLog', newItem)
+  return axios({
+    method: 'PUT',
+    url: '/api/logs/createLog',
+    headers: { Authorization: window.localStorage.token },
+    data: newItem
+  })
     .then(() => dispatch(asyncCreateLogSuccess(newItem.logId)))
     .catch(err => dispatch(asyncCreateLogError(err)));
 };
@@ -153,9 +148,14 @@ const asyncUpdateLogsSuccess = editingLogId => ({
   editingLogId
 });
 
-export const asyncUpdateLogs = editingLog => (dispatch) => {
+export const asyncUpdateLogs = editedLog => (dispatch) => {
   dispatch(asyncUpdateLogsRequest());
-  return axios.put('/api/logs/updateLog', editingLog)
-    .then(res => dispatch(asyncUpdateLogsSuccess(res.data)))
+
+  return axios({
+    method: 'PUT',
+    url: '/api/logs/updateLog',
+    headers: { Authorization: localStorage.token },
+    data: editedLog
+  }).then(res => dispatch(asyncUpdateLogsSuccess(res.data)))
     .catch(error => dispatch(asyncUpdateLogsError(error)));
 };

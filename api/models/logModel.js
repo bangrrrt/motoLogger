@@ -1,12 +1,28 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const LogSchema = new Schema({
-  motorcycleId: {
+const PartSchema = new Schema({
+  partName: {
     type: String,
     required: true
   },
+  price: {
+    type: Number,
+    default: 0,
+    required: false
+  }
+});
+
+const LogSchema = new Schema({
+  _id: {
+    type: String
+  },
   logId: {
+    type: String,
+    required: true
+  },
+  parts: [PartSchema],
+  motorcycleId: {
     type: String,
     required: true
   },
@@ -23,14 +39,13 @@ const LogSchema = new Schema({
     type: String,
     required: false
   },
-  parts: {
-    type: Array,
-    required: false
-  },
   miles: {
     type: Number,
     required: false
   },
+}, {
+  strict: 'throw',
+  useNestedStrict: true
 });
 
 module.exports = mongoose.model('Log', LogSchema);

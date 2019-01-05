@@ -54,7 +54,6 @@ const reducer = (state = initialState, action) => {
         isLoading: true
       };
     case types.ASYNC_LOGOUT_USER_ERROR:
-    console.log('action', action)
       return {
         ...state,
         error: action.error,

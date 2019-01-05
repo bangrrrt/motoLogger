@@ -132,7 +132,6 @@ const reducer = (state = initialState, action) => {
         error: action.error
       };
     case types.ASYNC_FETCH_LOGS_SUCCESS:
-      console.log('action', action);
       return {
         ...state,
         isLoading: false,
