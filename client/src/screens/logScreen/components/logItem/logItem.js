@@ -23,6 +23,7 @@ class LogItem extends Component {
     this.state = {
       nameInput: this.props.log.logName,
       notesInput: this.props.log.notes,
+      parts: this.props.log.parts,
       logId: this.props.log.logId || 'newLog',
       isExpanded: false,
       miles: this.props.log.miles,
@@ -36,18 +37,23 @@ class LogItem extends Component {
     const {
       motorcycleId,
       nameInput,
-      notesInput,
-      logId,
-      miles
+      notesInput
     } = this.state;
+    const {
+      miles,
+      parts,
+      logId,
+      dateAdded
+    } = this.props.log;
 
     return {
       logName: nameInput,
-      motorcycleId,
-      logId: this.state.logId || logId,
       notes: notesInput,
+      dateAdded,
+      motorcycleId,
+      logId,
       miles,
-      parts: this.props.log.parts || []
+      parts
     };
   }
 
@@ -95,7 +101,6 @@ class LogItem extends Component {
       <span
         onClick={() => {
           const errors = {};
-
           this.setState({ isFormSubmitted: true });
 
           if (!this.state.nameInput) {
@@ -103,9 +108,11 @@ class LogItem extends Component {
             errors.name = message;
           }
 
-          if (isNewItemCreated && size(errors) === 0) {
+          const isValid = size(errors) === 0;
+
+          if (isNewItemCreated && isValid) {
             onAsyncCreateLog(this.getLog());
-          } else if (size(errors) === 0) {
+          } else if (isValid) {
             onAsyncUpdateLog(this.getLog());
           }
 
@@ -164,7 +171,7 @@ class LogItem extends Component {
             height
           }}
         >
-          {this.props.log.notes}
+          {this.state.notesInput}
         </p>
       );
     }

@@ -1,26 +1,31 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 import './miles.css';
 
 //  React motion causes unnecessary re-renders
-class Miles extends Component {
-	render() {
-		const miles = this.props.miles.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+const Miles = ({
+  miles,
+  dateAdded,
+  isExpanded
+}) => {
+  const formattedMiles = miles.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const formattedDate = moment(dateAdded).format('MM-DD-YY');
 
-		return (
-			<div className="log-item-mileage log-item-section">
-				<div className="log-item-mileage-miles">
-					<span>{miles} Miles</span>
-					{this.props.isExpanded && <span className="log-item-mileage-miles-fun">of smiles</span>}
-				</div>
-				<div>
-					<span>{this.props.dateAdded}</span>
-				</div>
-			</div>
-		);
-	}
-}
+  return (
+    <div className="log-item-mileage log-item-section">
+      <div className="log-item-mileage-miles">
+        <span>{formattedMiles} Miles</span>
+        {isExpanded && <span className="log-item-mileage-miles-fun">of smiles</span>}
+      </div>
+      <div>
+        <span>{formattedDate}</span>
+      </div>
+    </div>
+  );
+};
+
 
 const { string, number, bool } = PropTypes;
 
@@ -45,6 +50,7 @@ Miles.propTypes = {
 
 Miles.defaultProps = {
   miles: 0,
+  dateAdded: moment(),
   isExpanded: false
 };
 

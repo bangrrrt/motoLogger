@@ -43,6 +43,10 @@ const LogSchema = new Schema({
     type: Number,
     required: false
   },
+  isEditable: {
+    type: Boolean,
+    required: false
+  }
 }, {
   strict: 'throw',
   useNestedStrict: true

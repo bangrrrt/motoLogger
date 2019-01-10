@@ -94,9 +94,9 @@ const asyncCreateLogError = error => ({
   error
 });
 
-const asyncCreateLogSuccess = logId => ({
+const asyncCreateLogSuccess = log => ({
   type: types.ASYNC_CREATE_LOG_SUCCESS,
-  logId
+  log
 });
 
 export const asyncCreateLog = newItem => (dispatch) => {
@@ -108,7 +108,7 @@ export const asyncCreateLog = newItem => (dispatch) => {
     headers: { Authorization: window.localStorage.token },
     data: newItem
   })
-    .then(() => dispatch(asyncCreateLogSuccess(newItem.logId)))
+    .then(res => dispatch(asyncCreateLogSuccess(res.data)))
     .catch(err => dispatch(asyncCreateLogError(err)));
 };
 
@@ -129,7 +129,11 @@ const asyncDeleteLogSuccess = logId => ({
 export const asyncDeleteLog = logId => (dispatch) => {
   dispatch(asyncDeleteLogRequest());
 
-  return axios.delete(`/api/logs/deleteLog/${logId}`)
+  return axios({
+    method: 'DELETE',
+    url: `/api/logs/deleteLog/${logId}`,
+    headers: { Authorization: window.localStorage.token }
+  })
     .then(() => dispatch(asyncDeleteLogSuccess(logId)))
     .catch(err => dispatch(asyncDeleteLogError(err)));
 };
@@ -143,9 +147,9 @@ const asyncUpdateLogsError = error => ({
   error
 });
 
-const asyncUpdateLogsSuccess = editingLogId => ({
+const asyncUpdateLogsSuccess = updatedLog => ({
   type: types.ASYNC_UPDATE_LOGS_SUCCESS,
-  editingLogId
+  updatedLog
 });
 
 export const asyncUpdateLogs = editedLog => (dispatch) => {

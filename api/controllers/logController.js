@@ -3,7 +3,6 @@ var ObjectId = require('mongodb').ObjectID;
 var assert = require('assert');
 var dbResources = require('./resources');
 var Log = require('../models/logModel');
-var Part = require('../models/partModel');
 var { dbURL, logCollection, dataBase } = dbResources;
 var getToken = require('../helper');
 
@@ -13,13 +12,17 @@ exports.CREATE_LOG = function(req, res) {
 
   if (token) {
     const logId = ObjectId();
-    const newLog = new Log({ ...req.body, _id: logId, logId: logId });
+    const newLog = new Log({
+      ...req.body,
+      _id: logId,
+      logId: logId,
+      isEditable: false
+    });
 
     newLog.save(function(err, log) {
       if(err) {
         return res.json(err);
       } else {
-       /* We succesfully saved the new user, so lets send back the user id. */
         return res.json(log);
       }
     });
@@ -79,16 +82,11 @@ exports.UPDATE_LOG = function(req, res) {
 
 // Deletes a log
 exports.DELETE_LOG = function(req, res) {
-  mongo.connect(dbURL, function(err, client) {
-    assert.equal(null, err);
+  Log.deleteOne({ _id: req.params.logId }, function(err, log) {
+    if (err) {
+      res.send(err);
+    }
 
-    client.db(dataBase).collection(logCollection)
-      .deleteOne({ _id: req.params.logId }, function(err, result) {
-        assert.equal(err, null);
-        assert.equal(1, result.result.ok);
-
-        res.send('Log deleted.')
-        client.close();
-    });
-  })
+    res.json(log.logId)
+  });
 };

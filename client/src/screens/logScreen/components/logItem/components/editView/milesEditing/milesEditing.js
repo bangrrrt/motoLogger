@@ -14,16 +14,12 @@ class Miles extends Component {
 
     this.state = {
       milesInput: this.props.miles || '',
-      date: moment(this.props.dateAdded, 'MMM-DD-YYYY') || moment()
+      date: moment(this.props.dateAdded) || moment()
     };
   }
 
-  handleUpdateDate(date) {
-    this.setState({
-      ...this.state,
-      date
-    });
-
+  handleUpdateDate = (date) => {
+    this.setState({ date });
     this.props.onUpdateDate(date, this.props.logId);
   }
 
@@ -51,7 +47,7 @@ class Miles extends Component {
             <i className="glyphicon glyphicon-calendar" />
             <DatePicker
               selected={this.state.date}
-              onChange={date => this.handleUpdateDate(date)}
+              onChange={this.handleUpdateDate}
               withPortal
             />
           </div>
@@ -61,7 +57,12 @@ class Miles extends Component {
   }
 }
 
-const { string, func, number, bool } = PropTypes;
+const {
+  string,
+  func,
+  number,
+  bool
+} = PropTypes;
 
 Miles.propTypes = {
   /**
@@ -91,7 +92,8 @@ Miles.propTypes = {
 };
 
 Miles.defaultProps = {
-  miles: 0
+  miles: 0,
+  dateAdded: moment()
 };
 
 export default Miles;

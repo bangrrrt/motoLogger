@@ -159,11 +159,11 @@ const reducer = (state = initialState, action) => {
         isEditing: false,
         activeMenuLogId: [],
         logItems: map(state.logItems, (log) => {
-          if (log.logId !== action.editingLogId.logId) {
+          if (log.logId !== action.updatedLog.logId) {
             return log;
           }
           // Return updated log if ids match
-          return action.editingLogId;
+          return action.updatedLog;
         })
       };
     case types.ASYNC_CREATE_LOG_REQUEST:
@@ -184,7 +184,7 @@ const reducer = (state = initialState, action) => {
         isLoading: false,
         isNewItemCreated: false,
         isEditing: false,
-        logItems: updateLogEditingStatus(action.logId, state.logItems),
+        logItems: updateLogEditingStatus(action.log.logId, state.logItems, action.log),
         activeMenuLogId: []
       };
     case types.ASYNC_DELETE_LOG_REQUEST:
