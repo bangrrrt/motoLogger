@@ -5,6 +5,7 @@ import includes from 'lodash/includes';
 import indexOf from 'lodash/indexOf';
 
 import * as types from './types';
+import * as userTypes from '../../loginScreen/state/types';
 import { updateLogEditingStatus, fetchLogHelper } from './helper';
 
 const initialState = {
@@ -33,9 +34,9 @@ const initialState = {
    */
   isExpanded: false,
   /**
-   * Object of errors for different fields
+   * Error from the server
    */
-  errors: {},
+  error: '',
   /**
    * True if the form was submitted
    */
@@ -65,6 +66,11 @@ const initialState = {
 // Create update log function that takes in an operation type, data, and an id
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case userTypes.ASYNC_FETCH_USER_DATA_ERROR:
+      return {
+        ...state,
+        error: action.error.response.status
+      };
     case types.CREATE_LOG:
       return {
         ...state,

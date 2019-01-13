@@ -7,8 +7,9 @@ const handleSubmit = (values, dispatch) => {
   dispatch(asyncRegisterUser(values));
 };
 
-const mapStateToProps = () => ({
-  onSubmit: handleSubmit
+const mapStateToProps = state => ({
+  onSubmit: handleSubmit,
+  isUserCreated: state.registerScreen.isUserCreated
 });
 
 // const mapDispatchToProps = dispatch => ({

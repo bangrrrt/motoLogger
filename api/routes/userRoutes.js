@@ -29,10 +29,6 @@ router.post('/', function(req, res) {
 
 module.exports = router;
 
-
-
-
-
 exports.me = function(req,res){
   if (req.headers && req.headers.authorization) {
       var authorization = headers.authorization,

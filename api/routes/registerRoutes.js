@@ -19,7 +19,7 @@ router.post('/', function(req, res) {
     newUser.save(function(err) {
       if (err) {
         res.status(400);
-        return res.json({ success: false, errors: err.errors });
+        return res.json({ success: false, errors: err });
       }
 
       res.json({success: true, msg: 'Successful created new user.'});

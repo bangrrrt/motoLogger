@@ -14,11 +14,25 @@ import './logScreen.css';
 // Renders the log screen where all the logs are visible
 class LogScreen extends Component {
   componentDidMount() {
-    const { hasLoggedIn, onAsyncFetchUserData } = this.props;
+    const {
+      hasLoggedIn,
+      onAsyncFetchUserData
+    } = this.props;
     const { token } = window.localStorage;
 
     if (token && !hasLoggedIn) {
       onAsyncFetchUserData(token);
+    }
+  }
+
+  componentDidUpdate() {
+    const {
+      error,
+      history
+    } = this.props;
+
+    if (error === 401) {
+      history.push('/register');
     }
   }
 
@@ -46,7 +60,15 @@ class LogScreen extends Component {
   }
 }
 
-const { array, func, bool } = PropTypes;
+const {
+  array,
+  func,
+  bool,
+  oneOf,
+  string,
+  object,
+  number
+} = PropTypes;
 
 LogScreen.propTypes = {
   /**
@@ -72,7 +94,20 @@ LogScreen.propTypes = {
   /**
    * Async action which fetches the user's data
    */
-  onAsyncFetchUserData: func.isRequired
+  onAsyncFetchUserData: func.isRequired,
+  /**
+   * Error returned from the server
+   */
+  error: oneOf([string, number]),
+  /**
+   * React Router Prop Injection
+   */
+  history: object.isRequired
+};
+
+LogScreen.defaultProps = {
+  activeMenuLogId: [],
+  error: {}
 };
 
 export default LogScreen;

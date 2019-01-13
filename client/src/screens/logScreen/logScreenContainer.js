@@ -8,7 +8,8 @@ const mapStateToProps = state => ({
   activeMenuLogId: state.logScreen.activeMenuLogId,
   isMobile: state.app.isMobile,
   motorcycles: state.garageScreen.motorcycles,
-  hasLoggedIn: state.loginScreen.isAuthenticated
+  hasLoggedIn: state.loginScreen.isAuthenticated,
+  error: state.logScreen.error
 });
 
 const mapStateToDispatch = dispatch => ({

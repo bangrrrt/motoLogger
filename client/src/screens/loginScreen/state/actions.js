@@ -67,5 +67,5 @@ export const asyncFetchUserData = () => (dispatch) => {
 
   return axios.get('/api/login/user', { headers: { Authorization: window.localStorage.token } })
     .then(user => dispatch(asyncFetchUserDataSuccess(user)))
-    .catch(error => dispatch(asyncFetchUserDataError(error)));
+    .catch(response => dispatch(asyncFetchUserDataError(response.data.status)));
 };
