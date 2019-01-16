@@ -23,11 +23,17 @@ exports.ADD = function(req, res) {
   var token = getToken(req.headers);
 
   if (token) {
-    User.findOne({ username: req.user.username }, function (err, user) {
-      if (err) return next(err);
+    const _id = objectId();
+    const newMotorcycle = {
+      ...req.body,
+      motorcycleId: _id,
+      _id
+    };
 
-      user.motorcycle.push(req.body.motorcycle)
-      res.json({ user });
+    User.findByIdAndUpdate(req.user._id, { $set: { motorcycles: newMotorcycle  }}, { new: true }, function (err, user) {
+      if (err) return res.json(err);
+
+      res.json(user.motorcycles);
     });
   } else {
     return res.status(403).send({ msg: 'Unauthorized.' });

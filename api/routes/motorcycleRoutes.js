@@ -5,7 +5,7 @@ require('./passport')(passport);
 var motorcycle = require('../controllers/motorcycleController');
 var router = express.Router();
 
-router.get('/add', passport.authenticate('jwt', { session: true }), motorcycle.ADD);
+router.post('/add', passport.authenticate('jwt', { session: true }), motorcycle.ADD);
 
 router.put('/update', passport.authenticate('jwt', { session: true }), motorcycle.UPDATE);
 

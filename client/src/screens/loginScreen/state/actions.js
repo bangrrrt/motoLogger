@@ -49,14 +49,10 @@ const asyncFetchUserDataSuccess = response => ({
   response
 });
 
-const asyncFetchUserDataError = (error) => {
-  console.log('error', error);
-
-  return {
-    type: types.ASYNC_FETCH_USER_DATA_ERROR,
-    error
-  };
-};
+const asyncFetchUserDataError = error => ({
+  type: types.ASYNC_FETCH_USER_DATA_ERROR,
+  error
+});
 
 const asyncFetchUserDataRequest = () => ({
   type: types.ASYNC_FETCH_USER_DATA_REQUEST
@@ -67,5 +63,5 @@ export const asyncFetchUserData = () => (dispatch) => {
 
   return axios.get('/api/login/user', { headers: { Authorization: window.localStorage.token } })
     .then(user => dispatch(asyncFetchUserDataSuccess(user)))
-    .catch(response => dispatch(asyncFetchUserDataError(response.data.status)));
+    .catch(response => dispatch(asyncFetchUserDataError(response.data)));
 };

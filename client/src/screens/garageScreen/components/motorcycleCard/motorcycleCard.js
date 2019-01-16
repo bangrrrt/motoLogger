@@ -13,7 +13,7 @@ const MotorcycleCard = ({
 }) => {
   return (
     <div
-      key={id}
+      key={name}
       role="button"
       onClick={() => onClick(id)}
       className="garage-screen-motorcycle-card"
@@ -46,18 +46,14 @@ MotorcycleCard.propTypes = {
   /**
    * The year of the motorcycle
    */
-  year: number,
-  /**
-   * The user's unique motorcycle
-   */
-  id: string.isRequired
+  year: number
 };
 
 MotorcycleCard.defaultProps = {
   name: '',
   make: '',
   model: '',
-  year: 2003
+  year: 0
 };
 
 export default MotorcycleCard;

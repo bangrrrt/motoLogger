@@ -14,7 +14,11 @@ const initialState = {
   /**
    * Error message from server
    */
-  error: ''
+  error: '',
+  /**
+   * True if the app is loading a resource
+   */
+  isLoading: false
 };
 
 // Create update log function that takes in an operation type, data, and an id
@@ -41,18 +45,15 @@ const reducer = (state = initialState, action) => {
         isLoading: true
       };
     case types.ASYNC_ADD_MOTORCYCLE_SUCCESS:
-      console.log('Add motorcycle');
-
       return {
         ...state,
-        isLoading: false
+        isLoading: false,
+        motorcycles: [...action.motorcycle]
       };
     case types.ASYNC_ADD_MOTORCYCLE_ERROR:
-      console.log('err motorcycle');
-
       return {
         ...state,
-        error: action.error.msg,
+        error: action.error,
         isLoading: false
       };
     default:

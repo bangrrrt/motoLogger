@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal } from 'react-bootstrap';
 
-import AddMotorcycle from './components/addMotorcycle';
+import AddMotorcycleContainer from './components/addMotorcycle/addMotorcycleContainer';
 import MotorcycleCard from './components/motorcycleCard';
 
 import './garageScreen.css';
@@ -12,10 +12,6 @@ const GarageScreen = ({
   onAsyncFetchLogs,
   selectedMotorcycle
 }) => {
-  if (!motorcycles) {
-    return <AddMotorcycle />;
-  }
-
   const renderMotorcycles = () => (
     <div>
       <h1 className="garage-screen-title">Garage</h1>
@@ -23,7 +19,7 @@ const GarageScreen = ({
       <div className="garage-screen-motorcycles-wrapper">
         {motorcycles.map(motorcycle => (
           <MotorcycleCard
-            key={motorcycle.id}
+            key={motorcycle.name}
             {...motorcycle}
             onClick={onAsyncFetchLogs}
           />
@@ -32,6 +28,7 @@ const GarageScreen = ({
     </div>
   );
 
+  const hasMotorcycles = motorcycles && motorcycles.length;
   // If user has motorcycles map over and display motorcycle cards
   return (
     <Modal
@@ -39,15 +36,20 @@ const GarageScreen = ({
     >
       <Modal.Body>
         <div className="garage-screen">
-          {motorcycles.length <= 0 && <AddMotorcycle />}
-          {motorcycles.length > 0 && renderMotorcycles()}
+          {hasMotorcycles <= 0 && <AddMotorcycleContainer />}
+          {hasMotorcycles > 0 && renderMotorcycles()}
         </div>
       </Modal.Body>
     </Modal>
   );
 };
 
-const { arrayOf, object, func, string } = PropTypes;
+const {
+  arrayOf,
+  object,
+  func,
+  string
+} = PropTypes;
 
 GarageScreen.propTypes = {
   /**

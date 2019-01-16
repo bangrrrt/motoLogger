@@ -64,7 +64,7 @@ const {
   array,
   func,
   bool,
-  oneOf,
+  oneOfType,
   string,
   object,
   number
@@ -98,7 +98,7 @@ LogScreen.propTypes = {
   /**
    * Error returned from the server
    */
-  error: oneOf([string, number]),
+  error: oneOfType([string, number]),
   /**
    * React Router Prop Injection
    */

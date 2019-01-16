@@ -2,9 +2,9 @@ import axios from 'axios';
 
 import * as types from './types';
 
-const asyncAddMotorcycleSuccess = response => ({
+const asyncAddMotorcycleSuccess = motorcycle => ({
   type: types.ASYNC_ADD_MOTORCYCLE_SUCCESS,
-  response
+  motorcycle
 });
 
 const asyncAddMotorcycleError = error => ({
@@ -19,8 +19,13 @@ const asyncAddMotorcycleRequest = () => ({
 export const asyncAddMotorcycle = dataToPost => (dispatch) => {
   dispatch(asyncAddMotorcycleRequest());
 
-  return axios.post('/api/motorcycles/add', dataToPost)
-    .then(res => dispatch(asyncAddMotorcycleSuccess(res)))
+  return axios({
+    method: 'POST',
+    url: '/api/motorcycles/add',
+    headers: { Authorization: window.localStorage.token },
+    data: dataToPost
+  })
+    .then(res => dispatch(asyncAddMotorcycleSuccess(res.data)))
     .catch(err => dispatch(asyncAddMotorcycleError(err)));
 };
 

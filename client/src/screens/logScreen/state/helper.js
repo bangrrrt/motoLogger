@@ -3,7 +3,6 @@ import map from 'lodash/map';
 export const updateLogEditingStatus = (logId, logs, updatedLog) => (
   map(logs, (log) => {
     if (log.logId === logId || log.logId === 'newLog') {
-      console.log("log", log)
       return {
         ...log,
         ...updatedLog,

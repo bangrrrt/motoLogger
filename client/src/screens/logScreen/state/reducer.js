@@ -69,7 +69,7 @@ const reducer = (state = initialState, action) => {
     case userTypes.ASYNC_FETCH_USER_DATA_ERROR:
       return {
         ...state,
-        error: action.error.response.status
+        error: action.error
       };
     case types.CREATE_LOG:
       return {

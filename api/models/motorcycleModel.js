@@ -2,11 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const MotorcycleSchema = new Schema({
-  logs: {
-    type: Array,
-    required: false
-  },
-  username: {
+  id: {
     type: String,
     required: true
   },
