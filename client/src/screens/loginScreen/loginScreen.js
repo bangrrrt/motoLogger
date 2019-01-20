@@ -26,9 +26,11 @@ class LoginScreen extends Component {
   render() {
     const {
       error,
+      isLoading,
       onSubmit,
       handleSubmit,
-      submitting
+      submitting,
+      loginError
     } = this.props;
 
     return (
@@ -51,7 +53,16 @@ class LoginScreen extends Component {
               label="Password"
               placeholder="Your Secret"
             />
-            {error && <strong>{error}</strong>}
+            {isLoading && (
+              <div className="login-screen-loading">
+                <div>
+                  <i className="log-list-loading glyphicon glyphicon-wrench" />
+                  <h4>Loading...</h4>
+                </div>
+              </div>
+            )}
+            {error && <span className="login-screen-error">{error}</span>}
+            {loginError && <span className="login-screen-error">{loginError}</span>}
             <div className="login-screen-button-wrapper">
               <button
                 type="submit"
@@ -79,7 +90,12 @@ class LoginScreen extends Component {
   }
 }
 
-const { func, string, bool, object } = PropTypes;
+const {
+  func,
+  string,
+  bool,
+  object
+} = PropTypes;
 
 LoginScreen.propTypes = {
   /**
@@ -90,20 +106,28 @@ LoginScreen.propTypes = {
    * Redux form prop injection
    */
   handleSubmit: func.isRequired,
-  error: string,
+  error: string.isRequired,
   submitting: bool.isRequired,
   /**
    * Handles form submission
    */
   onSubmit: func.isRequired,
   /**
+   * True if app is loading
+   */
+  isLoading: bool.isRequired,
+  /**
    * True if user logged in successfully
    */
-  isAuthenticated: bool.isRequired
+  isAuthenticated: bool.isRequired,
+  /**
+   * Error from the server
+   */
+  loginError: string
 };
 
 LoginScreen.defaultProps = {
-  error: ''
+  loginError: ''
 };
 
 export default reduxForm({

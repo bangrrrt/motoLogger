@@ -36,7 +36,7 @@ exports.ADD = function(req, res) {
       res.json(user.motorcycles);
     });
   } else {
-    return res.status(403).send({ msg: 'Unauthorized.' });
+    return res.status(403).send('Unauthorized.');
   }
 };
 

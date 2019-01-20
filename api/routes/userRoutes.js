@@ -6,7 +6,7 @@ router.post('/', function(req, res) {
   const { username, password, firstName, lastName } = req.body;
 
   if (!username && !password && !firstName && !lastName) {
-    res.json({success: false, msg: 'First name, last name, username and password are required.'});
+    res.json('First name, last name, username and password are required.');
   } else {
     var newUser = new User({
       username,
@@ -19,10 +19,10 @@ router.post('/', function(req, res) {
     newUser.save(function(err) {
       if (err) {
         res.status(400);
-        return res.json({ success: false, errors: err.errors });
+        return res.json(err.errors);
       }
 
-      res.json({success: true, msg: 'Successful created new user.'});
+      res.json('Successful created new user.');
     });
   }
 });

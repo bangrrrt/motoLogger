@@ -27,7 +27,7 @@ exports.CREATE_LOG = function(req, res) {
       }
     });
   } else {
-    return res.status(403).send({success: false, msg: 'Unauthorized.'});
+    return res.status(403).send('Unauthorized.');
   }
 };
 
@@ -54,7 +54,7 @@ exports.GET_LOGS = function(req, res) {
       });
     });
   } else {
-    return res.status(403).send({success: false, msg: 'Unauthorized.'});
+    return res.status(403).send('Unauthorized.');
   }
 };
 

@@ -20,7 +20,7 @@ export const asyncLoginUser = credentials => (dispatch) => {
   dispatch(asyncLoginUserRequest());
   return axios.post('/api/login/', credentials)
     .then(res => dispatch(asyncLoginUserSuccess(res)))
-    .catch(err => dispatch(asyncLoginUserError(err)));
+    .catch(error => dispatch(asyncLoginUserError(error.response.data)));
 };
 
 const asyncLogOutUserSuccess = response => ({
@@ -41,7 +41,7 @@ export const asyncLogOutUser = () => (dispatch) => {
   dispatch(asyncLogOutUserRequest());
   return axios.get('/logout')
     .then(res => dispatch(asyncLogOutUserSuccess(res)))
-    .catch(err => dispatch(asyncLogOutUserError(err)));
+    .catch(res => dispatch(asyncLogOutUserError(res.data)));
 };
 
 const asyncFetchUserDataSuccess = response => ({

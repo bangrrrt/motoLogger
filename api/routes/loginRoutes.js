@@ -28,7 +28,7 @@ router.post('/', function(req, res) {
     if (err) throw err;
 
     if (!user) {
-      res.status(401).send({msg: 'Authentication failed. User not found.'});
+      res.json(401, 'Authentication failed. User not found.');
     } else {
       // check if password matches
       user.comparePassword(req.body.password, function (err, isMatch) {
@@ -38,7 +38,7 @@ router.post('/', function(req, res) {
           // return the information including token as JSON
           res.json({...userDataToSend(user), token: 'JWT ' + token});
         } else {
-          res.status(401).send({msg: 'Authentication failed. Wrong password.'});
+          res.json(401, 'Authentication failed. Wrong password.');
         }
       });
     }
@@ -50,7 +50,7 @@ router.get('/user', passport.authenticate('jwt', { session: true }), function(re
 
     res.json({...userDataToSend(req.user)});
   } else {
-    res.status(401).send({msg: 'Unauthorized'});
+    res.json(401, 'User not found.');
   }
 });
 

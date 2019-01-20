@@ -20,6 +20,9 @@ class LogScreen extends Component {
     } = this.props;
     const { token } = window.localStorage;
 
+    if (!token) {
+      this.handleLoginRedirect();
+    }
     if (token && !hasLoggedIn) {
       onAsyncFetchUserData(token);
     }
@@ -28,12 +31,21 @@ class LogScreen extends Component {
   componentDidUpdate() {
     const {
       error,
-      history
+      history,
+      hasLoggedIn
     } = this.props;
 
     if (error === 401) {
       history.push('/register');
     }
+
+    if (!hasLoggedIn) {
+      this.handleLoginRedirect();
+    }
+  }
+
+  handleLoginRedirect = () => {
+    this.props.history.push('/login');
   }
 
   render() {

@@ -21,7 +21,7 @@ const asyncRegisterUser = registerData => (dispatch) => {
 
   return axios.post('/api/register/', registerData)
     .then(res => dispatch(asyncRegisterUserSuccess(res)))
-    .catch(err => dispatch(asyncRegisterUserError(err)));
+    .catch(error => dispatch(asyncRegisterUserError(error.response.data)));
 };
 
 export default asyncRegisterUser;
