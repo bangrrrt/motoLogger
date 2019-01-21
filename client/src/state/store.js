@@ -4,10 +4,16 @@ import thunk from 'redux-thunk';
 
 import appReducer from './reducer';
 import logScreenReducer from '../screens/logScreen/state/reducer';
+import registerScreenReducer from '../screens/registerScreen/state/reducer';
+import loginScreenReducer from '../screens/loginScreen/state/reducer';
+import garageScreenReducer from '../screens/garageScreen/state/reducer';
 
 const reducer = combineReducers({
   app: appReducer,
   logScreen: logScreenReducer,
+  registerScreen: registerScreenReducer,
+  loginScreen: loginScreenReducer,
+  garageScreen: garageScreenReducer,
   form: formReducer
 });
 

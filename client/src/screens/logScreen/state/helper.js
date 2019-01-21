@@ -1,17 +1,19 @@
 import map from 'lodash/map';
 
-export const updateLogEditingStatus = (logId, logs) => {
-  return map(logs, (log) => {
-    if (log.logId !== logId) {
-      return log;
+export const updateLogEditingStatus = (logId, logs, updatedLog) => (
+  map(logs, (log) => {
+    if (log.logId === logId || log.logId === 'newLog') {
+      return {
+        ...log,
+        ...updatedLog,
+        isEditable: !log.isEditable,
+        logId
+      };
     }
 
-    return {
-      ...log,
-      isEditable: !log.isEditable
-    };
-  });
-};
+    return log;
+  })
+);
 
 export const fetchLogHelper = fetchedLogs => (
   map(fetchedLogs, (log) => {

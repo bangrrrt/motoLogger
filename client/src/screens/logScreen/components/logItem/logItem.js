@@ -23,18 +23,39 @@ class LogItem extends Component {
     this.state = {
       nameInput: this.props.log.logName,
       notesInput: this.props.log.notes,
+      parts: this.props.log.parts,
+      logId: this.props.log.logId || 'newLog',
       isExpanded: false,
       miles: this.props.log.miles,
       errors: {},
-      isFormSubmitted: false
+      isFormSubmitted: false,
+      motorcycleId: this.props.motorcycleId
     };
   }
 
-  getLog = () => ({
-    ...this.props.log,
-    logName: this.state.nameInput,
-    notes: this.state.notesInput
-  })
+  getLog = () => {
+    const {
+      motorcycleId,
+      nameInput,
+      notesInput
+    } = this.state;
+    const {
+      miles,
+      parts,
+      logId,
+      dateAdded
+    } = this.props.log;
+
+    return {
+      logName: nameInput,
+      notes: notesInput,
+      dateAdded,
+      motorcycleId,
+      logId,
+      miles,
+      parts
+    };
+  }
 
   handleExpand = () => {
     this.setState({ isExpanded: !this.state.isExpanded });
@@ -47,7 +68,7 @@ class LogItem extends Component {
     }
 
     return (
-      <FormGroup controlId={this.props.log.logId}>
+      <FormGroup key={this.state.logId} controlId={this.state.logId}>
         <FormControl
           className="log-item-title-input"
           placeholder="Maintenance name"
@@ -80,7 +101,6 @@ class LogItem extends Component {
       <span
         onClick={() => {
           const errors = {};
-
           this.setState({ isFormSubmitted: true });
 
           if (!this.state.nameInput) {
@@ -88,9 +108,11 @@ class LogItem extends Component {
             errors.name = message;
           }
 
-          if (isNewItemCreated && size(errors) === 0) {
+          const isValid = size(errors) === 0;
+
+          if (isNewItemCreated && isValid) {
             onAsyncCreateLog(this.getLog());
-          } else if (size(errors) === 0) {
+          } else if (isValid) {
             onAsyncUpdateLog(this.getLog());
           }
 
@@ -149,13 +171,13 @@ class LogItem extends Component {
             height
           }}
         >
-          {this.props.log.notes}
+          {this.state.notesInput}
         </p>
       );
     }
 
     return (
-      <FormGroup controlId={this.props.log.logId}>
+      <FormGroup controlId={this.state.logId}>
         <FormControl
           className="log-item-notes-body"
           placeholder="Add notes"
@@ -250,7 +272,7 @@ class LogItem extends Component {
         logId
       }
     } = this.props;
-
+    // @TODO Update the data type of activeMenuLogId to be a string instead of an array
     const hasActiveMenu = includes(activeMenuLogId, logId);
 
     return (
@@ -270,7 +292,7 @@ class LogItem extends Component {
                 className="log-item-edit-menu"
                 style={{ height: logMenuHeight }}
               >
-                {hasActiveMenu && <EditMenu {...this.props} />}
+                {hasActiveMenu && <EditMenu logId={this.state.logId} {...this.props} />}
               </div>
             );
             return (
@@ -302,7 +324,14 @@ class LogItem extends Component {
   }
 }
 
-const { func, array, bool, shape, string, number } = PropTypes;
+const {
+  func,
+  array,
+  bool,
+  shape,
+  string,
+  number
+} = PropTypes;
 
 LogItem.propTypes = {
   /**
@@ -377,11 +406,16 @@ LogItem.propTypes = {
   /**
    * True if the log is in editing mode
    */
-  activeMenuLogId: array.isRequired
+  activeMenuLogId: array.isRequired,
+  /**
+   * The id of the motorcycle that the log belongs to
+   */
+  motorcycleId: string
 };
 
 LogItem.defaultProps = {
-  log: {}
+  log: {},
+  motorcycleId: ''
 };
 
 export default LogItem;

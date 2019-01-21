@@ -14,7 +14,8 @@ import {
 
 const mapStateToProps = state => ({
   activeMenuLogId: state.logScreen.activeMenuLogId,
-  isNewItemCreated: state.logScreen.isNewItemCreated
+  isNewItemCreated: state.logScreen.isNewItemCreated,
+  motorcycleId: state.logScreen.motorcycleId
 });
 
 const mapStateToDispatch = dispatch => ({

@@ -5,9 +5,14 @@ import includes from 'lodash/includes';
 import indexOf from 'lodash/indexOf';
 
 import * as types from './types';
+import * as userTypes from '../../loginScreen/state/types';
 import { updateLogEditingStatus, fetchLogHelper } from './helper';
 
 const initialState = {
+  /**
+   * Id of motorcycle's log
+   */
+  motorcycleId: '',
   /**
    * Name of the editing log
    */
@@ -29,28 +34,43 @@ const initialState = {
    */
   isExpanded: false,
   /**
-   * Object of errors for different fields
+   * Error from the server
    */
-  errors: {},
+  error: '',
   /**
    * True if the form was submitted
    */
   isFormSubmitted: false,
-  // True if a log is being edited
+  /*
+   * True if a log is being edited
+   */
   isEditing: false,
-  // True when user just created a log
+  /**
+   * True when user just created a log
+   */
   isNewItemCreated: false,
-  // True if the app is making a request to the server
+  /**
+   * True if the app is making a request to the server
+   */
   isLoading: false,
-  // Id of the log menu that is open
+  /**
+   * Id of the log menu that is open
+   */
   activeMenuLogId: [],
-  // Array of logs
+  /**
+   * Array of logs
+   */
   logItems: []
 };
 
 // Create update log function that takes in an operation type, data, and an id
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case userTypes.ASYNC_FETCH_USER_DATA_ERROR:
+      return {
+        ...state,
+        error: action.error
+      };
     case types.CREATE_LOG:
       return {
         ...state,
@@ -89,6 +109,23 @@ const reducer = (state = initialState, action) => {
           return logItem;
         })
       };
+    // case types.ASYNC_FETCH_MOTORCYCLES_REQUEST:
+    //   return {
+    //     ...state,
+    //     isLoading: true
+    //   };
+    // case types.ASYNC_FETCH_MOTORCYCLES_ERROR:
+    //   return {
+    //     ...state,
+    //     isLoading: false,
+    //     error: action.error
+    //   };
+    // case types.ASYNC_FETCH_MOTORCYCLES_SUCCESS:
+    //   return {
+    //     ...state,
+    //     isLoading: false,
+    //     motorcycles: action.data.motorcycles
+    //   };
     case types.ASYNC_FETCH_LOGS_REQUEST:
       return {
         ...state,
@@ -104,9 +141,10 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+        motorcycleId: action.data.motorcycleId,
         logItems: [
           ...state.logItems,
-          ...fetchLogHelper(action.fetchedLogs)
+          ...fetchLogHelper(action.data.logs)
         ]
       };
     case types.ASYNC_UPDATE_LOGS_REQUEST:
@@ -127,11 +165,11 @@ const reducer = (state = initialState, action) => {
         isEditing: false,
         activeMenuLogId: [],
         logItems: map(state.logItems, (log) => {
-          if (log.logId !== action.editingLogId.logId) {
+          if (log.logId !== action.updatedLog.logId) {
             return log;
           }
           // Return updated log if ids match
-          return action.editingLogId;
+          return action.updatedLog;
         })
       };
     case types.ASYNC_CREATE_LOG_REQUEST:
@@ -152,7 +190,7 @@ const reducer = (state = initialState, action) => {
         isLoading: false,
         isNewItemCreated: false,
         isEditing: false,
-        logItems: updateLogEditingStatus(action.logId, state.logItems),
+        logItems: updateLogEditingStatus(action.log.logId, state.logItems, action.log),
         activeMenuLogId: []
       };
     case types.ASYNC_DELETE_LOG_REQUEST:
