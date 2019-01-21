@@ -3,7 +3,8 @@ import {
   ASYNC_LOGIN_USER_SUCCESS,
   ASYNC_LOGIN_USER_REQUEST,
   ASYNC_FETCH_USER_DATA_REQUEST,
-  ASYNC_FETCH_USER_DATA_SUCCESS
+  ASYNC_FETCH_USER_DATA_SUCCESS,
+  ASYNC_FETCH_USER_DATA_ERROR
 } from '../../loginScreen/state/types';
 
 const initialState = {
@@ -38,6 +39,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true
+      };
+    case ASYNC_FETCH_USER_DATA_ERROR:
+      return {
+        ...state,
+        isLoading: false
       };
     case types.ASYNC_ADD_MOTORCYCLE_REQUEST:
       return {
