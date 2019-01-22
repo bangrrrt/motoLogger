@@ -14,7 +14,11 @@ const App = () => (
       <div className="App">
         <Route exact path="/" component={HomeScreen} />
         <Route path="/home" component={HomeScreen} />
+        {/* <NavBarContainer /> */}
         <Route path="/logs" component={LogScreenContainer} />
+        <Route path="/login" component={HomeScreen} />
+        <Route path="/register" component={HomeScreen} />
+        {/* <FooterContainer /> */}
       </div>
     </Provider>
   </Router>

@@ -16,11 +16,11 @@ const asyncLoginUserRequest = () => ({
   type: types.ASYNC_LOGIN_USER_REQUEST
 });
 
-export const asyncLoginUser = () => (dispatch) => {
+export const asyncLoginUser = credentials => (dispatch) => {
   dispatch(asyncLoginUserRequest());
-  return axios.get('/api/login/')
+  return axios.post('/api/login/', credentials)
     .then(res => dispatch(asyncLoginUserSuccess(res)))
-    .catch(err => dispatch(asyncLoginUserError(err)));
+    .catch(error => dispatch(asyncLoginUserError(error.response.data)));
 };
 
 const asyncLogOutUserSuccess = response => ({
@@ -41,27 +41,27 @@ export const asyncLogOutUser = () => (dispatch) => {
   dispatch(asyncLogOutUserRequest());
   return axios.get('/logout')
     .then(res => dispatch(asyncLogOutUserSuccess(res)))
-    .catch(err => dispatch(asyncLogOutUserError(err)));
+    .catch(res => dispatch(asyncLogOutUserError(res.data)));
 };
 
-const asyncRegisterUserSuccess = response => ({
-  type: types.ASYNC_REGISTER_USER_SUCCESS,
+const asyncFetchUserDataSuccess = response => ({
+  type: types.ASYNC_FETCH_USER_DATA_SUCCESS,
   response
 });
 
-const asyncRegisterUserError = error => ({
-  type: types.ASYNC_REGISTER_USER_ERROR,
+const asyncFetchUserDataError = error => ({
+  type: types.ASYNC_FETCH_USER_DATA_ERROR,
   error
 });
 
-const asyncRegisterUserRequest = () => ({
-  type: types.ASYNC_REGISTER_USER_REQUEST
+const asyncFetchUserDataRequest = () => ({
+  type: types.ASYNC_FETCH_USER_DATA_REQUEST
 });
 
-export const asyncRegisterUser = () => (dispatch) => {
-  dispatch(asyncRegisterUserRequest());
+export const asyncFetchUserData = () => (dispatch) => {
+  dispatch(asyncFetchUserDataRequest());
 
-  return axios.post('/register')
-    .then(res => dispatch(asyncRegisterUserSuccess(res)))
-    .catch(err => dispatch(asyncRegisterUserError(err)));
+  return axios.get('/api/login/user', { headers: { Authorization: window.localStorage.token } })
+    .then(user => dispatch(asyncFetchUserDataSuccess(user)))
+    .catch(response => dispatch(asyncFetchUserDataError(response.data)));
 };

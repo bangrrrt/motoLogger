@@ -1,100 +1,92 @@
 var mongo = require('mongodb').MongoClient;
-var objectId = require('mongodb').ObjectID;
+var ObjectId = require('mongodb').ObjectID;
 var assert = require('assert');
-var dbResources = require('./resources/resources');
-
+var dbResources = require('./resources');
+var Log = require('../models/logModel');
 var { dbURL, logCollection, dataBase } = dbResources;
+var getToken = require('../helper');
 
 // Adds a new log
 exports.CREATE_LOG = function(req, res) {
-  mongo.connect(dbURL, function(err, client) {
-    var newLog = {
-      _id: req.body.logId,
-      logId: req.body.logId,
-      itemName: req.body.itemName,
-      dateAdded: req.body.dateAdded,
-      notes: req.body.notes,
-      isEditable: req.body.isEditable,
-      parts: req.body.parts,
-      miles: req.body.miles
-    };
+  const token = getToken(req.headers);
 
-    if (err) {
-      res.send(err);
-    }
+  if (token) {
+    const logId = ObjectId();
+    const newLog = new Log({
+      ...req.body,
+      _id: logId,
+      logId: logId,
+      isEditable: false
+    });
 
-    client.db(dataBase).collection(logCollection)
-      .insertOne(newLog, function(err, results) {
-        assert.equal(null, err);
-
-        res.json(newLog);
-        client.close();
-      });
-  });
+    newLog.save(function(err, log) {
+      if(err) {
+        return res.json(err);
+      } else {
+        return res.json(log);
+      }
+    });
+  } else {
+    return res.status(403).send('Unauthorized.');
+  }
 };
 
-// Gets all the saved logs
 exports.GET_LOGS = function(req, res) {
-  mongo.connect(dbURL, function(err, client) {
-    if (err) {
-      res.send(err);
-    }
+  var token = getToken(req.headers);
+  var motorcycleId = req.params.motorcycleId;
 
-    client.db(dataBase).collection(logCollection)
-      .find({}).toArray(function (err, result) {
-        if (err) {
-          res.send(err);
-        };
-        res.json({ logs: result });
-        client.close();
+  if (token) {
+    Log.find({ motorcycleId: motorcycleId }, function (err, logs) {
+      if (err) {
+        return json(err);
+      }
+
+      if (!logs.length) {
+        return res.json({ 
+          motorcycleId,          
+          logs: []
+        });
+      }
+
+      return res.json({
+        motorcycleId,
+        logs
       });
-    client.close();
-  });
+    });
+  } else {
+    return res.status(403).send('Unauthorized.');
+  }
 };
 
 // Updates a log
 exports.UPDATE_LOG = function(req, res) {
   var resultArray = [];
-  mongo.connect(dbURL, function(err, client) {
-    var updatedLog = {
-      _id: req.body.logId,
-      logId: req.body.logId,
-      itemName: req.body.itemName,
-      dateAdded: req.body.dateAdded,
-      notes: req.body.notes,
-      isEditable: false,
-      parts: req.body.parts,
-      miles: req.body.miles
-    };
+  var newLog = { ...req.body };
 
+  Log.findById({ _id: req.body.logId }, function(err, log) {
     if (err) {
       res.send(err);
     }
 
-    client.db(dataBase).collection(logCollection)
-      .updateOne({ _id: req.body.logId }, { $set: updatedLog }, function(err, result) {
-        if (err) {
-          res.send(err)
-        }
+    log.set(newLog);
 
-        res.send(updatedLog)
-        client.close();
-    });
+    log.save(function(err, updatedLog) {
+      if (err) {
+        res.send(err);
+      }
+
+      res.send(updatedLog);
+    })
   });
 };
 
 // Deletes a log
 exports.DELETE_LOG = function(req, res) {
-  mongo.connect(dbURL, function(err, client) {
-    assert.equal(null, err);
+  Log.deleteOne({ _id: req.params.logId }, function(err, log) {
+    if (err) {
+      res.send(err);
+    }
 
-    client.db(dataBase).collection(logCollection)
-      .deleteOne({ _id: req.params.logId }, function(err, result) {
-        assert.equal(err, null);
-        assert.equal(1, result.result.n);
-
-        res.send('Log deleted.')
-        client.close();
-    });
-  })
+    res.json(log.logId)
+  });
 };

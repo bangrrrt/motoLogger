@@ -1,0 +1,17 @@
+.garage-screen {
+
+}
+.garage-screen-motorcycles-wrapper {
+  display: flex;
+}
+
+.garage-screen-title {
+  margin: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #d4d4d4;
+}
+
+.garage-screen-sub-title {
+  margin: 5px 0 30px;
+  text-align: center;
+}

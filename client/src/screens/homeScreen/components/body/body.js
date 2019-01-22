@@ -6,7 +6,7 @@ import Waypoint from 'react-waypoint';
 import scrollIntoView from 'scroll-into-view';
 
 import LoginScreenContainer from '../../../loginScreen/loginScreenContainer';
-import RegisterScreen from '../../../registerScreen/registerScreen';
+import RegisterScreenContainer from '../../../registerScreen/registerScreenContainer';
 import OilChangeLog from '../../../../images/homeScreenImages/oil_change_log.png';
 import BatteryLog from '../../../../images/homeScreenImages/new_battery.png';
 import ChainLog from '../../../../images/homeScreenImages/chain_log.png';
@@ -95,7 +95,12 @@ class Body extends Component {
     const registerFormClasses = classNames('hs-body-register-form', {
       fadeInDown: register
     });
-
+    //   <button
+    //   onClick={() => this.scrollToElement('register')}
+    //   className="hs-body-hero-image-register-title-link"
+    // >
+    //   Register Now
+    // </button>
     return (
       <div className="hs-body">
         <Waypoint
@@ -116,17 +121,6 @@ class Body extends Component {
             </div>
             <div className="hs-body-hero-image">
               <LoginScreenContainer />
-              <div className="hs-body-hero-image-register">
-                <h5>Don't have an account?</h5>
-                <h3 className="hs-body-hero-image-register-title">
-                  <button
-                    onClick={() => this.scrollToElement('register')}
-                    className="hs-body-hero-image-register-title-link"
-                  >
-                    Register Now
-                  </button>
-                </h3>
-              </div>
             </div>
             <button
               className="hs-body-hero-image-learn-more"
@@ -236,7 +230,7 @@ class Body extends Component {
               </p>
             </div>
             <div className={registerFormClasses}>
-              <RegisterScreen />
+              <RegisterScreenContainer />
             </div>
           </div>
         </Waypoint>

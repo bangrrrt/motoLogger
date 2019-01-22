@@ -8,12 +8,12 @@ var { dbURL, usersCollection, dataBase } = dbResources;
 exports.REGISTER_USER = function(req, res) {
   mongo.connect(dbURL, function(err, client) {
     if (err) {
-      res.send(err);
+      res.json(500, err);
     }
-    
+
     client.db(dataBase).collection(usersCollection)
     
-    res.send('register');
+    res.json('register');
     client.close();
   });
 };

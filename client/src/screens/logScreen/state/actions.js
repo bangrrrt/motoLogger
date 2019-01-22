@@ -3,14 +3,21 @@ import axios from 'axios';
 
 import * as types from './types';
 
-const crypto = require('crypto');
+export const createLog = () => {
+  const newLog = {
+    logId: 'newLog',
+    logName: '',
+    dateAdded: moment().format('MMM D, YYYY'),
+    notes: '',
+    isEditable: true,
+    parts: [],
+    miles: 0
+  };
 
-const cryptoString = (len) => {
-  if (!Number.isFinite(len)) {
-    throw new TypeError('Expected a finite number');
-  }
-
-  return crypto.randomBytes(Math.ceil(len / 2)).toString('hex').slice(0, len);
+  return {
+    type: types.CREATE_LOG,
+    newLog
+  };
 };
 
 export const onSelectLogPart = logId => ({
@@ -64,16 +71,16 @@ const asyncFetchLogsError = error => ({
   error
 });
 
-const asyncFetchLogsSuccess = fetchedLogs => ({
+const asyncFetchLogsSuccess = data => ({
   type: types.ASYNC_FETCH_LOGS_SUCCESS,
-  fetchedLogs
+  data
 });
 
-export const asyncFetchLogs = () => (dispatch) => {
+export const asyncFetchLogs = motorcycleId => (dispatch) => {
   dispatch(asyncFetchLogsRequest());
 
-  return axios.get('/api/logs/list')
-    .then(res => dispatch(asyncFetchLogsSuccess(res.data.logs)))
+  return axios.get(`/api/logs/list/${motorcycleId}`, { headers: { Authorization: window.localStorage.token } })
+    .then(res => dispatch(asyncFetchLogsSuccess(res.data)))
     .catch(err => dispatch(asyncFetchLogsError(err)));
 };
 
@@ -87,25 +94,20 @@ const asyncCreateLogError = error => ({
   error
 });
 
-const asyncCreateLogSuccess = newItem => ({
+const asyncCreateLogSuccess = log => ({
   type: types.ASYNC_CREATE_LOG_SUCCESS,
-  newItem
+  log
 });
 
-export const asyncCreateLog = () => (dispatch) => {
+export const asyncCreateLog = newItem => (dispatch) => {
   dispatch(asyncCreateLogRequest());
 
-  const newItem = {
-    logId: cryptoString(24),
-    itemName: '',
-    dateAdded: moment().format('MMM D, YYYY'),
-    notes: '',
-    isEditable: true,
-    parts: [],
-    miles: 0
-  };
-
-  return axios.put('/api/logs/createLog', newItem)
+  return axios({
+    method: 'PUT',
+    url: '/api/logs/createLog',
+    headers: { Authorization: window.localStorage.token },
+    data: newItem
+  })
     .then(res => dispatch(asyncCreateLogSuccess(res.data)))
     .catch(err => dispatch(asyncCreateLogError(err)));
 };
@@ -127,30 +129,37 @@ const asyncDeleteLogSuccess = logId => ({
 export const asyncDeleteLog = logId => (dispatch) => {
   dispatch(asyncDeleteLogRequest());
 
-  return axios.delete(`/api/logs/deleteLog/${logId}`)
+  return axios({
+    method: 'DELETE',
+    url: `/api/logs/deleteLog/${logId}`,
+    headers: { Authorization: window.localStorage.token }
+  })
     .then(() => dispatch(asyncDeleteLogSuccess(logId)))
     .catch(err => dispatch(asyncDeleteLogError(err)));
 };
 
-const asyncUpdateLogsRequest = () => {
-  return {
-    type: types.ASYNC_UPDATE_LOGS_REQUEST
-  };
-};
+const asyncUpdateLogsRequest = () => ({
+  type: types.ASYNC_UPDATE_LOGS_REQUEST
+});
 
 const asyncUpdateLogsError = error => ({
   type: types.ASYNC_UPDATE_LOGS_ERROR,
   error
 });
 
-const asyncUpdateLogsSuccess = editingLogId => ({
+const asyncUpdateLogsSuccess = updatedLog => ({
   type: types.ASYNC_UPDATE_LOGS_SUCCESS,
-  editingLogId
+  updatedLog
 });
 
-export const asyncUpdateLogs = editingLog => (dispatch) => {
+export const asyncUpdateLogs = editedLog => (dispatch) => {
   dispatch(asyncUpdateLogsRequest());
-  return axios.put('/api/logs/updateLog', editingLog)
-    .then(res => dispatch(asyncUpdateLogsSuccess(res.data)))
+
+  return axios({
+    method: 'PUT',
+    url: '/api/logs/updateLog',
+    headers: { Authorization: localStorage.token },
+    data: editedLog
+  }).then(res => dispatch(asyncUpdateLogsSuccess(res.data)))
     .catch(error => dispatch(asyncUpdateLogsError(error)));
 };

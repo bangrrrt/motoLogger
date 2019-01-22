@@ -29,7 +29,7 @@
 .log-list-loading {
   margin-top: 40px;
   font-size: 40px;
-  transform-origin: 75% 25%;
+  transform-origin: 85% 15%;
   animation: rotating 1.5s linear infinite;
 }
 

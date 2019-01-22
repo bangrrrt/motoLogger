@@ -21,7 +21,6 @@ class PartsEditing extends Component {
     super(props);
 
     this.state = {
-
       nameInput: '',
       priceInput: '',
       error: '',
@@ -57,14 +56,14 @@ class PartsEditing extends Component {
 
   handlePartSave = () => {
     // Check if what the user entered already exists in the parts array
-    if(some(this.props.parts, { partName: this.state.nameInput })) {
+    if (some(this.props.parts, { partName: this.state.nameInput })) {
       this.setState({
         error: 'This part name already exists.'
       });
     } else if (this.state.nameInput) {
       const newPart = {
         partName: this.state.nameInput,
-        partPrice: this.state.priceInput
+        price: this.state.priceInput
       };
       this.props.onAddLogPart(newPart, this.props.logId);
       this.setState({
@@ -80,8 +79,28 @@ class PartsEditing extends Component {
     }
   }
 
+  handleCheckboxToggle = (inputNode, index) => {
+    if (includes(this.state.selectedParts, index)) {
+      inputNode.checked = false;
+      this.setState({
+        ...this.state,
+        selectedParts: filter(this.state.selectedParts, index)
+      });
+    } else {
+      inputNode.checked = true;
+      this.setState({
+        ...this.state,
+        selectedParts: [
+          ...this.state.selectedParts,
+          index
+        ]
+      });
+    }
+  }
+
   renderPartInput = () => {
-    const error = this.state.error;
+    const { error } = this.state;
+
     return (
       <div>
         <div className="log-item-part-input-wrapper">
@@ -114,8 +133,8 @@ class PartsEditing extends Component {
                 });
               }}
             />
-            </FormGroup>
-            {error && <span className="log-item-part-input-error">{error}</span>}
+          </FormGroup>
+          {error && <span className="log-item-part-input-error">{error}</span>}
         </div>
         <div className="log-item-part-input-button-wrapper">
           <Button
@@ -137,25 +156,6 @@ class PartsEditing extends Component {
     );
   }
 
-  handleCheckboxToggle = (inputNode, index) => {
-    if (includes(this.state.selectedParts, index)) {
-      inputNode.checked = false;
-      this.setState({
-        ...this.state,
-        selectedParts: filter(this.state.selectedParts, index)
-      });
-    } else {
-      inputNode.checked = true;
-      this.setState({
-        ...this.state,
-        selectedParts: [
-          ...this.state.selectedParts,
-          index
-        ]
-      });
-    }
-  }
-
   renderParts = () => {
     if (!this.props.parts.length) {
       return (
@@ -166,7 +166,7 @@ class PartsEditing extends Component {
     }
 
     return map(this.props.parts || this.props.editingParts, (part, index) => {
-      const dollarSign = part.partPrice ? <span>$ {floatToAmount(part.partPrice)}</span> : null;
+      const dollarSign = part.price ? <span>$ {floatToAmount(part.price)}</span> : null;
       return (
         <li
           key={`${part.partName}-row`}
@@ -183,7 +183,7 @@ class PartsEditing extends Component {
                 type="checkbox"
               />
               <span>{part.partName}</span>
-            </div>  
+            </div>
             {dollarSign}
           </div>
         </li>

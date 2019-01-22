@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import NavBar from './navBar';
 import { onToggleFooterMenu, isAppViewMobile } from '../../state/actions';
-import { asyncCreateLog } from '../../screens/logScreen/state/actions';
+import { createLog } from '../../screens/logScreen/state/actions';
 
 const mapStateToProps = state => ({
   activeMenuLogId: state.logScreen.activeMenuLogId,
@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 });
 
 const mapStateToDispatch = dispatch => ({
-  onAsyncCreateLog: () => dispatch(asyncCreateLog()),
+  onCreateLog: () => dispatch(createLog()),
   onToggleFooterMenu: () => dispatch(onToggleFooterMenu()),
   onAppViewMobile: isMobile => dispatch(isAppViewMobile(isMobile))
 });
