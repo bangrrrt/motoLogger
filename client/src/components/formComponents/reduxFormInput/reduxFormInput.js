@@ -11,7 +11,8 @@ const ReduxFormInput = ({
   placeholder,
   type,
   isOptional,
-  hasForgotPassword
+  hasForgotPassword,
+  autoComplete
 }) => {
   const labelClasses = classnames({
     'redux-form-input-label': true,
@@ -33,7 +34,7 @@ const ReduxFormInput = ({
         )}
       </label>
       <div className="redux-form-input-input-wrapper">
-        <input className="redux-form-input-input" {...input} placeholder={placeholder} type={type} />
+        <input className="redux-form-input-input" {...input} autoComplete={autoComplete} placeholder={placeholder} type={type} />
         {touched && error && <span className="redux-form-input-error">{error}</span>}
       </div>
     </div>
@@ -69,12 +70,17 @@ ReduxFormInput.propTypes = {
   /**
    * True if the field value is optional
    */
-  isOptional: bool
+  isOptional: bool,
+  /**
+   * The autoComplete attribute
+   */
+  autoComplete: string
 };
 
 ReduxFormInput.defaultProps = {
   isOptional: false,
-  hasForgotPassword: false
+  hasForgotPassword: false,
+  autoComplete: ''
 };
 
 export default ReduxFormInput;

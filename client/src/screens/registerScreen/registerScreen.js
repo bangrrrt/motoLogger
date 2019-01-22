@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
+import { withRouter } from 'react-router-dom';
 
 import ReduxFormInput from '../../components/formComponents/reduxFormInput/reduxFormInput';
 import validate from './validate';
@@ -49,7 +50,7 @@ class RegisterScreen extends Component {
               type="email"
               component={ReduxFormInput}
               label="Email Address"
-              placeholder="Email Address"
+              placeholder="Email "
             />
             <Field
               name="password"
@@ -109,4 +110,4 @@ RegisterScreen.defaultProps = {
 export default reduxForm({
   form: 'register',
   validate
-})(RegisterScreen);
+})(withRouter(RegisterScreen));

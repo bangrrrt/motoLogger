@@ -3,13 +3,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 90vh;
   animation: fadeIn 1.5s;
 }
 
 .register-screen {
   background-color: #e7e8e8;
   padding: 20px 24px;
+  margin-bottom: 30px;
   border-radius: 12px;
   border: 2px solid #4f7f9f;
 }
@@ -22,8 +22,9 @@
 }
 
 .register-screen-button-wrapper {
-  margin-top: 5px;
+  margin-top: 15px;
   display: flex;
+  align-items: flex-end;
   justify-content: flex-end;  
 }
 
@@ -31,10 +32,13 @@
   padding: 6px 12px;
   border-radius: 4px;
   border: 1px solid #3E3E3E;
+  height: 45px;
   box-shadow: 0px 0px 15px 4px;
   outline: 0;
   background-color:#4f7f9f;
+  white-space: nowrap;
   color: #E7E8E8;
+  margin-bottom: 8px;
 }
 
 @keyframes fadeIn {
@@ -49,9 +53,7 @@
 
 /* Custom, iPhone Retina */ 
 @media only screen and (min-width: 320px) {
-	.register-screen {
-    width: 90%;
-  }
+
 }
 
 /* Extra Small Devices, Phones */ 
@@ -61,8 +63,5 @@
 
 /* Small Devices, Tablets */
 @media only screen and (min-width: 768px) {
-  .register-screen {
-    width: 25%;
-    margin-top: 80px;
-  }
+
 }

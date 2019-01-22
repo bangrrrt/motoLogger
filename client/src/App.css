@@ -27,10 +27,3 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-
-/* Custom, iPhone Retina */ 
-@media only screen and (min-width: 320px) {
-	.App {
-    padding-bottom: 75px;
-  }
-}

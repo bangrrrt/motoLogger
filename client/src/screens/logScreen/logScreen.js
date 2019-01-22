@@ -7,7 +7,9 @@ import {
 } from 'react-bootstrap';
 import GarageScreenContainer from '../garageScreen';
 
+import NavBarContainer from '../../components/navBar/navBarContainer';
 import LogListContainer from './components/logList/logListContainer';
+import FooterContainer from '../../components/footer/footerContainer';
 
 import './logScreen.css';
 
@@ -21,14 +23,14 @@ class LogScreen extends Component {
     const { token } = window.localStorage;
 
     if (!token) {
-      this.handleLoginRedirect();
+      this.handleHomeRedirect();
     }
     if (token && !hasLoggedIn) {
       onAsyncFetchUserData(token);
     }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     const {
       error,
       history,
@@ -39,13 +41,13 @@ class LogScreen extends Component {
       history.push('/register');
     }
 
-    if (!hasLoggedIn) {
-      this.handleLoginRedirect();
+    if (hasLoggedIn !== prevProps.hasLoggedIn) {
+      this.handleHomeRedirect();
     }
   }
 
-  handleLoginRedirect = () => {
-    this.props.history.push('/login');
+  handleHomeRedirect = () => {
+    this.props.history.push('/');
   }
 
   render() {
@@ -56,6 +58,7 @@ class LogScreen extends Component {
 
     return (
       <div>
+        <NavBarContainer />
         <GarageScreenContainer />
         <Grid
           className="log-screen"
@@ -67,6 +70,7 @@ class LogScreen extends Component {
             </Col>
           </Row>
         </Grid>
+        <FooterContainer />
       </div>
     );
   }
