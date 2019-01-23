@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 
+
+import FormError from '../../components/formError';
 import ReduxFormInput from '../../components/formComponents/reduxFormInput/reduxFormInput';
 import validate from './validate';
 
@@ -23,7 +25,9 @@ class RegisterScreen extends Component {
     const {
       submitting,
       handleSubmit,
-      onSubmit
+      onSubmit,
+      error,
+      registerError
     } = this.props;
 
     return (
@@ -59,6 +63,7 @@ class RegisterScreen extends Component {
               label="Password"
               placeholder="Password"
             />
+            {(registerError || error) && <FormError errorMessage={registerError || error} />}
             <div className="register-screen-button-wrapper">
               <button
                 type="submit"
@@ -87,7 +92,7 @@ RegisterScreen.propTypes = {
    * Redux form prop injection
    */
   handleSubmit: func.isRequired,
-  error: string,
+  error: string.isRequired,
   submitting: bool.isRequired,
   /**
    * Handles form submission
@@ -100,11 +105,15 @@ RegisterScreen.propTypes = {
   /**
    * True if the user was successfully created
    */
-  isUserCreated: bool.isRequired
+  isUserCreated: bool.isRequired,
+  /**
+   * Error returned from the server
+   */
+  registerError: string
 };
 
 RegisterScreen.defaultProps = {
-  error: ''
+  registerError: ''
 };
 
 export default reduxForm({

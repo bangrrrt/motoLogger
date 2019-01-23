@@ -1,9 +1,5 @@
-var mongo = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectID;
-var assert = require('assert');
-var dbResources = require('./resources');
 var Log = require('../models/logModel');
-var { dbURL, logCollection, dataBase } = dbResources;
 var getToken = require('../helper');
 
 // Adds a new log

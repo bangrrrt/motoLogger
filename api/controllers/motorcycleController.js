@@ -4,24 +4,16 @@ var assert = require('assert');
 var dbResources = require('./resources');
 var User = require('../models/user');
 var { dbURL, logCollection, dataBase } = dbResources;
-
-getToken = function (headers) {
-  if (headers && headers.authorization) {
-    var parted = headers.authorization.split(' ');
-    if (parted.length === 2) {
-      return parted[1];
-    } else {
-      return null;
-    }
-  } else {
-    return null;
-  }
-};
+var getToken = require('../helper');
 
 // Adds a new motorcycle
 exports.ADD = function(req, res) {
   var token = getToken(req.headers);
-
+  console.log('req.headers', req.headers);
+  console.log('*****************************');
+  console.log('*****************************');
+  console.log('*****************************');
+  console.log('token', token);
   if (token) {
     const _id = objectId();
     const newMotorcycle = {

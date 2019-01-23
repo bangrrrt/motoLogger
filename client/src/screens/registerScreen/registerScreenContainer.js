@@ -9,7 +9,8 @@ const handleSubmit = (values, dispatch) => {
 
 const mapStateToProps = state => ({
   onSubmit: handleSubmit,
-  isUserCreated: state.registerScreen.isUserCreated
+  isUserCreated: state.registerScreen.isUserCreated,
+  registerError: state.registerScreen.error
 });
 
 // const mapDispatchToProps = dispatch => ({
