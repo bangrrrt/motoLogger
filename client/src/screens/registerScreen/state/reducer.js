@@ -18,12 +18,18 @@ const reducer = (state = initialState, action) => {
         error: action.error,
         isLoading: false
       };
-    case types.ASYNC_REGISTER_USER_SUCCESS:
+    case types.ASYNC_REGISTER_USER_SUCCESS: {
+      const {
+        token
+      } = action.response.data;
+
+      window.localStorage.token = token;
       return {
         ...state,
         isLoading: false,
         isUserCreated: true
       };
+    }
     case types.ASYNC_REGISTER_USER_REQUEST:
       return {
         ...state,

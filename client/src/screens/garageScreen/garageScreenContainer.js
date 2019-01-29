@@ -5,7 +5,9 @@ import { asyncFetchLogs } from '../logScreen/state/actions';
 
 const mapStateToProps = state => ({
   motorcycles: state.garageScreen.motorcycles,
-  selectedMotorcycle: state.logScreen.motorcycleId
+  isEditing: state.garageScreen.isEditing,
+  selectedMotorcycle: state.logScreen.motorcycleId,
+  isLoading: state.garageScreen.isLoading
 });
 
 const mapDispatchToProps = dispatch => ({

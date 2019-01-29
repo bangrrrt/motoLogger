@@ -1,9 +1,11 @@
+var jwt = require('jsonwebtoken');
 var User = require('../models/user');
+var resources = require('./resources/resources');
+var UserDataToSend = require('./helper').userDataToSend;
 
 // Register user
 exports.addUser = function(req, res) {
   const { username, password, firstName, lastName } = req.body;
-  console.log('req register', req)
   if (!username && !password && !firstName && !lastName) {
     res.json('First name, last name, username and password are required.');
   } else {
@@ -20,12 +22,12 @@ exports.addUser = function(req, res) {
       if (err && err.code === 11000) {
         return res.json(400, "This email is already registered");
       }
-      
+
       if (err) {
         return res.json(400, err);
       }
-
-      res.json(user);
+      var token = jwt.sign(user.toObject(), resources.secret);
+      res.json({...UserDataToSend(user), token: `JWT ${token}` });
     });
   }
 }

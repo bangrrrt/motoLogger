@@ -106,7 +106,7 @@ LoginScreen.propTypes = {
    * Redux form prop injection
    */
   handleSubmit: func.isRequired,
-  error: string.isRequired,
+  error: string,
   submitting: bool.isRequired,
   /**
    * Handles form submission
@@ -127,7 +127,8 @@ LoginScreen.propTypes = {
 };
 
 LoginScreen.defaultProps = {
-  loginError: ''
+  loginError: '',
+  error: ''
 };
 
 export default reduxForm({

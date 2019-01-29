@@ -4,16 +4,13 @@ var assert = require('assert');
 var dbResources = require('./resources');
 var User = require('../models/user');
 var { dbURL, logCollection, dataBase } = dbResources;
-var getToken = require('../helper');
+var GetToken = require('./helper').getToken;
+
 
 // Adds a new motorcycle
 exports.ADD = function(req, res) {
-  var token = getToken(req.headers);
-  console.log('req.headers', req.headers);
-  console.log('*****************************');
-  console.log('*****************************');
-  console.log('*****************************');
-  console.log('token', token);
+  var token = GetToken(req.headers);
+
   if (token) {
     const _id = objectId();
     const newMotorcycle = {
@@ -28,13 +25,12 @@ exports.ADD = function(req, res) {
       res.json(user.motorcycles);
     });
   } else {
-    return res.status(403).send('Unauthorized.');
+    return res.json(403, 'Unauthorized.');
   }
 };
 
 // Updates a motorcycle
 exports.UPDATE = function(req, res) {
-  var resultArray = [];
   mongo.connect(dbURL, function(err, client) {
     var updatedLog = {
       _id: req.body.logId,

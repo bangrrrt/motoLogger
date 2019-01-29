@@ -1,10 +1,10 @@
 var ObjectId = require('mongodb').ObjectID;
 var Log = require('../models/logModel');
-var getToken = require('../helper');
+var GetToken = require('./helper').getToken;
 
 // Adds a new log
 exports.CREATE_LOG = function(req, res) {
-  const token = getToken(req.headers);
+  const token = GetToken(req.headers);
 
   if (token) {
     const logId = ObjectId();
@@ -28,7 +28,7 @@ exports.CREATE_LOG = function(req, res) {
 };
 
 exports.GET_LOGS = function(req, res) {
-  var token = getToken(req.headers);
+  var token = GetToken(req.headers);
   var motorcycleId = req.params.motorcycleId;
 
   if (token) {
@@ -56,7 +56,6 @@ exports.GET_LOGS = function(req, res) {
 
 // Updates a log
 exports.UPDATE_LOG = function(req, res) {
-  var resultArray = [];
   var newLog = { ...req.body };
 
   Log.findById({ _id: req.body.logId }, function(err, log) {

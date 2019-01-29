@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './motorcycleCard.css';
 
 const MotorcycleCard = ({
-  id,
+  motorcycleId,
   name,
   make,
   model,
@@ -15,7 +15,7 @@ const MotorcycleCard = ({
     <div
       key={name}
       role="button"
-      onClick={() => onClick(id)}
+      onClick={() => onClick(motorcycleId)}
       className="garage-screen-motorcycle-card"
     >
       <h3>{name}</h3>

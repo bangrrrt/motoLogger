@@ -20,14 +20,14 @@ const reducer = combineReducers({
 });
 
 const showDevTools = typeof window !== 'undefined'
-  ? (window.devToolsExtension && process.env.NODE_ENV !== 'production')
+  ? (window.__REDUX_DEVTOOLS_EXTENSION__ && process.env.NODE_ENV !== 'production')
   : false;
 
 const store = (createStore)(
   reducer,
   compose(
     applyMiddleware(thunk),
-    showDevTools ? window.devToolsExtension() : f => f
+    showDevTools ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
   )
 );
 

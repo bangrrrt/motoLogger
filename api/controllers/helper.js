@@ -1,4 +1,4 @@
-module.exports = getToken = function (headers) {
+exports.getToken = function (headers) {
   if (headers && headers.authorization) {
     var parted = headers.authorization.split(' ');
     if (parted.length === 2) {
@@ -9,4 +9,18 @@ module.exports = getToken = function (headers) {
   } else {
     return null;
   }
+};
+
+exports.userDataToSend = function ({
+  username,
+  firstName,
+  lastName,
+  motorcycles
+}) {
+  return {
+    username,
+    firstName,
+    lastName,
+    motorcycles
+  };
 };
