@@ -23,6 +23,32 @@ class LoginScreen extends Component {
     }
   }
 
+  renderRegisterButton = () => {
+    const {
+      onRegisterClick
+    } = this.props;
+
+    if (onRegisterClick && typeof onRegisterClick === 'function') {
+      return (
+        <button
+          className="login-screen-register-title-link"
+          onClick={() => onRegisterClick()}
+        >
+          Register Now
+        </button>
+      );
+    }
+
+    return (
+      <Link
+        to="/register"
+        className="login-screen-register-title-link"
+      >
+        Register Now
+      </Link>
+    );
+  }
+
   render() {
     const {
       error,
@@ -77,12 +103,7 @@ class LoginScreen extends Component {
         <div className="login-screen-register">
           <h5>Don't have an account?</h5>
           <h3 className="login-screen-register-title">
-            <Link
-              to="/register"
-              className="login-screen-register-title-link"
-            >
-              Register Now
-            </Link>
+            {this.renderRegisterButton()}
           </h3>
         </div>
       </div>
@@ -109,6 +130,10 @@ LoginScreen.propTypes = {
   error: string,
   submitting: bool.isRequired,
   /**
+   * Callback function for register button
+   */
+  onRegisterClick: func,
+  /**
    * Handles form submission
    */
   onSubmit: func.isRequired,
@@ -128,7 +153,8 @@ LoginScreen.propTypes = {
 
 LoginScreen.defaultProps = {
   loginError: '',
-  error: ''
+  error: '',
+  onRegisterClick: null
 };
 
 export default reduxForm({

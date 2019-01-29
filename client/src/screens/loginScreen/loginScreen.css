@@ -36,6 +36,22 @@
   border: 2px solid #4f7f9f;
 }
 
+.login-screen-register-title-link {
+  color: white;
+  border: 0;
+  background: none;
+  text-decoration: underline;
+  transition: all ease 0.2s;
+}
+
+.login-screen-register-title-link:focus {
+  outline: none;
+}
+
+.login-screen-register-title-link:hover {
+  opacity: 0.5;
+}
+
 .login-screen-title {
   margin-top: 0;
   color: #3e3e3e;

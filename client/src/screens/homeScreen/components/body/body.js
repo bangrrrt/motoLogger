@@ -120,7 +120,9 @@ class Body extends Component {
               <h1 className="hs-body-hero-image-slogan">Fix it, Log it, Ride</h1>
             </div>
             <div className="hs-body-hero-image">
-              <LoginScreenContainer />
+              <LoginScreenContainer
+                onRegisterClick={() => this.scrollToElement('register')}
+              />
             </div>
             <button
               className="hs-body-hero-image-learn-more"
