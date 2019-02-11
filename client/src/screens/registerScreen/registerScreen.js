@@ -11,16 +11,6 @@ import validate from './validate';
 import './registerScreen.css';
 
 class RegisterScreen extends Component {
-  componentDidUpdate(prevProps) {
-    const {
-      isUserCreated,
-      history
-    } = this.props;
-
-    if (isUserCreated !== prevProps.isUserCreated) {
-      history.push('/login');
-    }
-  }
   render() {
     const {
       submitting,
@@ -92,7 +82,7 @@ RegisterScreen.propTypes = {
    * Redux form prop injection
    */
   handleSubmit: func.isRequired,
-  error: string.isRequired,
+  error: string,
   submitting: bool.isRequired,
   /**
    * Handles form submission
@@ -103,16 +93,13 @@ RegisterScreen.propTypes = {
    */
   history: object.isRequired,
   /**
-   * True if the user was successfully created
-   */
-  isUserCreated: bool.isRequired,
-  /**
    * Error returned from the server
    */
   registerError: string
 };
 
 RegisterScreen.defaultProps = {
+  error: '',
   registerError: ''
 };
 

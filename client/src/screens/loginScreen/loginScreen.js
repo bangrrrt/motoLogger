@@ -1,28 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ReduxFormInput from '../../components/formComponents/reduxFormInput/reduxFormInput';
 
 import './loginScreen.css';
 
 class LoginScreen extends Component {
-  componentDidMount() {
-    const { history } = this.props;
-
-    if (window.localStorage.token) {
-      history.push('/logs');
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { isAuthenticated, history } = this.props;
-
-    if (isAuthenticated !== prevProps.isAuthenticated) {
-      history.push('/logs');
-    }
-  }
-
   renderRegisterButton = () => {
     const {
       onRegisterClick
@@ -114,15 +98,10 @@ class LoginScreen extends Component {
 const {
   func,
   string,
-  bool,
-  object
+  bool
 } = PropTypes;
 
 LoginScreen.propTypes = {
-  /**
-   * React Router prop injection
-   */
-  history: object.isRequired,
   /**
    * Redux form prop injection
    */
@@ -159,4 +138,4 @@ LoginScreen.defaultProps = {
 
 export default reduxForm({
   form: 'login'
-})(withRouter(LoginScreen));
+})(LoginScreen);

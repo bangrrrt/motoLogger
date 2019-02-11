@@ -5,7 +5,7 @@ var UserDataToSend = require('./helper').userDataToSend;
 
 // Register user
 exports.addUser = function(req, res) {
-  const { username, password, firstName, lastName } = req.body;
+  const { username, password, firstName, lastName } = req.body.userData;
   if (!username && !password && !firstName && !lastName) {
     res.json('First name, last name, username and password are required.');
   } else {

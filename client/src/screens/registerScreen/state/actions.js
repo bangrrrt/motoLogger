@@ -16,10 +16,10 @@ const asyncRegisterUserRequest = () => ({
   type: types.ASYNC_REGISTER_USER_REQUEST
 });
 
-const asyncRegisterUser = registerData => (dispatch) => {
+const asyncRegisterUser = (userData, token) => (dispatch) => {
   dispatch(asyncRegisterUserRequest());
 
-  return axios.post('/api/register/', registerData)
+  return axios.post('/api/register/', { userData, token })
     .then(res => dispatch(asyncRegisterUserSuccess(res)))
     .catch(error => dispatch(asyncRegisterUserError(error.response.data)));
 };

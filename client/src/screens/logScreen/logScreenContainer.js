@@ -1,7 +1,5 @@
 import { connect } from 'react-redux';
 import LogScreen from './logScreen';
-import { asyncFetchLogs } from './state/actions';
-import { asyncFetchUserData } from '../loginScreen/state/actions';
 
 const mapStateToProps = state => ({
   logItems: state.logScreen.logItems,
@@ -12,9 +10,4 @@ const mapStateToProps = state => ({
   error: state.logScreen.error
 });
 
-const mapStateToDispatch = dispatch => ({
-  onAsyncFetchLogs: motorcycleId => dispatch(asyncFetchLogs(motorcycleId)),
-  onAsyncFetchUserData: token => dispatch(asyncFetchUserData(token))
-});
-
-export default connect(mapStateToProps, mapStateToDispatch)(LogScreen);
+export default connect(mapStateToProps)(LogScreen);

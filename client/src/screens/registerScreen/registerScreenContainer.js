@@ -4,16 +4,17 @@ import asyncRegisterUser from './state/actions';
 import registerScreen from './registerScreen';
 
 const handleSubmit = (values, dispatch) => {
-  dispatch(asyncRegisterUser(values));
+  window.grecaptcha.ready(() => {
+    window.grecaptcha.execute(process.env.siteKey, { action: 'register' })
+      .then((token) => {
+        dispatch(asyncRegisterUser(values, token));
+      }, err => console.log('captcha error', err));
+  });
 };
 
 const mapStateToProps = state => ({
   onSubmit: handleSubmit,
-  isUserCreated: state.registerScreen.isUserCreated,
   registerError: state.registerScreen.error
 });
-
-// const mapDispatchToProps = dispatch => ({
-// });
 
 export default connect(mapStateToProps, null)(registerScreen);
