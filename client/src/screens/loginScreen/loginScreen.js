@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import ReduxFormInput from '../../components/formComponents/reduxFormInput/reduxFormInput';
+import ScreenLoader from '../../components/screenLoader';
 
 import './loginScreen.css';
 
@@ -63,14 +64,7 @@ class LoginScreen extends Component {
               label="Password"
               placeholder="Your Secret"
             />
-            {isLoading && (
-              <div className="login-screen-loading">
-                <div>
-                  <i className="log-list-loading glyphicon glyphicon-wrench" />
-                  <h4>Loading...</h4>
-                </div>
-              </div>
-            )}
+            {isLoading && <ScreenLoader />}
             {error && <span className="login-screen-error">{error}</span>}
             {loginError && <span className="login-screen-error">{loginError}</span>}
             <div className="login-screen-button-wrapper">

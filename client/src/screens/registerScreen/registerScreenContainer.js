@@ -14,7 +14,8 @@ const handleSubmit = (values, dispatch) => {
 
 const mapStateToProps = state => ({
   onSubmit: handleSubmit,
-  registerError: state.registerScreen.error
+  registerError: state.registerScreen.error,
+  isLoading: state.registerScreen.isLoading
 });
 
 export default connect(mapStateToProps, null)(registerScreen);

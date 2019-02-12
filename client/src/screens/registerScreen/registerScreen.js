@@ -9,6 +9,7 @@ import ReduxFormInput from '../../components/formComponents/reduxFormInput/redux
 import validate from './validate';
 
 import './registerScreen.css';
+import ScreenLoader from '../../components/screenLoader';
 
 class RegisterScreen extends Component {
   render() {
@@ -17,12 +18,14 @@ class RegisterScreen extends Component {
       handleSubmit,
       onSubmit,
       error,
-      registerError
+      registerError,
+      isLoading
     } = this.props;
 
     return (
       <div className="register-screen-wrapper register-screen-animation">
         <div className="register-screen">
+          {isLoading && <ScreenLoader />}
           <h1 className="register-screen-title">Register</h1>
           <form id="registerForm" onSubmit={handleSubmit(onSubmit)}>
             <Field
@@ -89,6 +92,10 @@ RegisterScreen.propTypes = {
    */
   onSubmit: func.isRequired,
   /**
+   * True if the screen is loading
+   */
+  isLoading: bool,
+  /**
    * React router prop injection
    */
   history: object.isRequired,
@@ -100,7 +107,8 @@ RegisterScreen.propTypes = {
 
 RegisterScreen.defaultProps = {
   error: '',
-  registerError: ''
+  registerError: '',
+  isLoading: false
 };
 
 export default reduxForm({
