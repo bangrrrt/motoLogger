@@ -108,9 +108,9 @@
 }
 
 .hs-body-oil-text-wrapper {
-  animation-fill-mode: backwards;
+  animation-fill-mode: forwards;
   animation-delay: 0.5s;
-  display: none;
+  opacity: 0;
 }
 
 .hs-body-oil-image-wrapper {
@@ -256,31 +256,31 @@
 .fadeInDown {
   display: initial;
   animation-name: fadeInDown;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
 }
 
 .fadeInDownBig {
   display: initial;
   animation-name: fadeInDownBig;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
 }
 
 .fadeInRight {
   display: initial;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
   animation-name: fadeInRight;
 }
 
 .fadeInLeft {
   animation-fill-mode: backwards;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
   display: initial;
   animation-name: fadeInLeft;
 }
 
 .zoomInDown {
   animation-fill-mode: backwards;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
   animation-name: zoomInDown;
 }
 
