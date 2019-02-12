@@ -58,7 +58,7 @@ ReduxFormInput.propTypes = {
   /**
    * The placeholder text for the input
   */
-  placeholder: string.isRequired,
+  placeholder: string,
   /**
    * Input label name
   */
@@ -80,7 +80,8 @@ ReduxFormInput.propTypes = {
 ReduxFormInput.defaultProps = {
   isOptional: false,
   hasForgotPassword: false,
-  autoComplete: ''
+  autoComplete: '',
+  placeholder: ''
 };
 
 export default ReduxFormInput;

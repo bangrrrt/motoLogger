@@ -3,32 +3,29 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 
+
+import FormError from '../../components/formError';
 import ReduxFormInput from '../../components/formComponents/reduxFormInput/reduxFormInput';
 import validate from './validate';
 
 import './registerScreen.css';
+import ScreenLoader from '../../components/screenLoader';
 
 class RegisterScreen extends Component {
-  componentDidUpdate(prevProps) {
-    const {
-      isUserCreated,
-      history
-    } = this.props;
-
-    if (isUserCreated !== prevProps.isUserCreated) {
-      history.push('/login');
-    }
-  }
   render() {
     const {
       submitting,
       handleSubmit,
-      onSubmit
+      onSubmit,
+      error,
+      registerError,
+      isLoading
     } = this.props;
 
     return (
       <div className="register-screen-wrapper register-screen-animation">
         <div className="register-screen">
+          {isLoading && <ScreenLoader />}
           <h1 className="register-screen-title">Register</h1>
           <form id="registerForm" onSubmit={handleSubmit(onSubmit)}>
             <Field
@@ -59,6 +56,7 @@ class RegisterScreen extends Component {
               label="Password"
               placeholder="Password"
             />
+            {(registerError || error) && <FormError errorMessage={registerError || error} />}
             <div className="register-screen-button-wrapper">
               <button
                 type="submit"
@@ -94,17 +92,23 @@ RegisterScreen.propTypes = {
    */
   onSubmit: func.isRequired,
   /**
+   * True if the screen is loading
+   */
+  isLoading: bool,
+  /**
    * React router prop injection
    */
   history: object.isRequired,
   /**
-   * True if the user was successfully created
+   * Error returned from the server
    */
-  isUserCreated: bool.isRequired
+  registerError: string
 };
 
 RegisterScreen.defaultProps = {
-  error: ''
+  error: '',
+  registerError: '',
+  isLoading: false
 };
 
 export default reduxForm({

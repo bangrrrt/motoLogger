@@ -1,26 +1,37 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ReduxFormInput from '../../components/formComponents/reduxFormInput/reduxFormInput';
+import ScreenLoader from '../../components/screenLoader';
 
 import './loginScreen.css';
 
 class LoginScreen extends Component {
-  componentDidMount() {
-    const { history } = this.props;
+  renderRegisterButton = () => {
+    const {
+      onRegisterClick
+    } = this.props;
 
-    if (window.localStorage.token) {
-      history.push('/logs');
+    if (onRegisterClick && typeof onRegisterClick === 'function') {
+      return (
+        <button
+          className="login-screen-register-title-link"
+          onClick={() => onRegisterClick()}
+        >
+          Register Now
+        </button>
+      );
     }
-  }
 
-  componentDidUpdate(prevProps) {
-    const { isAuthenticated, history } = this.props;
-
-    if (isAuthenticated !== prevProps.isAuthenticated) {
-      history.push('/logs');
-    }
+    return (
+      <Link
+        to="/register"
+        className="login-screen-register-title-link"
+      >
+        Register Now
+      </Link>
+    );
   }
 
   render() {
@@ -53,14 +64,7 @@ class LoginScreen extends Component {
               label="Password"
               placeholder="Your Secret"
             />
-            {isLoading && (
-              <div className="login-screen-loading">
-                <div>
-                  <i className="log-list-loading glyphicon glyphicon-wrench" />
-                  <h4>Loading...</h4>
-                </div>
-              </div>
-            )}
+            {isLoading && <ScreenLoader />}
             {error && <span className="login-screen-error">{error}</span>}
             {loginError && <span className="login-screen-error">{loginError}</span>}
             <div className="login-screen-button-wrapper">
@@ -77,12 +81,7 @@ class LoginScreen extends Component {
         <div className="login-screen-register">
           <h5>Don't have an account?</h5>
           <h3 className="login-screen-register-title">
-            <Link
-              to="/register"
-              className="login-screen-register-title-link"
-            >
-              Register Now
-            </Link>
+            {this.renderRegisterButton()}
           </h3>
         </div>
       </div>
@@ -93,21 +92,20 @@ class LoginScreen extends Component {
 const {
   func,
   string,
-  bool,
-  object
+  bool
 } = PropTypes;
 
 LoginScreen.propTypes = {
   /**
-   * React Router prop injection
-   */
-  history: object.isRequired,
-  /**
    * Redux form prop injection
    */
   handleSubmit: func.isRequired,
-  error: string.isRequired,
+  error: string,
   submitting: bool.isRequired,
+  /**
+   * Callback function for register button
+   */
+  onRegisterClick: func,
   /**
    * Handles form submission
    */
@@ -127,9 +125,11 @@ LoginScreen.propTypes = {
 };
 
 LoginScreen.defaultProps = {
-  loginError: ''
+  loginError: '',
+  error: '',
+  onRegisterClick: null
 };
 
 export default reduxForm({
   form: 'login'
-})(withRouter(LoginScreen));
+})(LoginScreen);

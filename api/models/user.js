@@ -1,10 +1,15 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var ObjectId = Schema.Types.ObjectId;
 var bcrypt = require('bcrypt-nodejs');
 
 const MotorcycleSchema = new Schema({
-	id: {
-		type: String,
+	_id: {
+		type: ObjectId,
+		required: true
+	},
+	motorcycleId: {
+		type: ObjectId,
 		required: true
 	},
 	name: {
@@ -23,11 +28,15 @@ const MotorcycleSchema = new Schema({
 		type: Number,
 		required: false
 	},
+	miles: {
+		type: String || Number,
+		required: false
+	},
 	image: { // Check for file size limits
 		type: String,
 		required: false
 	}
-	});
+});
 
 var UserSchema = new Schema({
   username: {

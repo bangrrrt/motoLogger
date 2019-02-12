@@ -4,23 +4,12 @@ var assert = require('assert');
 var dbResources = require('./resources');
 var User = require('../models/user');
 var { dbURL, logCollection, dataBase } = dbResources;
+var GetToken = require('./helper').getToken;
 
-getToken = function (headers) {
-  if (headers && headers.authorization) {
-    var parted = headers.authorization.split(' ');
-    if (parted.length === 2) {
-      return parted[1];
-    } else {
-      return null;
-    }
-  } else {
-    return null;
-  }
-};
 
 // Adds a new motorcycle
 exports.ADD = function(req, res) {
-  var token = getToken(req.headers);
+  var token = GetToken(req.headers);
 
   if (token) {
     const _id = objectId();
@@ -36,13 +25,12 @@ exports.ADD = function(req, res) {
       res.json(user.motorcycles);
     });
   } else {
-    return res.status(403).send('Unauthorized.');
+    return res.json(403, 'Unauthorized.');
   }
 };
 
 // Updates a motorcycle
 exports.UPDATE = function(req, res) {
-  var resultArray = [];
   mongo.connect(dbURL, function(err, client) {
     var updatedLog = {
       _id: req.body.logId,

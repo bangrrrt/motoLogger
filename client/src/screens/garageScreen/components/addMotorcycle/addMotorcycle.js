@@ -4,29 +4,18 @@ import { Field, reduxForm } from 'redux-form';
 
 import ReduxFormInput from '../../../../components/formComponents/reduxFormInput/reduxFormInput';
 // import validate from './validate';
-
+import './addMotorcycle.css';
 
 const AddMotorcycle = ({
-  isEditing,
   handleSubmit,
   onSubmit,
-  motorcycles,
   isLoading,
   error
 }) => {
-  let text = 'Add your first motorcycle';
-  const hasMotorcycles = motorcycles && motorcycles.length;
-
-  if (hasMotorcycles) {
-    text = 'Add another motorcycle';
-  } else if (hasMotorcycles && isEditing) {
-    text = 'Edit Motorcycle';
-  }
-
   if (isLoading) {
     return (
       <p>
-        Saving...
+        Loading...
       </p>
     );
   }
@@ -39,7 +28,6 @@ const AddMotorcycle = ({
 
   return (
     <div>
-      <h1>{text}</h1>
       <form id="addMotorcycle" onSubmit={handleSubmit(onSubmit)}>
         <Field
           name="name"
@@ -65,6 +53,12 @@ const AddMotorcycle = ({
           component={ReduxFormInput} // Create ReduxForm number input using date-picker only year selector
           label="Year"
         />
+        <Field
+          name="miles"
+          type="text"
+          component={ReduxFormInput} // Create ReduxForm number input
+          label="Current Miles"
+        />
         <button
           type="submit"
         >
@@ -78,9 +72,7 @@ const AddMotorcycle = ({
 const {
   bool,
   func,
-  string,
-  object,
-  arrayOf
+  string
 } = PropTypes;
 
 AddMotorcycle.propTypes = {
@@ -95,21 +87,12 @@ AddMotorcycle.propTypes = {
    */
   onSubmit: func.isRequired,
   /**
-   * True when a user is editing a motorcycle
-   */
-  isEditing: bool,
-  /**
-   * List of motorcycles
-   */
-  motorcycles: arrayOf(object).isRequired,
-  /**
    * True if app is loading
    */
   isLoading: bool.isRequired
 };
 
 AddMotorcycle.defaultProps = {
-  isEditing: false,
   error: ''
 };
 
