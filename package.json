@@ -19,6 +19,7 @@
     "debug": "~2.6.9",
     "express": "~4.15.5",
     "express-session": "^1.15.6",
+    "express-sslify": "^1.2.0",
     "jade": "~1.11.0",
     "jsonwebtoken": "^8.3.0",
     "mongodb": "^3.0.2",

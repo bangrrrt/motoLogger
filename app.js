@@ -29,6 +29,11 @@ var app = express();
 // app.set('views', path.join(__dirname, 'client'));
 // app.set('view engine', 'jade');
 
+// Enforce SSL in production
+if (app.get('env') !== 'development') {
+  app.use(enforce.HTTPS({ trustProtoHeader: true }));
+}
+
 app.use(session({
   maxAge: 60000,
   secret: resources.secret
