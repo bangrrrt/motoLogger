@@ -52,10 +52,10 @@ class FooterMenu extends Component {
                 <div className="footer-menu-links-wrapper">
                   <ul className="footer-menu-links">
                     <li className="footer-menu-link">
-                      <a href="https://www.linkedin.com/in/christian-bangert-17939b75/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                      <a href="https://www.linkedin.com/in/bangrrrt" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                     </li>
                     <li className="footer-menu-link">
-                      <a href="https://github.com/bangrrrt">Github</a>
+                      <a target="_blank" rel="noopener noreferrer" href="https://github.com/bangrrrt">Github</a>
                     </li>
                     <li className="footer-menu-link">
                       <a href="mailto:ChristianDBangert@gmail.com">ChristianDBangert@gmail.com</a>

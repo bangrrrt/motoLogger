@@ -7,10 +7,10 @@ const FooterBar = () => (
     <div className="footer-bar-links-wrapper">
       <ul className="footer-bar-links">
         <li className="footer-bar-link">
-          <a href="https://www.linkedin.com/in/christian-bangert-17939b75/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://www.linkedin.com/in/bangrrrt" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </li>
         <li className="footer-bar-link">
-          <a href="https://github.com/bangrrrt">Github</a>
+          <a target="_blank" rel="noopener noreferrer" href="https://github.com/bangrrrt">Github</a>
         </li>
         <li className="footer-bar-link">
           <a href="mailto:ChristianDBangert@gmail.com">ChristianDBangert@gmail.com</a>
