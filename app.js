@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var session = require('express-session')
 var resources = require('./api/controllers/resources');
-
+var enforce = require('express-sslify');
 
 // Load log routes
 var logRoutes = require('./api/routes/logRoutes');
