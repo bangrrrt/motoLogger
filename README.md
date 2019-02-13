@@ -1,8 +1,4 @@
-# motoLogger
-This project is still under construction
+# MotoLogger
 
-To run the project you must have node, yarn, and mongodb installed.
-
-1) Open terminal at project root directory.
-
-2) Run command `yarn && yarn start`
+#### MotoLogger started as an experiment and now it's developed into something much larger.  
+<a href="https://www.motologger.us/#register">Join the community today</a>
