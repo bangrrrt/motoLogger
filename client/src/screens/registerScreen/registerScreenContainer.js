@@ -5,7 +5,7 @@ import registerScreen from './registerScreen';
 
 const handleSubmit = (values, dispatch) => {
   window.grecaptcha.ready(() => {
-    window.grecaptcha.execute(process.env.siteKey, { action: 'register' })
+    window.grecaptcha.execute(process.env.SITEKEY, { action: 'register' })
       .then((token) => {
         dispatch(asyncRegisterUser(values, token));
       }, err => console.log('captcha error', err));

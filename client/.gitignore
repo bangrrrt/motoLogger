@@ -5,12 +5,12 @@
 
 # testing
 /coverage
-
+/.vscode
 # production
 /build
-
-notes.txt
-
+./readme.md
+./notes.txt
+.env
 # misc
 .DS_Store
 .env.local

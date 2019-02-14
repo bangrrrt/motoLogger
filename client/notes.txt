@@ -1,0 +1,42 @@
+::::: V1 :::::
+// <3
+-Finish API endpoints
+  - Zapier
+-Deploy to server/ Web Hosting
+-Add project to BitBucket
+-Color Scheme
+  -http://paletton.com/#uid=30M0k0kw0w0lNnOmhDjy+kwJ+qt
+-Add input for price for parts and labor
+-Create Landing Page - Log Page
+  - Main Page: Recent Logs
+    -add images
+    -allow user to upload their own image which is used as a background
+    -loaders
+    -change color of log bg
+  - Log Entry Shortcut
+  - Maintenance Schedule
+    - Calendar Log
+  - Daily Mile Tracker (DREAM: Integrate into SmartWatch)
+  - [Room for Additional Sections]
+-?TBD Points for Style- Create Item Screen (contains UI)
+
+
+
+::::: V2 :::::
+
+
+-Updates to Landing Page:
+  -Upgrades section/wishlist
+
+-Data Integration:
+-Add profiles
+-Multiple motorcyle vehicles
+-Nick names
+-Reminders for regular maintenance
+-database for makes/model - linked to reminders for maintenance
+-Tracking Miles - use this for triggering reminders
+-Need Database 
+
+    () ()
+  (O . O )
+   Bun-Yay
