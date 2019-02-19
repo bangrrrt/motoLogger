@@ -1,0 +1,13 @@
+.garage-screen-add-motorcycle-submit-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.garage-screen-add-motorcycle-submit {
+  padding: 10px 16px;
+  background-color: #4F7F9F;
+  border-radius: 4px;
+  border: 0;
+  outline: 0;
+  color: white;
+}

@@ -3,28 +3,46 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 
 import ReduxFormInput from '../../../../components/formComponents/reduxFormInput/reduxFormInput';
-// import validate from './validate';
+import validate from './validate';
 import './addMotorcycle.css';
 
 const AddMotorcycle = ({
   handleSubmit,
   onSubmit,
-  isLoading,
   error
 }) => {
-  if (isLoading) {
-    return (
-      <p>
-        Loading...
-      </p>
-    );
-  }
-
   if (error) {
     return (
       <p>{error}</p>
     );
   }
+
+  const normalizeAmount = value => parseInt(value.replace(/,/g, ''), 10);
+
+  const formatAmount = (input = '') => {
+    if (!input) {
+      return '';
+    }
+
+    const value = input.toString();
+
+    if (Number.isNaN(parseInt(value[value.length - 1], 10))) {
+      return value.slice(0, -1);
+    }
+
+    return value
+      .replace(/,/g, '')
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
+  const parseNumber = (value) => {
+    const num = Number(value);
+    if (num === Number.isNaN() || num === 0) {
+      return '';
+    }
+
+    return num;
+  };
 
   return (
     <div>
@@ -33,7 +51,7 @@ const AddMotorcycle = ({
           name="name"
           type="text"
           component={ReduxFormInput}
-          label="Motorcycle Name"
+          label="Motorcycle Nickname"
         />
         <Field
           name="make"
@@ -49,21 +67,28 @@ const AddMotorcycle = ({
         />
         <Field
           name="year"
-          type="text"
-          component={ReduxFormInput} // Create ReduxForm number input using date-picker only year selector
+          type="number"
+          component={ReduxFormInput}
+          parse={parseNumber}
           label="Year"
         />
         <Field
           name="miles"
+          parse={val => val.toString()}
           type="text"
-          component={ReduxFormInput} // Create ReduxForm number input
+          format={formatAmount}
+          normalize={normalizeAmount}
+          component={ReduxFormInput}
           label="Current Miles"
         />
-        <button
-          type="submit"
-        >
-          Add
-        </button>
+        <div className="garage-screen-add-motorcycle-submit-wrapper">
+          <button
+            className="garage-screen-add-motorcycle-submit"
+            type="submit"
+          >
+            Add
+          </button>
+        </div>
       </form>
     </div>
   );
@@ -85,11 +110,7 @@ AddMotorcycle.propTypes = {
   /**
    * Handles form submission
    */
-  onSubmit: func.isRequired,
-  /**
-   * True if app is loading
-   */
-  isLoading: bool.isRequired
+  onSubmit: func.isRequired
 };
 
 AddMotorcycle.defaultProps = {
@@ -98,5 +119,5 @@ AddMotorcycle.defaultProps = {
 
 export default reduxForm({
   form: 'addMotorcycle',
-  // validate
+  validate
 })(AddMotorcycle);
