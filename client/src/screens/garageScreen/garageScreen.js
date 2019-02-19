@@ -4,6 +4,7 @@ import { Modal } from 'react-bootstrap';
 
 import AddMotorcycleContainer from './components/addMotorcycle/addMotorcycleContainer';
 import MotorcycleCard from './components/motorcycleCard';
+import ScreenLoader from '../../components/screenLoader';
 
 import './garageScreen.css';
 
@@ -41,20 +42,21 @@ const GarageScreen = ({
     subTitle = '';
   }
 
-  const mainTitle = hasMotorcycles ? 'Garage' : 'Welcome to Motorlogger!';
+  const mainTitle = hasMotorcycles ? 'Garage' : 'Welcome to MotoLogger!';
 
   // If user has motorcycles map over and display motorcycle cards
   return (
     <Modal
       show={selectedMotorcycle === ''}
     >
+      {isLoading && <ScreenLoader />}
       <Modal.Title componentClass="div" className="garage-screen-title">
         <h1 className="garage-screen-main-title">{mainTitle}</h1>
         <h3 className="garage-screen-sub-title">{subTitle}</h3>
       </Modal.Title>
       <Modal.Body>
         <div className="garage-screen">
-          {hasMotorcycles <= 0 && !isLoading && <AddMotorcycleContainer />}
+          {hasMotorcycles <= 0 && <AddMotorcycleContainer />}
           {hasMotorcycles > 0 && renderMotorcycles()}
         </div>
       </Modal.Body>
@@ -90,12 +92,13 @@ GarageScreen.propTypes = {
   /**
    * True if the app is loading
    */
-  isLoading: bool.isRequired
+  isLoading: bool
 };
 
 GarageScreen.defaultProps = {
   selectedMotorcycle: '',
-  isEditing: false
+  isEditing: false,
+  isLoading: false
 };
 
 export default GarageScreen;

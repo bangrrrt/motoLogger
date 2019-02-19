@@ -11,7 +11,6 @@ const handleSubmit = (newMotorcycle, dispatch) => {
 
 const mapStateToProps = state => ({
   onSubmit: handleSubmit,
-  isLoading: state.garageScreen.isLoading,
   error: state.garageScreen.error
 });
 
