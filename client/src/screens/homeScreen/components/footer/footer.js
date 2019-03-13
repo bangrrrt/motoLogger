@@ -24,7 +24,7 @@ const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="hs-footer-list-item-link"
-            href="https://www.github.com/"
+            href="https://github.com/bangrrrt"
           >
             Github
           </a>
