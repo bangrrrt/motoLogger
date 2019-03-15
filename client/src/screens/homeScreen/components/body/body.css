@@ -293,7 +293,7 @@
 /********** Custom, iPhone Retina Landscape ************/ 
 /*******************************************************/
 /*******************************************************/
-@media only screen and (min-width: 320px) and (orientation: landscape) {
+@media only screen and (min-width: 320px) and (min-aspect-ratio: 13/9) {
   .hs-body-hero-image-wrapper {
     display: flex;
     flex-direction: initial;
@@ -391,7 +391,7 @@
 /********** Custom, iPhone Retina Portrait *************/ 
 /*******************************************************/
 /*******************************************************/
-@media only screen and (min-width: 320px) and (orientation: portrait)  {
+@media only screen and (min-width: 320px) and (max-aspect-ratio: 13/9)  {
   .hs-body p {
     font-size: 16px;
   }
@@ -569,7 +569,7 @@
 /*************** Small Devices, Tablets *****************/ 
 /*******************************************************/
 /*******************************************************/
-@media only screen and (min-width: 768px) and (orientation: landscape) {
+@media only screen and (min-width: 768px) and (min-aspect-ratio: 13/9) {
   .hs-body p {
     font-size: 18px;
   }
