@@ -58,12 +58,20 @@ class AppRouter extends Component {
         />
         <Route
           path="/logs"
-          render={() => (isAuthenticated || isUserCreated ?
-            <LogScreenContainer /> : <Redirect push to="/" />
-          )}
+          render={() => {
+            if (isAuthenticated || isUserCreated) {
+              const badge = document.getElementsByClassName('grecaptcha-badge')[0];
+
+              if (badge) {
+                badge.parentNode.removeChild(badge);
+              }
+
+              return <LogScreenContainer />;
+            }
+
+            return <Redirect push to="/" />;
+          }}
         />
-        <Route path="/login" component={HomeScreen} />
-        <Route path="/register" component={HomeScreen} />
       </Switch>
     );
   }
