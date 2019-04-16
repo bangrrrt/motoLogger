@@ -76,12 +76,17 @@ exports.UPDATE_LOG = function(req, res) {
 };
 
 // Deletes a log
-exports.DELETE_LOG = function(req, res) {
-  Log.deleteOne({ _id: req.params.logId }, function(err, log) {
-    if (err) {
-      res.send(err);
-    }
+exports.DELETE_LOG = async (req, res) => {
+  try {
+    const logId = req.params.logId;
+    const log = await Log.deleteOne({ _id: logId });
 
-    res.json(log.logId)
-  });
+    if (!log) {
+      res.send(`Could not find log ${logId}`);
+    } else {
+      res.json(logId)
+    }
+  } catch(err) {
+    res.status(500).send(`Unknown error while deleting log ${logId}. ${err}`)
+  }
 };
