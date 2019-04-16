@@ -27,30 +27,32 @@ exports.CREATE_LOG = function(req, res) {
   }
 };
 
-exports.GET_LOGS = function(req, res) {
-  var token = GetToken(req.headers);
-  var motorcycleId = req.params.motorcycleId;
+exports.GET_LOGS = async (req, res) => {
+  const token = GetToken(req.headers);
+  const motorcycleId = req.params.motorcycleId;
 
   if (token) {
-    Log.find({ motorcycleId: motorcycleId }, function (err, logs) {
-      if (err) {
-        return json(err);
-      }
+    try {
+      const logs = await Log.find({ motorcycleId });
 
-      if (!logs.length) {
-        return res.json({ 
+      if(!logs) {
+        res.status(404).send(`Logs not found for motorcycle ${motorcycleId}`)
+      } else if (!logs.length) {
+        res.status(200).json({ 
           motorcycleId,          
           logs: []
         });
+      } else {
+        res.status(200).json({
+          motorcycleId,
+          logs
+        });
       }
-
-      return res.json({
-        motorcycleId,
-        logs
-      });
-    });
+    } catch(err) {
+      res.send(500).send(`Unknown error while getting logs. ${err}`)
+    }
   } else {
-    return res.status(403).send('Unauthorized.');
+    return res.status(403).send('Please login to view your logs.');
   }
 };
 
@@ -59,13 +61,13 @@ exports.UPDATE_LOG = async (req, res) => {
   try {
     const newLog = { ...req.body };
     const { logId } = req.body;
-
     const updatedLog = await Log.findOneAndUpdate({ _id: logId }, newLog);
-      if (!updatedLog) {
-        res.status(404).send(`Could not find log ${logId}`);
-      } else {
-        res.status(200).send(updatedLog);
-      }
+
+    if (!updatedLog) {
+      res.status(404).send(`Could not find log ${logId}`);
+    } else {
+      res.status(200).send(updatedLog);
+    }
   } catch (err) {
     res.status(500).send(`Unknown error while updating log. ${err}`)
   }
@@ -80,7 +82,7 @@ exports.DELETE_LOG = async (req, res) => {
     if (!log) {
       res.status(404).send(`Could not find log ${logId}`);
     } else {
-      res.status(200).json(logId)
+      res.status(204).json(logId)
     }
   } catch(err) {
     res.status(500).send(`Unknown error while deleting log ${logId}. ${err}`)
