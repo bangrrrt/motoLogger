@@ -55,36 +55,32 @@ exports.GET_LOGS = function(req, res) {
 };
 
 // Updates a log
-exports.UPDATE_LOG = function(req, res) {
-  var newLog = { ...req.body };
+exports.UPDATE_LOG = async (req, res) => {
+  try {
+    const newLog = { ...req.body };
+    const { logId } = req.body;
 
-  Log.findById({ _id: req.body.logId }, function(err, log) {
-    if (err) {
-      res.send(err);
-    }
-
-    log.set(newLog);
-
-    log.save(function(err, updatedLog) {
-      if (err) {
-        res.send(err);
+    const updatedLog = await Log.findOneAndUpdate({ _id: logId }, newLog);
+      if (!updatedLog) {
+        res.status(404).send(`Could not find log ${logId}`);
+      } else {
+        res.status(200).send(updatedLog);
       }
-
-      res.send(updatedLog);
-    })
-  });
+  } catch (err) {
+    res.status(500).send(`Unknown error while updating log. ${err}`)
+  }
 };
 
 // Deletes a log
 exports.DELETE_LOG = async (req, res) => {
   try {
-    const logId = req.params.logId;
+    const { logId } = req.params;
     const log = await Log.deleteOne({ _id: logId });
 
     if (!log) {
-      res.send(`Could not find log ${logId}`);
+      res.status(404).send(`Could not find log ${logId}`);
     } else {
-      res.json(logId)
+      res.status(200).json(logId)
     }
   } catch(err) {
     res.status(500).send(`Unknown error while deleting log ${logId}. ${err}`)
