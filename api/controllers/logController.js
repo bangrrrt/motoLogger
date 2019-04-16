@@ -3,7 +3,7 @@ var Log = require('../models/logModel');
 var GetToken = require('./helper').getToken;
 
 // Adds a new log
-exports.CREATE_LOG = function(req, res) {
+exports.CREATE_LOG = async (req, res) => {
   const token = GetToken(req.headers);
 
   if (token) {
@@ -11,19 +11,23 @@ exports.CREATE_LOG = function(req, res) {
     const newLog = new Log({
       ...req.body,
       _id: logId,
-      logId: logId,
+      logId,
       isEditable: false
     });
 
-    newLog.save(function(err, log) {
-      if(err) {
-        return res.json(err);
-      } else {
-        return res.json(log);
+    try {
+      const log = await newLog.save(newLog);
+      res.json(log);
+    } catch(err) {
+      if (err.name === 'MongoError' && err.code === 11000) {
+        res.status(409).send(`Duplicate entry. ${err}`);
       }
-    });
+
+      res.status(500).send(err);
+    }
+
   } else {
-    return res.status(403).send('Unauthorized.');
+    return res.status(403).send('Please login to create a new log.');
   }
 };
 
