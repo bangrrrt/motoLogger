@@ -1,13 +1,13 @@
-var ObjectId = require('mongodb').ObjectID;
-var Log = require('../models/logModel');
-var GetToken = require('./helper').getToken;
+const objectId = require('mongodb').ObjectID;
+const Log = require('../models/logModel');
+const getToken = require('./helper').getToken;
 
 // Adds a new log
-exports.CREATE_LOG = async (req, res) => {
-  const token = GetToken(req.headers);
+exports.createLog = async (req, res) => {
+  const token = getToken(req.headers);
 
   if (token) {
-    const logId = ObjectId();
+    const logId = objectId();
     const newLog = new Log({
       ...req.body,
       _id: logId,
@@ -31,8 +31,8 @@ exports.CREATE_LOG = async (req, res) => {
   }
 };
 
-exports.GET_LOGS = async (req, res) => {
-  const token = GetToken(req.headers);
+exports.getLogs = async (req, res) => {
+  const token = getToken(req.headers);
   const motorcycleId = req.params.motorcycleId;
 
   if (token) {
@@ -61,7 +61,7 @@ exports.GET_LOGS = async (req, res) => {
 };
 
 // Updates a log
-exports.UPDATE_LOG = async (req, res) => {
+exports.updateLog = async (req, res) => {
   try {
     const newLog = { ...req.body };
     const { logId } = req.body;
@@ -78,7 +78,7 @@ exports.UPDATE_LOG = async (req, res) => {
 };
 
 // Deletes a log
-exports.DELETE_LOG = async (req, res) => {
+exports.deleteLog = async (req, res) => {
   try {
     const { logId } = req.params;
     const log = await Log.deleteOne({ _id: logId });
